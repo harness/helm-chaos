@@ -35,3 +35,5 @@ data:
   DEFAULT_CHAOS_HUB_SIZE: '{{ .Values.chaosHubSize }}'
   DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS: '{{ .Values.parallelChaosExperimentRuns }}'
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
+  ENTERPRISE_HUB_SECRET: ""
+  ENTERPRISE_HUB_TOKEN: ""
