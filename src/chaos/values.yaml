@@ -1,0 +1,328 @@
+global:
+  loadbalancerURL: "test@harness.io"
+  airgap: false
+  ha: false
+  opa:
+    enabled: false
+  cd:
+    # -- Enable to install CD
+    enabled: true
+  # Enable if using ingress objects
+  ingress:
+    enabled: true
+    loadBalancerIP: '0.0.0.0'
+    className: "harness"
+    loadBalancerEnabled: true
+    hosts:
+      - ''
+    tls:
+      enabled: false
+      secretName: harness-ssl
+    nginx:
+      # -- Create Nginx Controller.  True will deploy a controller into your cluster
+      create: true
+    defaultbackend:
+      # -- Create will deploy a default backend into your cluster
+      create: true
+
+## Platform Settings
+platform:
+  harness-manager:
+    featureFlags:
+      OPA: "OPA_PIPELINE_GOVERNANCE"
+      ADDITIONAL: "CHAOS_ENABLED"
+
+chaos-manager:
+  replicaCount: 1
+  maxSurge: 1
+  maxUnavailable: 0
+
+  image:
+    registry: docker.io
+    repository: chaosnative/harness-smp-chaos-manager
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "0.7.3"
+    digest: ""
+    imagePullSecrets: ["chaos-regcred-secret"]
+
+  jobs:
+    chaos_db_upgrade:
+      enabled: 'false'
+      slackURLToNotify: 'no-url'
+      image:
+        registry: docker.io
+        tag: "0.7.1"
+        repository: chaosnative/harness-smp-chaos-db-upgrade-agent
+        pullPolicy: Always
+        digest: ""
+        imagePullSecrets: ["chaos-regcred-secret"]
+
+  subscriberImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/harness-smp-chaos-subscriber
+      tag: 0.7.1
+      digest: ""
+
+  argoWorkflowControllerImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/workflow-controller
+      tag: v3.3.1
+      digest: ""
+
+  argoWorkflowExecutorImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/argoexec
+      tag: v3.3.1
+      digest: ""
+
+  litmusChaosOperatorImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/chaos-operator
+      tag: 3.0.0-stable
+      digest: ""
+
+  litmusChaosRunnerImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/chaos-runner
+      tag: 3.0.0-stable
+      digest: ""
+
+  litmusChaosExporterImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/chaos-exporter
+      tag: 3.0.0-stable
+      digest: ""
+
+  enterpriseHubBranchName: 'hce-saas'
+
+  chaosExperimentLimit: '1000'
+
+  chaosHubLimit: '30'
+
+  chaosGamedayLimit: '200'
+
+  chaosHubSize: '200'
+
+  parallelChaosExperimentRuns: '25'
+
+  skipSecureVerify: 'true'
+
+  configmap: {}
+
+  mongoSecrets:
+    userName:
+      name: harness-secrets
+      key: mongodbUsername
+    password:
+      name: mongodb-replicaset-chart
+      key: mongodb-root-password
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "chaos-manager-sa"
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    #runAsUser: 65534
+    #runAsNonRoot: true
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 8080
+    targetport: 8080
+
+  resources:
+    limits:
+      cpu: 1500m
+      memory: 2048Mi
+    requests:
+      cpu: 1500m
+      memory: 2048Mi
+
+  autoscaling: {}
+    #enabled: false
+    #minReplicas: 1
+    #maxReplicas: 2
+    #targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+
+chaos-web:
+  replicaCount: 3
+  maxSurge: 1
+  maxUnavailable: 0
+
+  image:
+    registry: docker.io
+    repository: chaosnative/harness-smp-chaos-web
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "0.7.1"
+    digest: ""
+    imagePullSecrets: ["chaos-regcred-secret"]
+
+  enableCDN: "false"
+
+  configmap: {}
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "chaos-web-sa"
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    #runAsUser: 65534
+    #runAsNonRoot: true
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 8184
+    targetport: 8184
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+
+  autoscaling: {}
+    #enabled: false
+    #minReplicas: 1
+    #maxReplicas: 2
+    #targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+
+chaos-driver:
+  replicaCount: 3
+  maxSurge: 1
+  maxUnavailable: 0
+
+  image:
+    registry: docker.io
+    repository: chaosnative/harness-smp-chaos-driver
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "0.7.0"
+    digest: ""
+    imagePullSecrets: ["chaos-regcred-secret"]
+
+  configmap: {}
+
+  mongoSecrets:
+    userName:
+      name: harness-secrets
+      key: mongodbUsername
+    password:
+      name: mongodb-replicaset-chart
+      key: mongodb-root-password
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "chaos-driver-sa"
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    #runAsUser: 65534
+    #runAsNonRoot: true
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 9000
+    targetport: 9000
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      memory: 512Mi
+
+  autoscaling: {}
+    #enabled: false
+    #minReplicas: 1
+    #maxReplicas: 2
+    #targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+

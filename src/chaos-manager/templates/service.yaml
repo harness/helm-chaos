@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chaos-manager-service
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "chaos-manager.labels" . | nindent 4 }}
+spec:
+  type: {{.Values.service.type}}
+  ports:
+  - name: chaos-manager
+    port: {{.Values.service.port}}
+    protocol: TCP
+    targetPort: {{.Values.service.targetport}}
+  selector:
+    component: chaos-manager
+     {{- include "chaos-manager.selectorLabels" . | nindent 4 }}

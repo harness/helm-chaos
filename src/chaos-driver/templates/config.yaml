@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chaos-driver-config
+  namespace: {{ .Release.Namespace | quote }}
+data:
+  DEPLOY_MODE: KUBERNETES_ONPREM
+  CHAOS_MANAGER_ENDPOINT: 'http://chaos-manager-service.{{ .Release.Namespace }}.svc.cluster.local:8080'
+  NG_MANAGER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/ng/api'
+  ACCESS_CONTROL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/authz/api'

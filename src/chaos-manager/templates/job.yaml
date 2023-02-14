@@ -1,0 +1,92 @@
+{{- if .Values.jobs.chaos_db_upgrade.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: chaos-db-upgrade-job-{{ lower ( randAlphaNum 6 ) }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "chaos-manager.labels" . | nindent 4 }}
+spec:
+  ttlSecondsAfterFinished: 60
+  backoffLimit: 0
+  template:
+    metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      {{ include "chaos-manager.pullSecrets" . | nindent 6 }}
+      containers:
+      - name: upgrade-agent
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.jobs.chaos_db_upgrade.image "global" .Values.global) }}
+        imagePullPolicy: {{ .Values.jobs.chaos_db_upgrade.image.pullPolicy}}
+        envFrom:
+          - secretRef:
+              name: chaos-db-upgrade-job-secret
+        env:
+          - name: PREV_VERSION
+            value: "0.3.0"
+          - name: VERSION
+            value: "0.7.0"
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mongoSecrets.userName.name }}
+                key: {{ .Values.mongoSecrets.userName.key }}
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mongoSecrets.password.name }}
+                key: {{ .Values.mongoSecrets.password.key }}
+          - name: MONGODB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mongoSecrets.userName.name }}
+                key: {{ .Values.mongoSecrets.userName.key }}
+          - name: MONGODB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mongoSecrets.password.name }}
+                key: {{ .Values.mongoSecrets.password.key }}
+          - name: DB_SERVER
+            value: {{ include "harnesscommon.database.mongo" (dict "database" "chaos-harness" "context" $) }}
+          - name: DEFAULT_CHAOS_EXPERIMENT_LIMIT
+            valueFrom:
+              configMapKeyRef:
+                name: chaos-manager-config
+                key: DEFAULT_CHAOS_EXPERIMENT_LIMIT
+          - name: DEFAULT_CHAOS_HUB_LIMIT
+            valueFrom:
+              configMapKeyRef:
+                name: chaos-manager-config
+                key: DEFAULT_CHAOS_HUB_LIMIT
+          - name: DEFAULT_CHAOS_GAMEDAY_LIMIT
+            valueFrom:
+              configMapKeyRef:
+                name: chaos-manager-config
+                key: DEFAULT_CHAOS_GAMEDAY_LIMIT
+          - name: DEFAULT_CHAOS_HUB_SIZE
+            valueFrom:
+              configMapKeyRef:
+                name: chaos-manager-config
+                key: DEFAULT_CHAOS_HUB_SIZE
+          - name: DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS
+            valueFrom:
+              configMapKeyRef:
+                name: chaos-manager-config
+                key: DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS          
+      restartPolicy: Never
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
+      {{- end }}
+
+{{- end }}
