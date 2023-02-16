@@ -39,6 +39,15 @@ replicaCount: 1
 maxSurge: 1
 maxUnavailable: 0
 
+waitForInitContainer:
+  image:
+    registry: docker.io
+    repository: harness/helm-init-container
+    pullPolicy: IfNotPresent
+    tag: "latest"
+    digest: ""
+    imagePullSecrets: []
+    
 image:
   registry: docker.io
   repository: chaosnative/harness-smp-chaos-manager

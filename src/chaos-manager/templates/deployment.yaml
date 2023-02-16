@@ -29,6 +29,13 @@ spec:
     spec:
       {{ include "chaos-manager.pullSecrets" . | nindent 6 }}
       serviceAccountName: {{ include "chaos-manager.serviceAccountName" . }}
+      initContainers:
+      - name: wait-for-mongo
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+        imagePullPolicy: IfNotPresent
+        args:
+          - "pod"
+          - "-lapp=mongodb-replicaset"
       containers:
         - name: chaos-manager
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}

@@ -25,6 +25,7 @@ global:
       # -- Create will deploy a default backend into your cluster
       create: true
 
+
 ## Platform Settings
 platform:
   harness-manager:
@@ -36,7 +37,14 @@ chaos-manager:
   replicaCount: 1
   maxSurge: 1
   maxUnavailable: 0
-
+  waitForInitContainer:
+    image:
+      registry: docker.io
+      repository: harness/helm-init-container
+      pullPolicy: IfNotPresent
+      tag: "latest"
+      digest: ""
+      imagePullSecrets: []
   image:
     registry: docker.io
     repository: chaosnative/harness-smp-chaos-manager
@@ -254,7 +262,15 @@ chaos-driver:
   replicaCount: 3
   maxSurge: 1
   maxUnavailable: 0
-
+  
+  waitForInitContainer:
+    image:
+      registry: docker.io
+      repository: harness/helm-init-container
+      pullPolicy: IfNotPresent
+      tag: "latest"
+      digest: ""
+      imagePullSecrets: []
   image:
     registry: docker.io
     repository: chaosnative/harness-smp-chaos-driver
