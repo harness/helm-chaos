@@ -9,4 +9,4 @@ dependencies:
   repository: file://../chaos-web
   version: 0.1.0
 digest: sha256:38485a415dc40ea45ac78f0878ac5a59d388768f0b0dfd800ae29f4ad4eaa281
-generated: "2023-02-14T15:03:30.989743+05:30"
+generated: "2023-02-16T15:25:58.614825+05:30"
