@@ -137,12 +137,12 @@ chaos-manager:
 
   serviceAccount:
     # Specifies whether a service account should be created
-    create: true
+    create: false
     # Annotations to add to the service account
     annotations: {}
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
-    name: "chaos-manager-sa"
+    name: "harness-default"
 
   podAnnotations: {}
 
@@ -209,12 +209,12 @@ chaos-web:
 
   serviceAccount:
     # Specifies whether a service account should be created
-    create: true
+    create: false
     # Annotations to add to the service account
     annotations: {}
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
-    name: "chaos-web-sa"
+    name: "harness-default"
 
   podAnnotations: {}
 
@@ -262,7 +262,7 @@ chaos-driver:
   replicaCount: 3
   maxSurge: 1
   maxUnavailable: 0
-  
+
   waitForInitContainer:
     image:
       registry: docker.io
@@ -295,12 +295,12 @@ chaos-driver:
 
   serviceAccount:
     # Specifies whether a service account should be created
-    create: true
+    create: false
     # Annotations to add to the service account
     annotations: {}
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
-    name: "chaos-driver-sa"
+    name: "harness-default"
 
   podAnnotations: {}
 
