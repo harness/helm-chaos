@@ -15,6 +15,10 @@ version: 0.1.0
 appVersion: "0.1.0"
 
 dependencies:
+  - name: chaos-common
+    version: 0.1.x
+    repository: "file://../chaos-common"
+
   - name: chaos-driver
     version: 0.1.x
     repository: "file://../chaos-driver"
@@ -26,4 +30,7 @@ dependencies:
   - name: chaos-web
     version: 0.1.x
     repository: "file://../chaos-web"
-
+  
+  - name: chaos-k8s-ifs
+    version: 0.1.x
+    repository: "file://../chaos-k8s-ifs"

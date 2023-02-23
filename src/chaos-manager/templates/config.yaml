@@ -14,7 +14,7 @@ data:
   REDIS_LOCK_SSL_ENABLED: 'false'
   REDIS_LOCK_NAMESPACE: ''
   REDIS_LOCK_DATABASE: '0'
-  PORTAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/smp/chaos/manager/api'
+  PORTAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/smp/chaos/kserver/api'
   SUBSCRIBER_IMAGE: {{ include "chaos-manager.subscriberImage" . }}
   CONTAINER_RUNTIME_EXECUTOR: 'k8sapi'
   ARGO_WORKFLOW_CONTROLLER_IMAGE: {{ include "chaos-manager.argoWorkflowControllerImage" . }}
@@ -37,3 +37,6 @@ data:
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
   ENTERPRISE_HUB_SECRET: ""
   ENTERPRISE_HUB_TOKEN: ""
+  K8S_IFS_VERSION: 'ci'
+  K8S_INFRA_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/smp/chaos/kserver/api'
+  LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}

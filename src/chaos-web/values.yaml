@@ -44,9 +44,9 @@ image:
   repository: chaosnative/harness-smp-chaos-web
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.7.1"
+  tag: "0.8.6"
   digest: ""
-  imagePullSecrets: ["chaos-regcred-secret"]
+  #imagePullSecrets: ["chaos-regcred-secret"]
 
 enableCDN: 'false'
 
