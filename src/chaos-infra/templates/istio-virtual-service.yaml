@@ -1,0 +1,91 @@
+{{- if .Values.global.istio.enabled }}
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "chaos-infra.labels" . | nindent 4 }}
+  name: harness-chaos-vs
+  namespace: {{ .Release.Namespace }}
+spec:
+  gateways:
+    {{- if .Values.global.istio.gateway.create }}
+    - istio-system/public
+    {{- else }}
+    {{- range .Values.global.istio.virtualService.gateways }}
+    - {{ . }}
+    {{- end }}
+    {{- end }}
+  hosts:
+    {{- range .Values.global.istio.virtualService.hosts }}
+    - {{ . }}
+    {{- end }}
+  http:
+  - match:
+    - uri:
+        prefix: /chaos/driver/api/
+    - uri:
+        prefix: /chaos/driver/api
+    name: chaos-driver-service
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: chaos-driver-service
+        port:
+          number: 9000
+  - match:
+    - uri:
+        prefix: /chaos/manager/api/
+    - uri:
+        prefix: /chaos/manager/api
+    name: chaos-manager-service
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: chaos-manager-service
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /chaos/kserver/api/
+    - uri:
+        prefix: /chaos/kserver/api
+    name: chaos-k8s-ifs-service
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: chaos-k8s-ifs-service
+        port:
+          number: 6000
+  - match:
+    - uri:
+        prefix: /chaos/lserver/api/
+    - uri:
+        prefix: /chaos/lserver/api
+    name: chaos-linux-ifs-service
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: chaos-linux-ifs-service
+        port:
+          number: 4000
+  - match:
+    - uri:
+        prefix: /chaos/
+    - uri:
+        prefix: /chaos
+    name: chaos-web-service
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: chaos-web-service
+        port:
+          number: 8184
+
+{{- end }}

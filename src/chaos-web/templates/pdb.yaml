@@ -3,6 +3,8 @@ kind: PodDisruptionBudget
 metadata:
   name: chaos-web-pdb
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "chaos-web.labels" . | nindent 4 }}
 spec:
   minAvailable: "50%"
   selector:
