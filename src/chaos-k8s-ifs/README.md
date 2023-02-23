@@ -1,4 +1,4 @@
-# chaos-manager
+# chaos-k8s-ifs
 
 ## Requirements
 
