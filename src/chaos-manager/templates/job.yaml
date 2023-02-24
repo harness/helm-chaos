@@ -26,9 +26,9 @@ spec:
               name: chaos-db-upgrade-job-secret
         env:
           - name: PREV_VERSION
-            value: "0.3.0"
-          - name: VERSION
             value: "0.7.0"
+          - name: VERSION
+            value: "0.8.0"
           - name: DB_USER
             valueFrom:
               secretKeyRef:

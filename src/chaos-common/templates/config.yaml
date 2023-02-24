@@ -6,4 +6,6 @@ metadata:
 data:
   REDIS_ENDPOINT: 'redis://redis-sentinel-harness.{{ .Release.Namespace }}:6379'
   REDIS_SSL_ENABLED: 'true'
+  REDIS_CERT_PATH: '/opt/harness/svc/redis_labs_ca_truststore'
   REDIS_DATABASE: '0'
+  LOG_SERVICE_ENDPOINT: 'http://log-service.{{ .Release.Namespace }}.svc.cluster.local:8079'

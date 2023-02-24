@@ -6,8 +6,10 @@ metadata:
   labels:
     component: chaos-manager
     app: chaos-manager
-    restart: "1"
+    restart: "0"
     {{- include "chaos-manager.labels" . | nindent 4 }}
+  annotations:
+    restart: 1
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -28,7 +30,19 @@ spec:
         {{- include "chaos-manager.selectorLabels" . | nindent 8 }}
     spec:
       {{ include "chaos-manager.pullSecrets" . | nindent 6 }}
+      securityContext:
+        fsGroup: 2000
       serviceAccountName: {{ include "chaos-manager.serviceAccountName" . }}
+      volumes:
+        - name: service-account
+          secret:
+            secretName: chaos-redis-ca-truststore
+            items:
+              - key: redis-labs-ca-truststore
+                path: redis_labs_ca_truststore
+            defaultMode: 420
+        - name: chaos-manager-hub-storage
+          emptyDir: {}
       initContainers:
       - name: wait-for-mongo
         image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
@@ -40,12 +54,22 @@ spec:
         - name: chaos-manager
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: service-account
+              mountPath: /opt/harness/svc
+            - mountPath: "/data/chaos_hubs"
+              name: chaos-manager-hub-storage
           envFrom:
             - secretRef:
                 name: chaos-manager-secret
             - configMapRef:
                 name: chaos-manager-config
           env:
+            - name: LOG_SERVICE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: LOG_SERVICE_ENDPOINT
             - name: DB_USER
               valueFrom:
                 secretKeyRef:

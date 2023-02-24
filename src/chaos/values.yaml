@@ -66,7 +66,7 @@ chaos-manager:
         repository: chaosnative/harness-smp-chaos-db-upgrade-agent
         pullPolicy: Always
         digest: ""
-        #imagePullSecrets: ["chaos-regcred-secret"]
+        imagePullSecrets: [""]
 
   subscriberImage:
     image:
@@ -113,13 +113,13 @@ chaos-manager:
   logWatcherImage:
     image:
       registry: docker.io
-      repository: chaosnative/harness-smp-chaos-log-watcher
-      tag: 0.8.0
+      repository: chaosnative/harness-chaos-log-watcher
+      tag: release-chaos-log-watcher-0.8.0
       digest: ""
 
-  enterpriseHubBranchName: 'hce-saas'
+  enterpriseHubBranchName: 'main'
 
-  chaosExperimentLimit: '1000'
+  chaosExperimentLimit: '2000'
 
   chaosHubLimit: '30'
 
@@ -127,7 +127,7 @@ chaos-manager:
 
   chaosHubSize: '200'
 
-  parallelChaosExperimentRuns: '25'
+  parallelChaosExperimentRuns: '500'
 
   skipSecureVerify: 'true'
 
@@ -175,11 +175,11 @@ chaos-manager:
 
   resources:
     limits:
-      cpu: 1500m
-      memory: 2048Mi
+      cpu: 250m
+      memory: 1024Mi
     requests:
-      cpu: 1500m
-      memory: 2048Mi
+      cpu: 250m
+      memory: 1024Mi
 
   autoscaling: {}
     #enabled: false
@@ -246,11 +246,11 @@ chaos-web:
 
   resources:
     limits:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 250m
+      memory: 256Mi
     requests:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 250m
+      memory: 256Mi
 
   autoscaling: {}
     #enabled: false
@@ -332,10 +332,11 @@ chaos-driver:
 
   resources:
     limits:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 250m
+      memory: 256Mi
     requests:
-      memory: 512Mi
+      cpu: 250m
+      memory: 256Mi
 
   autoscaling: {}
     #enabled: false

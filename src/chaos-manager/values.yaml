@@ -67,7 +67,7 @@ jobs:
       repository: chaosnative/harness-smp-chaos-db-upgrade-agent
       pullPolicy: Always
       digest: ""
-      imagePullSecrets: ["chaos-regcred-secret"]
+      imagePullSecrets: [""]
 
 subscriberImage:
   image:
@@ -118,9 +118,9 @@ logWatcherImage:
     tag: release-chaos-log-watcher-0.8.0
     digest: ""
 
-enterpriseHubBranchName: 'hce-saas'
+enterpriseHubBranchName: 'main'
 
-chaosExperimentLimit: '1000'
+chaosExperimentLimit: '2000'
 
 chaosHubLimit: '30'
 
@@ -128,7 +128,7 @@ chaosGamedayLimit: '200'
 
 chaosHubSize: '200'
 
-parallelChaosExperimentRuns: '25'
+parallelChaosExperimentRuns: '500'
 
 skipSecureVerify: 'true'
 
@@ -176,11 +176,11 @@ service:
 
 resources:
   limits:
-    cpu: 1500m
-    memory: 2048Mi
+    cpu: 250m
+    memory: 1024Mi
   requests:
-    cpu: 1500m
-    memory: 2048Mi
+    cpu: 250m
+    memory: 1024Mi
 
 autoscaling: {}
   #enabled: false
