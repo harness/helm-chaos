@@ -67,7 +67,7 @@ jobs:
       repository: chaosnative/harness-smp-chaos-db-upgrade-agent
       pullPolicy: Always
       digest: ""
-      imagePullSecrets: [""]
+      imagePullSecrets: []
 
 subscriberImage:
   image:

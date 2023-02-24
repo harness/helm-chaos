@@ -9,7 +9,7 @@ metadata:
     restart: "0"
     {{- include "chaos-manager.labels" . | nindent 4 }}
   annotations:
-    restart: 1
+    restart: "1"
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
