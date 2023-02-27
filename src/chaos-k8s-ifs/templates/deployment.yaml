@@ -37,21 +37,21 @@ spec:
         args:
           - "pod"
           - "-lapp=mongodb-replicaset"
-      volumes:
-      - name: service-account
-        secret:
-          secretName: chaos-redis-ca-truststore
-          items:
-            - key: redis-labs-ca-truststore
-              path: redis_labs_ca_truststore
-          defaultMode: 420
+      #volumes:
+      #- name: service-account
+      #  secret:
+      #    secretName: chaos-redis-ca-truststore
+      #    items:
+      #      - key: redis-labs-ca-truststore
+      #        path: redis_labs_ca_truststore
+      #    defaultMode: 420
       containers:
         - name: chaos-k8s-ifs
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          volumeMounts:
-          - name: service-account
-            mountPath: /opt/harness/svc
+          #volumeMounts:
+          #- name: service-account
+          #  mountPath: /opt/harness/svc
           env:
             - name: CHAOS_SERVICE_JWT_SECRET
               valueFrom:

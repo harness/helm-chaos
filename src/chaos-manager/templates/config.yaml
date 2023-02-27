@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace | quote }}
 data:
   DEPLOY_MODE: KUBERNETES_ONPREM
-  REDIS_SSL_ENABLED: 'true'
+  REDIS_SSL_ENABLED: 'false'
   REDIS_CERT_PATH: '/opt/harness/svc/redis_labs_ca_truststore'
   REDIS_EVENTS_FWK_NAMESPACE: ''
   REDIS_CERT_PATH: '/opt/harness/svc/redis_labs_ca_truststore'

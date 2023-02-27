@@ -34,13 +34,13 @@ spec:
         fsGroup: 2000
       serviceAccountName: {{ include "chaos-manager.serviceAccountName" . }}
       volumes:
-        - name: service-account
-          secret:
-            secretName: chaos-redis-ca-truststore
-            items:
-              - key: redis-labs-ca-truststore
-                path: redis_labs_ca_truststore
-            defaultMode: 420
+        #- name: service-account
+        #  secret:
+        #    secretName: chaos-redis-ca-truststore
+        #    items:
+        #      - key: redis-labs-ca-truststore
+        #        path: redis_labs_ca_truststore
+        #    defaultMode: 420
         - name: chaos-manager-hub-storage
           emptyDir: {}
       initContainers:
@@ -55,8 +55,8 @@ spec:
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-            - name: service-account
-              mountPath: /opt/harness/svc
+            #- name: service-account
+            #  mountPath: /opt/harness/svc
             - mountPath: "/data/chaos_hubs"
               name: chaos-manager-hub-storage
           envFrom:
