@@ -53,7 +53,7 @@ image:
   repository: chaosnative/harness-smp-chaos-manager
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.8.3"
+  tag: "0.8.4"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
