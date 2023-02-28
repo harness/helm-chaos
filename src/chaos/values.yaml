@@ -436,3 +436,162 @@ chaos-k8s-ifs:
   tolerations: []
 
   affinity: {}
+
+chaos-linux-ifc:
+
+  replicaCount: 2
+  maxSurge: 1
+  maxUnavailable: 0
+
+  waitForInitContainer:
+    image:
+      registry: docker.io
+      repository: harness/helm-init-container
+      pullPolicy: IfNotPresent
+      tag: "latest"
+      digest: ""
+      imagePullSecrets: []
+      
+  image:
+    registry: docker.io
+    #repository: chaosnative/harness-smp-chaos-delegate-controller
+    repository: chaosnative/delegate-controller
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "ci"
+    digest: ""
+    #imagePullSecrets: ["chaos-regcred-secret"]
+
+  configmap: {}
+
+
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "chaos-linux-ifc-sa"
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    #runAsUser: 65534
+    #runAsNonRoot: true
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+
+  autoscaling: {}
+    #enabled: false
+    #minReplicas: 1
+    #maxReplicas: 2
+    #targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+chaos-linux-ifs:
+
+  replicaCount: 2
+  maxSurge: 1
+  maxUnavailable: 0
+
+  waitForInitContainer:
+    image:
+      registry: docker.io
+      repository: harness/helm-init-container
+      pullPolicy: IfNotPresent
+      tag: "latest"
+      digest: ""
+      imagePullSecrets: []
+      
+  image:
+    registry: docker.io
+    #repository: chaosnative/harness-smp-chaos-delegate-controller
+    repository: chaosnative/delegate-controller
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "ci"
+    digest: ""
+    #imagePullSecrets: ["chaos-regcred-secret"]
+
+  configmap: {}
+
+
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "chaos-linux-ifc-sa"
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    #runAsUser: 65534
+    #runAsNonRoot: true
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+
+  autoscaling: {}
+    #enabled: false
+    #minReplicas: 1
+    #maxReplicas: 2
+    #targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+

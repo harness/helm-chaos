@@ -1,0 +1,30 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: chaos-linux-ifs
+  namespace: '{{ .Release.Namespace }}'
+  labels:
+    name: chaos-linux-ifs
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list"]
+  - apiGroups: ["litmuschaos.io"]
+    resources: ["taskdefinitions","linuxchaosexperiments"]
+    verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: chaos-linux-ifs
+  namespace: '{{ .Release.Namespace }}'
+  labels:
+    name: chaos-linux-ifs
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: chaos-linux-ifs
+subjects:
+  - kind: ServiceAccount
+    name: '{{ include "chaos-linux-ifs.serviceAccountName" . }}'

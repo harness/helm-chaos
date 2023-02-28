@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chaos-linux-ifs
+  namespace: {{ .Release.Namespace }}
+  labels:
+    component: chaos-linux-ifs
+    app: chaos-linux-ifs
+    {{- include "chaos-linux-ifs.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.maxSurge }}
+      maxUnavailable: {{ .Values.maxUnavailable }}  
+  selector:
+    matchLabels:
+      component: chaos-linux-ifs
+      app: chaos-linux-ifs
+      {{- include "chaos-linux-ifs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        component: chaos-linux-ifs
+      app: chaos-linux-ifs
+      {{- include "chaos-linux-ifs.selectorLabels" . | nindent 6 }}
+    spec:
+      {{ include "chaos-linux-ifs.pullSecrets" . | nindent 6 }}
+      serviceAccountName: {{ include "chaos-linux-ifs.serviceAccountName" . }}
+      initContainers:
+      - name: wait-for-mongo
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+        imagePullPolicy: IfNotPresent
+        args:
+          - "pod"
+          - "-lapp=mongodb-replicaset"
+      containers:
+        - name: chaos-linux-ifs
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
+          env:
+          - name: CHAOS_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: CHAOS_SERVICE_JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: chaos-common-secret
+                key: CHAOS_SERVICE_JWT_SECRET
+          - name: DB_SERVER
+            value: {{ include "harnesscommon.database.mongo" (dict "database" "chaos-harness" "context" $) }}
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mongoSecrets.userName.name }}
+                key: {{ .Values.mongoSecrets.userName.key }}
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mongoSecrets.password.name }}
+                key: {{ .Values.mongoSecrets.password.key }}
+          ports:
+            - containerPort: {{.Values.service.port}}
+            - containerPort: {{.Values.service.grpcport}}
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 2000
+          resources:
+              {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

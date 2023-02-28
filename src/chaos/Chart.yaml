@@ -34,3 +34,11 @@ dependencies:
   - name: chaos-k8s-ifs
     version: 0.1.x
     repository: "file://../chaos-k8s-ifs"
+
+  - name: chaos-linux-ifs
+    version: 0.1.x
+    repository: "file://../chaos-linux-ifs"
+
+  - name: chaos-linux-ifc
+    version: 0.1.x
+    repository: "file://../chaos-linux-ifc"
