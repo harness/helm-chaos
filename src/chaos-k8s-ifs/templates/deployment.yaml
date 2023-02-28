@@ -120,6 +120,11 @@ spec:
                 configMapKeyRef:
                   name: chaos-common-config
                   key: REDIS_CERT_PATH
+            - name: INFRA_COMPATIBLE_VERSIONS
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: INFRA_COMPATIBLE_VERSIONS
           ports:
             - containerPort: {{.Values.service.port}}
           resources:

@@ -1,8 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: chaos-linux-ifc-config
-  namespace: {{ .Release.Namespace | quote }}
-data:
-  CHAOS_MANAGER_GRPC_ENDPOINT: "chaos-manager-service.{{ .Release.Namespace }}.svc.cluster.local:8081"

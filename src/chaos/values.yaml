@@ -54,7 +54,7 @@ chaos-manager:
     repository: chaosnative/hce-saas-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "main-0714bc770978889dcf1ead739a9a33c124e2d806"
+    tag: "main-cfeb624d4dfb0a3b5a4640dee062e483cce64673"
     digest: ""
     imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -73,8 +73,8 @@ chaos-manager:
   subscriberImage:
     image:
       registry: docker.io
-      repository: chaosnative/harness-smp-chaos-subscriber
-      tag: 0.8.2
+      repository: chaosnative/hce-saas-subscriber
+      tag: main-cfeb624d4dfb0a3b5a4640dee062e483cce64673
       digest: ""
 
   argoWorkflowControllerImage:
@@ -206,7 +206,7 @@ chaos-web:
     repository: chaosnative/hce-saas-chaos-web
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "main-0714bc770978889dcf1ead739a9a33c124e2d806"
+    tag: "main-cfeb624d4dfb0a3b5a4640dee062e483cce64673"
     digest: ""
     imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -286,7 +286,7 @@ chaos-driver:
     repository: chaosnative/hce-saas-chaos-driver
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "main-0714bc770978889dcf1ead739a9a33c124e2d806"
+    tag: "main-cfeb624d4dfb0a3b5a4640dee062e483cce64673"
     digest: ""
     imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -466,8 +466,6 @@ chaos-linux-ifc:
 
   configmap: {}
 
-
-
   nameOverride: ""
   fullnameOverride: ""
 
@@ -494,8 +492,6 @@ chaos-linux-ifc:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
-
-
 
   resources:
     limits:
@@ -536,7 +532,7 @@ chaos-linux-ifs:
   image:
     registry: docker.io
     #repository: chaosnative/harness-smp-chaos-delegate-controller
-    repository: chaosnative/delegate-controller
+    repository: chaosnative/delegate-server
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "ci"
@@ -544,8 +540,6 @@ chaos-linux-ifs:
     imagePullSecrets: ["chaos-regcred-secret"]
 
   configmap: {}
-
-
 
   nameOverride: ""
   fullnameOverride: ""
@@ -557,7 +551,7 @@ chaos-linux-ifs:
     annotations: {}
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
-    name: "chaos-linux-ifc-sa"
+    name: "chaos-linux-ifs-sa"
 
   podAnnotations: {}
 
@@ -573,8 +567,6 @@ chaos-linux-ifs:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
-
-
 
   resources:
     limits:

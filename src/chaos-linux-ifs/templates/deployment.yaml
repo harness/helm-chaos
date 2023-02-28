@@ -60,6 +60,21 @@ spec:
               secretKeyRef:
                 name: {{ .Values.mongoSecrets.password.name }}
                 key: {{ .Values.mongoSecrets.password.key }}
+          - name: MONGODB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mongoSecrets.userName.name }}
+                key: {{ .Values.mongoSecrets.userName.key }}
+          - name: MONGODB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mongoSecrets.password.name }}
+                key: {{ .Values.mongoSecrets.password.key }}
+          - name: CHAOS_MANAGER_GRPC_ENDPOINT
+            valueFrom:
+              configMapKeyRef:
+                name: chaos-common-config
+                key: CHAOS_MANAGER_GRPC_ENDPOINT
           ports:
             - containerPort: {{.Values.service.port}}
             - containerPort: {{.Values.service.grpcport}}

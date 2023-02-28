@@ -8,7 +8,7 @@ metadata:
     name: chaos-linux-ifs
 rules:
   - apiGroups: [""]
-    resources: ["secrets"]
+    resources: ["secrets", "pods"]
     verbs: ["get", "list"]
   - apiGroups: ["litmuschaos.io"]
     resources: ["taskdefinitions","linuxchaosexperiments"]

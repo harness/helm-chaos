@@ -36,6 +36,8 @@ platform:
       ADDITIONAL: "CHAOS_ENABLED"
 
 replicaCount: 2
+# TODO: remove this
+replicaCountDeployment: 0
 maxSurge: 1
 maxUnavailable: 0
 
@@ -72,8 +74,8 @@ jobs:
 subscriberImage:
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-subscriber
-    tag: 0.8.2
+    repository: chaosnative/hce-saas-subscriber
+    tag: main-cfeb624d4dfb0a3b5a4640dee062e483cce64673
     digest: ""
 
 argoWorkflowControllerImage:
@@ -114,8 +116,8 @@ litmusChaosExporterImage:
 logWatcherImage:
   image:
     registry: docker.io
-    repository: chaosnative/harness-chaos-log-watcher
-    tag: release-chaos-log-watcher-0.8.0
+    repository: chaosnative/hce-saas-log-watcher
+    tag: main-28f5433232b6c1e2d2512315753021e2df9474cc
     digest: ""
 
 enterpriseHubBranchName: 'main'
@@ -173,6 +175,8 @@ service:
   type: ClusterIP
   port: 8080
   targetport: 8080
+  grpcport: 8081
+  targetgrpcport: 8081
 
 resources:
   limits:
