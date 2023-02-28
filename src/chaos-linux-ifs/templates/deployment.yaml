@@ -23,8 +23,8 @@ spec:
     metadata:
       labels:
         component: chaos-linux-ifs
-      app: chaos-linux-ifs
-      {{- include "chaos-linux-ifs.selectorLabels" . | nindent 6 }}
+        app: chaos-linux-ifs
+        {{- include "chaos-linux-ifs.selectorLabels" . | nindent 8 }}
     spec:
       {{ include "chaos-linux-ifs.pullSecrets" . | nindent 6 }}
       serviceAccountName: {{ include "chaos-linux-ifs.serviceAccountName" . }}
@@ -63,7 +63,6 @@ spec:
           ports:
             - containerPort: {{.Values.service.port}}
             - containerPort: {{.Values.service.grpcport}}
-
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

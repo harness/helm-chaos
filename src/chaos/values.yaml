@@ -1,5 +1,5 @@
 global:
-  loadbalancerURL: "test@harness.io"
+  loadbalancerURL: "http://34.23.21.25"
   airgap: false
   ha: false
   opa:
@@ -7,10 +7,12 @@ global:
   cd:
     # -- Enable to install CD
     enabled: true
+  chaos:
+    enabled: true
   # Enable if using ingress objects
   ingress:
     enabled: true
-    loadBalancerIP: '0.0.0.0'
+    loadBalancerIP: '34.23.21.25'
     className: "harness"
     loadBalancerEnabled: true
     hosts:
@@ -49,12 +51,12 @@ chaos-manager:
       
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-manager
+    repository: chaosnative/hce-saas-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.8.3"
+    tag: "main-0714bc770978889dcf1ead739a9a33c124e2d806"
     digest: ""
-    #imagePullSecrets: ["chaos-regcred-secret"]
+    imagePullSecrets: ["chaos-regcred-secret"]
 
   jobs:
     chaos_db_upgrade:
@@ -66,7 +68,7 @@ chaos-manager:
         repository: chaosnative/harness-smp-chaos-db-upgrade-agent
         pullPolicy: Always
         digest: ""
-        imagePullSecrets: [""]
+        imagePullSecrets: []
 
   subscriberImage:
     image:
@@ -201,12 +203,12 @@ chaos-web:
 
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-web
+    repository: chaosnative/hce-saas-chaos-web
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.8.6"
+    tag: "main-0714bc770978889dcf1ead739a9a33c124e2d806"
     digest: ""
-    #imagePullSecrets: ["chaos-regcred-secret"]
+    imagePullSecrets: ["chaos-regcred-secret"]
 
   enableCDN: 'false'
 
@@ -281,12 +283,12 @@ chaos-driver:
 
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-driver
+    repository: chaosnative/hce-saas-chaos-driver
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.8.0"
+    tag: "main-0714bc770978889dcf1ead739a9a33c124e2d806"
     digest: ""
-    #imagePullSecrets: ["chaos-regcred-secret"]
+    imagePullSecrets: ["chaos-regcred-secret"]
 
   configmap: {}
 
@@ -367,12 +369,12 @@ chaos-k8s-ifs:
       
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-k8s-ifs
+    repository: chaosnative/hce-saas-k8s-ifs
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.8.1"
+    tag: "main-28f5433232b6c1e2d2512315753021e2df9474cc"
     digest: ""
-    #imagePullSecrets: ["chaos-regcred-secret"]
+    imagePullSecrets: ["chaos-regcred-secret"]
 
   configmap: {}
 
@@ -460,7 +462,7 @@ chaos-linux-ifc:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "ci"
     digest: ""
-    #imagePullSecrets: ["chaos-regcred-secret"]
+    imagePullSecrets: ["chaos-regcred-secret"]
 
   configmap: {}
 
@@ -539,7 +541,7 @@ chaos-linux-ifs:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "ci"
     digest: ""
-    #imagePullSecrets: ["chaos-regcred-secret"]
+    imagePullSecrets: ["chaos-regcred-secret"]
 
   configmap: {}
 
