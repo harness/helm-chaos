@@ -1,27 +1,29 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: chaos-manager
   namespace: {{ .Release.Namespace }}
   labels:
     component: chaos-manager
     app: chaos-manager
-    restart: "0"
     {{- include "chaos-manager.labels" . | nindent 4 }}
-  annotations:
-    restart: "1"
 spec:
-  replicas: {{ .Values.replicaCountDeployment }}
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: {{ .Values.maxSurge }}
-      maxUnavailable: {{ .Values.maxUnavailable }}
+  replicas: {{ .Values.replicaCount }}
+  serviceName: chaos-manager-service
   selector:
     matchLabels:
       component: chaos-manager
       app: chaos-manager
       {{- include "chaos-manager.selectorLabels" . | nindent 6 }}
+  volumeClaimTemplates:
+  - metadata:
+      name: chaos-manager-hub-storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
   template:
     metadata:
       labels:
@@ -33,16 +35,6 @@ spec:
       securityContext:
         fsGroup: 2000
       serviceAccountName: {{ include "chaos-manager.serviceAccountName" . }}
-      volumes:
-        #- name: service-account
-        #  secret:
-        #    secretName: chaos-redis-ca-truststore
-        #    items:
-        #      - key: redis-labs-ca-truststore
-        #        path: redis_labs_ca_truststore
-        #    defaultMode: 420
-        - name: chaos-manager-hub-storage
-          emptyDir: {}
       initContainers:
       - name: wait-for-mongo
         image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}

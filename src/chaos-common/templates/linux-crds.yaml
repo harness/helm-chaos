@@ -1,0 +1,746 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.9.0
+  creationTimestamp: null
+  name: linuxchaosexperiments.litmuschaos.io
+spec:
+  group: litmuschaos.io
+  names:
+    kind: LinuxChaosExperiment
+    listKind: LinuxChaosExperimentList
+    plural: linuxchaosexperiments
+    shortNames:
+      - lce
+    singular: linuxchaosexperiment
+  scope: Namespaced
+  versions:
+    - name: v1alpha1
+      schema:
+        openAPIV3Schema:
+          description: LinuxChaosExperiment is the Schema for the linuxchaosexperiment
+            API
+          properties:
+            apiVersion:
+              description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+              type: string
+            kind:
+              description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: LinuxChaosExperimentSpec defines the desired state of LinuxChaosExperiment
+              properties:
+                cleanupPolicy:
+                  type: string
+                experimentId:
+                  type: string
+                experimentRunId:
+                  type: string
+                experimentState:
+                  type: string
+                steps:
+                  items:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        status:
+                          type: string
+                      required:
+                        - name
+                      type: object
+                    type: array
+                  type: array
+                tasks:
+                  items:
+                    properties:
+                      chaosInfra:
+                        type: string
+                      definition:
+                        properties:
+                          bash:
+                            properties:
+                              script:
+                                type: string
+                              vars:
+                                items:
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
+                                  required:
+                                    - name
+                                  type: object
+                                type: array
+                            type: object
+                          chaos:
+                            properties:
+                              dnsChaos/inputs:
+                                properties:
+                                  dnsPort:
+                                    type: integer
+                                  duration:
+                                    type: integer
+                                  hostNames:
+                                    type: string
+                                  matchScheme:
+                                    type: string
+                                  rampTime:
+                                    type: integer
+                                  spoofMap:
+                                    type: string
+                                  upstreamServer:
+                                    type: string
+                                type: object
+                              experiment:
+                                type: string
+                              httpChaos/inputs:
+                                properties:
+                                  contentEncoding:
+                                    type: string
+                                  contentType:
+                                    type: string
+                                  duration:
+                                    type: integer
+                                  headersMap:
+                                    type: string
+                                  jitter:
+                                    type: integer
+                                  latency:
+                                    type: integer
+                                  mode:
+                                    type: string
+                                  networkInterface:
+                                    type: string
+                                  proxyPort:
+                                    type: string
+                                  rampTime:
+                                    type: integer
+                                  resetTimeout:
+                                    type: integer
+                                  responseBody:
+                                    type: string
+                                  statusCode:
+                                    type: string
+                                  targetServicePort:
+                                    type: string
+                                  toxicTypes:
+                                    type: string
+                                  toxicity:
+                                    type: integer
+                                required:
+                                  - targetServicePort
+                                  - toxicTypes
+                                type: object
+                              networkChaos/inputs:
+                                properties:
+                                  destinationHosts:
+                                    type: string
+                                  destinationIPs:
+                                    type: string
+                                  duration:
+                                    type: integer
+                                  jitter:
+                                    type: integer
+                                  networkInterface:
+                                    type: string
+                                  networkLatency:
+                                    type: integer
+                                  packetCorruptionPercentage:
+                                    type: integer
+                                  packetDuplicationPercentage:
+                                    type: integer
+                                  packetLossPercentage:
+                                    type: integer
+                                  rampTime:
+                                    type: integer
+                                type: object
+                              probes:
+                                items:
+                                  properties:
+                                    cmdProbe/inputs:
+                                      properties:
+                                        command:
+                                          type: string
+                                        comparator:
+                                          properties:
+                                            criteria:
+                                              type: string
+                                            type:
+                                              type: string
+                                            value:
+                                              type: string
+                                          required:
+                                            - criteria
+                                            - value
+                                          type: object
+                                      required:
+                                        - command
+                                        - comparator
+                                      type: object
+                                    httpProbe/inputs:
+                                      properties:
+                                        insecureSkipVerify:
+                                          type: boolean
+                                        method:
+                                          properties:
+                                            get:
+                                              properties:
+                                                criteria:
+                                                  type: string
+                                                responseCode:
+                                                  type: string
+                                              required:
+                                                - criteria
+                                                - responseCode
+                                              type: object
+                                            post:
+                                              properties:
+                                                body:
+                                                  type: string
+                                                bodyPath:
+                                                  type: string
+                                                contentType:
+                                                  type: string
+                                                criteria:
+                                                  type: string
+                                                responseCode:
+                                                  type: string
+                                              required:
+                                                - criteria
+                                                - responseCode
+                                              type: object
+                                          type: object
+                                        url:
+                                          type: string
+                                      required:
+                                        - method
+                                        - url
+                                      type: object
+                                    mode:
+                                      type: string
+                                    name:
+                                      type: string
+                                    runProperties:
+                                      properties:
+                                        initialDelaySeconds:
+                                          type: integer
+                                        interval:
+                                          type: integer
+                                        probePollingInterval:
+                                          type: integer
+                                        probeTimeout:
+                                          type: integer
+                                        retry:
+                                          type: integer
+                                        stopOnFailure:
+                                          type: boolean
+                                      type: object
+                                    type:
+                                      type: string
+                                  required:
+                                    - mode
+                                    - name
+                                    - type
+                                  type: object
+                                type: array
+                              processKillChaos/inputs:
+                                properties:
+                                  duration:
+                                    type: integer
+                                  processIDs:
+                                    type: string
+                                  rampTime:
+                                    type: integer
+                                type: object
+                              serviceRestartChaos/inputs:
+                                properties:
+                                  delay:
+                                    type: integer
+                                  duration:
+                                    type: integer
+                                  interval:
+                                    type: integer
+                                  rampTime:
+                                    type: integer
+                                  selfHealingServices:
+                                    type: boolean
+                                  sequence:
+                                    type: string
+                                  services:
+                                    type: string
+                                  timeout:
+                                    type: integer
+                                type: object
+                              stressChaos/inputs:
+                                properties:
+                                  duration:
+                                    type: integer
+                                  fileSystemUtilisationBytes:
+                                    format: int64
+                                    type: integer
+                                  fileSystemUtilisationPercentage:
+                                    type: integer
+                                  load:
+                                    type: integer
+                                  memoryBytes:
+                                    format: int64
+                                    type: integer
+                                  memoryPercentage:
+                                    type: integer
+                                  rampTime:
+                                    type: integer
+                                  volumeMountPath:
+                                    type: string
+                                  workers:
+                                    type: integer
+                                type: object
+                              timeChaos/inputs:
+                                properties:
+                                  disableNTP:
+                                    type: boolean
+                                  duration:
+                                    type: integer
+                                  offset:
+                                    type: string
+                                  rampTime:
+                                    type: integer
+                                type: object
+                            required:
+                              - experiment
+                            type: object
+                        type: object
+                      name:
+                        type: string
+                      taskDefCRName:
+                        type: string
+                      taskState:
+                        type: string
+                      taskType:
+                        type: string
+                      weight:
+                        type: integer
+                    required:
+                      - chaosInfra
+                      - definition
+                      - name
+                      - taskType
+                    type: object
+                  type: array
+              required:
+                - experimentId
+                - experimentRunId
+                - steps
+                - tasks
+              type: object
+            status:
+              properties:
+                experimentStatus:
+                  type: string
+                finishedAt:
+                  format: date-time
+                  type: string
+                startedAt:
+                  format: date-time
+                  type: string
+                taskStatuses:
+                  items:
+                    properties:
+                      executionPhase:
+                        type: string
+                      finishedAt:
+                        format: date-time
+                        type: string
+                      name:
+                        type: string
+                      outputs:
+                        properties:
+                          errorCode:
+                            type: string
+                          failStep:
+                            type: string
+                        type: object
+                      startedAt:
+                        format: date-time
+                        type: string
+                      taskDefinitionCR:
+                        type: string
+                      taskStatus:
+                        type: string
+                      taskType:
+                        type: string
+                    required:
+                      - name
+                      - taskStatus
+                      - taskType
+                    type: object
+                  type: array
+              type: object
+          type: object
+      served: true
+      storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.9.0
+  creationTimestamp: null
+  name: taskdefinitions.litmuschaos.io
+spec:
+  group: litmuschaos.io
+  names:
+    kind: TaskDefinition
+    listKind: TaskDefinitionList
+    plural: taskdefinitions
+    shortNames:
+      - taskd
+    singular: taskdefinition
+  scope: Namespaced
+  versions:
+    - name: v1alpha1
+      schema:
+        openAPIV3Schema:
+          description: TaskDefinition is the Schema for the taskdefinitions API
+          properties:
+            apiVersion:
+              description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+              type: string
+            kind:
+              description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: TaskDefinitionSpec defines the desired state of TaskDefinition
+              properties:
+                action:
+                  properties:
+                    bash:
+                      properties:
+                        script:
+                          type: string
+                        vars:
+                          items:
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                              - name
+                            type: object
+                          type: array
+                      type: object
+                    chaos:
+                      properties:
+                        dnsChaos/inputs:
+                          properties:
+                            dnsPort:
+                              type: integer
+                            duration:
+                              type: integer
+                            hostNames:
+                              type: string
+                            matchScheme:
+                              type: string
+                            rampTime:
+                              type: integer
+                            spoofMap:
+                              type: string
+                            upstreamServer:
+                              type: string
+                          type: object
+                        experiment:
+                          type: string
+                        httpChaos/inputs:
+                          properties:
+                            contentEncoding:
+                              type: string
+                            contentType:
+                              type: string
+                            duration:
+                              type: integer
+                            headersMap:
+                              type: string
+                            jitter:
+                              type: integer
+                            latency:
+                              type: integer
+                            mode:
+                              type: string
+                            networkInterface:
+                              type: string
+                            proxyPort:
+                              type: string
+                            rampTime:
+                              type: integer
+                            resetTimeout:
+                              type: integer
+                            responseBody:
+                              type: string
+                            statusCode:
+                              type: string
+                            targetServicePort:
+                              type: string
+                            toxicTypes:
+                              type: string
+                            toxicity:
+                              type: integer
+                          required:
+                            - targetServicePort
+                            - toxicTypes
+                          type: object
+                        networkChaos/inputs:
+                          properties:
+                            destinationHosts:
+                              type: string
+                            destinationIPs:
+                              type: string
+                            duration:
+                              type: integer
+                            jitter:
+                              type: integer
+                            networkInterface:
+                              type: string
+                            networkLatency:
+                              type: integer
+                            packetCorruptionPercentage:
+                              type: integer
+                            packetDuplicationPercentage:
+                              type: integer
+                            packetLossPercentage:
+                              type: integer
+                            rampTime:
+                              type: integer
+                          type: object
+                        probes:
+                          items:
+                            properties:
+                              cmdProbe/inputs:
+                                properties:
+                                  command:
+                                    type: string
+                                  comparator:
+                                    properties:
+                                      criteria:
+                                        type: string
+                                      type:
+                                        type: string
+                                      value:
+                                        type: string
+                                    required:
+                                      - criteria
+                                      - value
+                                    type: object
+                                required:
+                                  - command
+                                  - comparator
+                                type: object
+                              httpProbe/inputs:
+                                properties:
+                                  insecureSkipVerify:
+                                    type: boolean
+                                  method:
+                                    properties:
+                                      get:
+                                        properties:
+                                          criteria:
+                                            type: string
+                                          responseCode:
+                                            type: string
+                                        required:
+                                          - criteria
+                                          - responseCode
+                                        type: object
+                                      post:
+                                        properties:
+                                          body:
+                                            type: string
+                                          bodyPath:
+                                            type: string
+                                          contentType:
+                                            type: string
+                                          criteria:
+                                            type: string
+                                          responseCode:
+                                            type: string
+                                        required:
+                                          - criteria
+                                          - responseCode
+                                        type: object
+                                    type: object
+                                  url:
+                                    type: string
+                                required:
+                                  - method
+                                  - url
+                                type: object
+                              mode:
+                                type: string
+                              name:
+                                type: string
+                              runProperties:
+                                properties:
+                                  initialDelaySeconds:
+                                    type: integer
+                                  interval:
+                                    type: integer
+                                  probePollingInterval:
+                                    type: integer
+                                  probeTimeout:
+                                    type: integer
+                                  retry:
+                                    type: integer
+                                  stopOnFailure:
+                                    type: boolean
+                                type: object
+                              type:
+                                type: string
+                            required:
+                              - mode
+                              - name
+                              - type
+                            type: object
+                          type: array
+                        processKillChaos/inputs:
+                          properties:
+                            duration:
+                              type: integer
+                            processIDs:
+                              type: string
+                            rampTime:
+                              type: integer
+                          type: object
+                        serviceRestartChaos/inputs:
+                          properties:
+                            delay:
+                              type: integer
+                            duration:
+                              type: integer
+                            interval:
+                              type: integer
+                            rampTime:
+                              type: integer
+                            selfHealingServices:
+                              type: boolean
+                            sequence:
+                              type: string
+                            services:
+                              type: string
+                            timeout:
+                              type: integer
+                          type: object
+                        stressChaos/inputs:
+                          properties:
+                            duration:
+                              type: integer
+                            fileSystemUtilisationBytes:
+                              format: int64
+                              type: integer
+                            fileSystemUtilisationPercentage:
+                              type: integer
+                            load:
+                              type: integer
+                            memoryBytes:
+                              format: int64
+                              type: integer
+                            memoryPercentage:
+                              type: integer
+                            rampTime:
+                              type: integer
+                            volumeMountPath:
+                              type: string
+                            workers:
+                              type: integer
+                          type: object
+                        timeChaos/inputs:
+                          properties:
+                            disableNTP:
+                              type: boolean
+                            duration:
+                              type: integer
+                            offset:
+                              type: string
+                            rampTime:
+                              type: integer
+                          type: object
+                      required:
+                        - experiment
+                      type: object
+                  type: object
+                chaosInfra:
+                  type: string
+                siblings:
+                  type: integer
+                taskState:
+                  type: string
+              required:
+                - action
+                - chaosInfra
+                - taskState
+              type: object
+            status:
+              description: TaskDefinitionStatus defines the observed state of TaskDefinition
+              properties:
+                executionPhase:
+                  type: string
+                probeStatuses:
+                  items:
+                    description: ProbeStatus defines information about the status and
+                      result of the probes
+                    properties:
+                      mode:
+                        description: 'Mode defined the mode of probe, supported values:
+                        SOT, EOT, Edge, OnChaos, Continuous'
+                        type: string
+                      name:
+                        description: Name defines the name of probe
+                        type: string
+                      status:
+                        description: Status defines whether a probe is pass or fail
+                        properties:
+                          description:
+                            description: Description defines the description of probe
+                              status
+                            type: string
+                          verdict:
+                            description: 'Verdict defines the verdict of the probe,
+                            range: Passed, Failed, N/A'
+                            type: string
+                        type: object
+                      type:
+                        description: 'Type defined the type of probe, supported values:
+                        K8sProbe, HttpProbe, CmdProbe'
+                        type: string
+                    type: object
+                  type: array
+                probeSuccessPercentage:
+                  type: string
+                taskOutput:
+                  properties:
+                    errorCode:
+                      type: string
+                    failStep:
+                      type: string
+                  type: object
+                taskStatus:
+                  type: string
+                verdict:
+                  type: string
+              type: object
+          type: object
+      served: true
+      storage: true

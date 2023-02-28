@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: chaos-k8s-ifs-pdb
+  namespace: {{ .Release.Namespace }}
+spec:
+  minAvailable: "50%"
+  selector:
+   matchLabels:
+    app: chaos-k8s-ifs

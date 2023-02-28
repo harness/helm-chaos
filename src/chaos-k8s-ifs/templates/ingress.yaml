@@ -1,0 +1,40 @@
+{{- if .Values.global.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chaos-k8s-ifs-ingress
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: {{ .Values.global.ingress.className | quote }}
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: chaos-k8s-ifs-service
+                port:
+                  number: {{ .Values.service.port }}
+            path: /smp/chaos/kserver/api
+            pathType: Prefix
+          - path: /chaos/kserver/api
+            pathType: Prefix
+            backend:
+              service:
+                name: chaos-k8s-ifs-service
+                port:
+                  number: {{ .Values.service.port }}
+  {{- if .Values.global.ingress.tls.enabled }}
+    {{- range .Values.global.ingress.hosts }}
+      host: {{ . | quote }}
+    {{- end }}
+  tls:
+    - hosts:
+        {{- range .Values.global.ingress.hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .Values.global.ingress.tls.secretName }}
+  {{- end }}
+{{- end }}

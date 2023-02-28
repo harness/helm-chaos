@@ -1,0 +1,21 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chaos-linux-ifs-ingress-130
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: {{ .Values.global.ingress.className | quote }}
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: chaos-linux-ifs-service
+                port:
+                  number: 4000
+            path: /chaos/lserver/api(/|$)(.*)
+            pathType: Prefix

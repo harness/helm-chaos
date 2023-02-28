@@ -104,6 +104,13 @@ Create the name of the litmusChaosExporterImage image to use
 {{ include "common.images.image" (dict "imageRoot" .Values.litmusChaosExporterImage.image "global" .Values.global) }}
 {{- end }}
 
+{{/*
+Create the name of the logWatcherImage image to use
+*/}}
+{{- define "chaos-manager.logWatcherImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.logWatcherImage.image "global" .Values.global) }}
+{{- end }}
+
 {{- define "chaos-manager.pullSecrets" -}}
 {{ include "common.images.pullSecrets" (dict "images" (list .Values.image ) "global" .Values.global ) }}
 {{- end -}}
