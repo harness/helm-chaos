@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chaos-k8s-ifs-service
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "chaos-k8s-ifs.labels" . | nindent 4 }}
+spec:
+  type: {{.Values.service.type}}
+  ports:
+  - name: chaos-k8s-ifs
+    port: {{.Values.service.port}}
+    protocol: TCP
+    targetPort: {{.Values.service.targetport}}
+  selector:
+    component: chaos-k8s-ifs
+     {{- include "chaos-k8s-ifs.selectorLabels" . | nindent 4 }}

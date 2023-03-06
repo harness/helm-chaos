@@ -34,9 +34,10 @@ platform:
       ADDITIONAL: "CHAOS_ENABLED"
 
 chaos-manager:
-  replicaCount: 1
+  replicaCount: 2
   maxSurge: 1
   maxUnavailable: 0
+
   waitForInitContainer:
     image:
       registry: docker.io
@@ -45,14 +46,15 @@ chaos-manager:
       tag: "latest"
       digest: ""
       imagePullSecrets: []
+
   image:
     registry: docker.io
     repository: chaosnative/harness-smp-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.7.3"
+    tag: "0.8.3"
     digest: ""
-    imagePullSecrets: ["chaos-regcred-secret"]
+    #imagePullSecrets: ["chaos-regcred-secret"]
 
   jobs:
     chaos_db_upgrade:
@@ -60,17 +62,17 @@ chaos-manager:
       slackURLToNotify: 'no-url'
       image:
         registry: docker.io
-        tag: "0.7.1"
+        tag: "0.8.1"
         repository: chaosnative/harness-smp-chaos-db-upgrade-agent
         pullPolicy: Always
         digest: ""
-        imagePullSecrets: ["chaos-regcred-secret"]
+        imagePullSecrets: [""]
 
   subscriberImage:
     image:
       registry: docker.io
       repository: chaosnative/harness-smp-chaos-subscriber
-      tag: 0.7.1
+      tag: 0.8.2
       digest: ""
 
   argoWorkflowControllerImage:
@@ -108,9 +110,16 @@ chaos-manager:
       tag: 3.0.0-stable
       digest: ""
 
-  enterpriseHubBranchName: 'hce-saas'
+  logWatcherImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/harness-chaos-log-watcher
+      tag: release-chaos-log-watcher-0.8.0
+      digest: ""
 
-  chaosExperimentLimit: '1000'
+  enterpriseHubBranchName: 'main'
+
+  chaosExperimentLimit: '2000'
 
   chaosHubLimit: '30'
 
@@ -118,7 +127,7 @@ chaos-manager:
 
   chaosHubSize: '200'
 
-  parallelChaosExperimentRuns: '25'
+  parallelChaosExperimentRuns: '500'
 
   skipSecureVerify: 'true'
 
@@ -166,11 +175,11 @@ chaos-manager:
 
   resources:
     limits:
-      cpu: 1500m
-      memory: 2048Mi
+      cpu: 250m
+      memory: 1024Mi
     requests:
-      cpu: 1500m
-      memory: 2048Mi
+      cpu: 250m
+      memory: 1024Mi
 
   autoscaling: {}
     #enabled: false
@@ -185,7 +194,6 @@ chaos-manager:
 
   affinity: {}
 
-
 chaos-web:
   replicaCount: 3
   maxSurge: 1
@@ -196,11 +204,11 @@ chaos-web:
     repository: chaosnative/harness-smp-chaos-web
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.7.1"
+    tag: "0.8.6"
     digest: ""
-    imagePullSecrets: ["chaos-regcred-secret"]
+    #imagePullSecrets: ["chaos-regcred-secret"]
 
-  enableCDN: "false"
+  enableCDN: 'false'
 
   configmap: {}
 
@@ -238,11 +246,11 @@ chaos-web:
 
   resources:
     limits:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 250m
+      memory: 256Mi
     requests:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 250m
+      memory: 256Mi
 
   autoscaling: {}
     #enabled: false
@@ -257,11 +265,11 @@ chaos-web:
 
   affinity: {}
 
-
 chaos-driver:
   replicaCount: 3
   maxSurge: 1
   maxUnavailable: 0
+
   waitForInitContainer:
     image:
       registry: docker.io
@@ -270,14 +278,15 @@ chaos-driver:
       tag: "latest"
       digest: ""
       imagePullSecrets: []
+
   image:
     registry: docker.io
     repository: chaosnative/harness-smp-chaos-driver
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.7.0"
+    tag: "0.8.0"
     digest: ""
-    imagePullSecrets: ["chaos-regcred-secret"]
+    #imagePullSecrets: ["chaos-regcred-secret"]
 
   configmap: {}
 
@@ -323,10 +332,11 @@ chaos-driver:
 
   resources:
     limits:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 250m
+      memory: 256Mi
     requests:
-      memory: 512Mi
+      cpu: 250m
+      memory: 256Mi
 
   autoscaling: {}
     #enabled: false
@@ -341,3 +351,88 @@ chaos-driver:
 
   affinity: {}
 
+chaos-k8s-ifs:
+  replicaCount: 2
+  maxSurge: 1
+  maxUnavailable: 0
+
+  waitForInitContainer:
+    image:
+      registry: docker.io
+      repository: harness/helm-init-container
+      pullPolicy: IfNotPresent
+      tag: "latest"
+      digest: ""
+      imagePullSecrets: []
+
+  image:
+    registry: docker.io
+    repository: chaosnative/harness-smp-chaos-k8s-ifs
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "0.8.1"
+    digest: ""
+    #imagePullSecrets: ["chaos-regcred-secret"]
+
+  configmap: {}
+
+  mongoSecrets:
+    userName:
+      name: harness-secrets
+      key: mongodbUsername
+    password:
+      name: mongodb-replicaset-chart
+      key: mongodb-root-password
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "harness-default"
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    #runAsUser: 65534
+    #runAsNonRoot: true
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 6000
+    targetport: 6000
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+
+  autoscaling: {}
+    #enabled: false
+    #minReplicas: 1
+    #maxReplicas: 2
+    #targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
