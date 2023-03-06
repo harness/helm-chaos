@@ -30,7 +30,7 @@ dependencies:
   - name: chaos-web
     version: 0.2.x
     repository: "file://../chaos-web"
-  
+
   - name: chaos-k8s-ifs
     version: 0.1.x
     repository: "file://../chaos-k8s-ifs"

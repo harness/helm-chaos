@@ -74,7 +74,7 @@ jobs:
 
           declare -a changed_charts="$(lookup_changed_charts "$current_branch")"
           for chart in $changed_charts
-          do 
+          do
             if [ -d "$chart" ]; then
               export random=$((${RANDOM}*${RANDOM}/100))
               export randomVersion=$(yq e ".version" $chart/chart.yaml)-${random}-dev

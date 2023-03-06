@@ -46,7 +46,7 @@ chaos-manager:
       tag: "latest"
       digest: ""
       imagePullSecrets: []
-      
+
   image:
     registry: docker.io
     repository: chaosnative/harness-smp-chaos-manager
@@ -364,7 +364,7 @@ chaos-k8s-ifs:
       tag: "latest"
       digest: ""
       imagePullSecrets: []
-      
+
   image:
     registry: docker.io
     repository: chaosnative/harness-smp-chaos-k8s-ifs
