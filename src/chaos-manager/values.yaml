@@ -35,7 +35,7 @@ platform:
       OPA: "OPA_PIPELINE_GOVERNANCE"
       ADDITIONAL: "CHAOS_ENABLED"
 
-replicaCount: 2
+replicaCount: 1
 maxSurge: 1
 maxUnavailable: 0
 
@@ -176,11 +176,10 @@ service:
 
 resources:
   limits:
-    cpu: 250m
-    memory: 1024Mi
+    cpu: 1500m
+    memory: 2048Mi
   requests:
-    cpu: 250m
-    memory: 1024Mi
+    memory: 2048Mi
 
 autoscaling: {}
   #enabled: false
