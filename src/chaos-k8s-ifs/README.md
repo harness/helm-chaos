@@ -18,9 +18,7 @@ A Helm chart for Kubernetes
 | autoscaling | object | `{}` |  |
 | configmap | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
-| global.airgap | bool | `false` |  |
 | global.cd.enabled | bool | `true` | Enable to install CD |
-| global.ha | bool | `false` |  |
 | global.ingress.className | string | `"harness"` |  |
 | global.ingress.defaultbackend.create | bool | `true` | Create will deploy a default backend into your cluster |
 | global.ingress.enabled | bool | `true` |  |
@@ -31,7 +29,6 @@ A Helm chart for Kubernetes
 | global.ingress.tls.enabled | bool | `false` |  |
 | global.ingress.tls.secretName | string | `"harness-ssl"` |  |
 | global.loadbalancerURL | string | `"test@harness.io"` |  |
-| global.opa.enabled | bool | `false` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
