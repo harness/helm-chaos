@@ -4,4 +4,3 @@
 global:
   loadbalancerURL: "test@harness.io"
 
-common:

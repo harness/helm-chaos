@@ -431,5 +431,3 @@ chaos-k8s-ifs:
   tolerations: []
 
   affinity: {}
-
-chaos-common:
