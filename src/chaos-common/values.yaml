@@ -1,14 +1,7 @@
-# Default values for chaos-driver
+# Default values for chaos-common
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
   loadbalancerURL: "test@harness.io"
-  airgap: false
-  ha: false
-  opa:
-    enabled: false
-  cd:
-    # -- Enable to install CD
-    enabled: true
 
 common:

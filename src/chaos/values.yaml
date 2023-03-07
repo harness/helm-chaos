@@ -1,9 +1,5 @@
 global:
   loadbalancerURL: "test@harness.io"
-  airgap: false
-  ha: false
-  opa:
-    enabled: false
   cd:
     # -- Enable to install CD
     enabled: true
@@ -27,14 +23,14 @@ global:
 
 
 ## Platform Settings
-platform:
-  harness-manager:
-    featureFlags:
-      OPA: "OPA_PIPELINE_GOVERNANCE"
-      ADDITIONAL: "CHAOS_ENABLED"
+# platform:
+#  harness-manager:
+#    featureFlags:
+#      OPA: "OPA_PIPELINE_GOVERNANCE"
+#      ADDITIONAL: "CHAOS_ENABLED"
 
 chaos-manager:
-  replicaCount: 2
+  replicaCount: 1
   maxSurge: 1
   maxUnavailable: 0
 
@@ -52,7 +48,7 @@ chaos-manager:
     repository: chaosnative/harness-smp-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.8.3"
+    tag: "0.8.4"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -66,7 +62,7 @@ chaos-manager:
         repository: chaosnative/harness-smp-chaos-db-upgrade-agent
         pullPolicy: Always
         digest: ""
-        imagePullSecrets: [""]
+        imagePullSecrets: []
 
   subscriberImage:
     image:
@@ -175,11 +171,10 @@ chaos-manager:
 
   resources:
     limits:
-      cpu: 250m
-      memory: 1024Mi
+      cpu: 1500m
+      memory: 2048Mi
     requests:
-      cpu: 250m
-      memory: 1024Mi
+      memory: 2048Mi
 
   autoscaling: {}
     #enabled: false
@@ -332,11 +327,11 @@ chaos-driver:
 
   resources:
     limits:
-      cpu: 250m
-      memory: 256Mi
+      cpu: 500m
+      memory: 512Mi
     requests:
-      cpu: 250m
-      memory: 256Mi
+      cpu: 500m
+      memory: 512Mi
 
   autoscaling: {}
     #enabled: false
@@ -352,7 +347,7 @@ chaos-driver:
   affinity: {}
 
 chaos-k8s-ifs:
-  replicaCount: 2
+  replicaCount: 3
   maxSurge: 1
   maxUnavailable: 0
 
@@ -436,3 +431,5 @@ chaos-k8s-ifs:
   tolerations: []
 
   affinity: {}
+
+chaos-common:
