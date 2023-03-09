@@ -1,14 +1,10 @@
 global:
-  loadbalancerURL: "test@harness.io"
-  cd:
-    # -- Enable to install CD
-    enabled: true
+  loadbalancerURL: "https://smp-istio.test.harness.io"
   # Enable if using ingress objects
   ingress:
-    enabled: true
-    loadBalancerIP: '0.0.0.0'
+    enabled: false
     className: "harness"
-    loadBalancerEnabled: true
+    loadBalancerEnabled: false
     hosts:
       - ''
     tls:
@@ -16,13 +12,15 @@ global:
       secretName: harness-ssl
     nginx:
       # -- Create Nginx Controller.  True will deploy a controller into your cluster
-      create: true
+      create: false
     defaultbackend:
       # -- Create will deploy a default backend into your cluster
-      create: true
+      create: false
 
 
 ## Platform Settings
+# These flags needs to be added to platform.
+#
 # platform:
 #  harness-manager:
 #    featureFlags:
