@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: harness
     app.kubernetes.io/managed-by: Helm
-  name: harness-vs
+  name: harness-chaos-vs
   namespace: harness
 spec:
   gateways:
