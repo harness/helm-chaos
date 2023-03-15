@@ -48,7 +48,7 @@ chaos-manager:
     repository: chaosnative/harness-smp-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.8.4"
+    tag: "0.8.8"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -350,6 +350,7 @@ chaos-k8s-ifs:
   replicaCount: 3
   maxSurge: 1
   maxUnavailable: 0
+  skipSecureVerify: "true"
 
   waitForInitContainer:
     image:
@@ -365,7 +366,7 @@ chaos-k8s-ifs:
     repository: chaosnative/harness-smp-chaos-k8s-ifs
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.8.1"
+    tag: "0.8.2"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
