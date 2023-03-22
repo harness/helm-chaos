@@ -33,7 +33,7 @@ platform:
   harness-manager:
     featureFlags:
       OPA: "OPA_PIPELINE_GOVERNANCE"
-      ADDITIONAL: "CHAOS_ENABLED"
+      ADDITIONAL: "CHAOS_ENABLED,FF_CHAOS_LINUX_ENABLED"
 
 chaos-manager:
   replicaCount: 2
@@ -54,7 +54,7 @@ chaos-manager:
     repository: chaosnative/hce-saas-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "main-cfeb624d4dfb0a3b5a4640dee062e483cce64673"
+    tag: "main-c297d80ac7de12486ebfddf3a3689d790186b3ac"
     digest: ""
     imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -206,7 +206,7 @@ chaos-web:
     repository: chaosnative/hce-saas-chaos-web
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "main-cfeb624d4dfb0a3b5a4640dee062e483cce64673"
+    tag: "main-c297d80ac7de12486ebfddf3a3689d790186b3ac"
     digest: ""
     imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -286,7 +286,7 @@ chaos-driver:
     repository: chaosnative/hce-saas-chaos-driver
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "main-cfeb624d4dfb0a3b5a4640dee062e483cce64673"
+    tag: "main-c297d80ac7de12486ebfddf3a3689d790186b3ac"
     digest: ""
     imagePullSecrets: ["chaos-regcred-secret"]
 
