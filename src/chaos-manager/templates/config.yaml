@@ -44,3 +44,4 @@ data:
   LOG_SERVICE_ENDPOINT: 'http://log-service.{{ .Release.Namespace }}.svc.cluster.local:8079'
   LINUX_INFRA_GQL_SERVER_ENDPOINT: "{{ .Values.global.loadbalancerURL }}/chaos/lserver/api"
   LINUX_INFRA_RPC_SERVER_ENDPOINT: "chaos-linux-ifs-service.{{ .Release.Namespace }}.svc.cluster.local:5000"
+  LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}

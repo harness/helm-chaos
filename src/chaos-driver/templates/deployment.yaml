@@ -34,7 +34,7 @@ spec:
         imagePullPolicy: IfNotPresent
         args:
           - "pod"
-          - "-lapp=mongodb-replicaset"   
+          - "-lapp=mongodb-replicaset"
       containers:
         - name: chaos-driver
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
@@ -67,6 +67,12 @@ spec:
                   key: {{ .Values.mongoSecrets.password.key }}
             - name: DB_SERVER
               value: {{ include "harnesscommon.database.mongo" (dict "database" "chaos-harness" "context" $) }}
+              
+            - name: NG_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: NG_MANAGER_ENDPOINT
           ports:
             - containerPort: {{.Values.service.port}}
           resources:

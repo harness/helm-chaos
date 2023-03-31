@@ -8,6 +8,7 @@ data:
   REDIS_SSL_ENABLED: 'false'
   REDIS_CERT_PATH: '/opt/harness/svc/redis_labs_ca_truststore'
   REDIS_DATABASE: '0'
-  LOG_SERVICE_ENDPOINT: 'http://log-service.{{ .Release.Namespace }}.svc.cluster.local:8079'
   INFRA_COMPATIBLE_VERSIONS: '["0.8.0"]'
   CHAOS_MANAGER_GRPC_ENDPOINT: 'chaos-manager-service.{{ .Release.Namespace }}.svc.cluster.local:8081'
+  LOG_SERVICE_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'
+  NG_MANAGER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/ng/api'

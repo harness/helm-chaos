@@ -75,7 +75,7 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: chaos-manager-config
-                key: DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS          
+                key: DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS
       restartPolicy: Never
       {{- if .Values.nodeSelector }}
       nodeSelector:

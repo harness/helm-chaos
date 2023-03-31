@@ -125,6 +125,26 @@ spec:
                 configMapKeyRef:
                   name: chaos-common-config
                   key: INFRA_COMPATIBLE_VERSIONS
+            - name: SKIP_SECURE_VERIFY
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-k8s-ifs-config
+                  key: SKIP_SECURE_VERIFY
+            - name: NG_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: NG_MANAGER_ENDPOINT
+            - name: NG_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: chaos-common-secret
+                  key: NG_JWT_SECRET
+            - name: SEGMENT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: chaos-common-secret
+                  key: SEGMENT_API_KEY
           ports:
             - containerPort: {{.Values.service.port}}
           resources:
