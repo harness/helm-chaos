@@ -51,10 +51,10 @@ chaos-manager:
       
   image:
     registry: docker.io
-    repository: chaosnative/hce-saas-chaos-manager
+    repository: chaosnative/harness-smp-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "CHAOS-1338-latest"
+    tag: "0.9.x-linux"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -73,8 +73,8 @@ chaos-manager:
   subscriberImage:
     image:
       registry: docker.io
-      repository: chaosnative/hce-saas-subscriber
-      tag: main-cfeb624d4dfb0a3b5a4640dee062e483cce64673
+      repository: chaosnative/harness-smp-chaos-subscriber
+      tag: 0.8.2
       digest: ""
 
   argoWorkflowControllerImage:
@@ -203,10 +203,10 @@ chaos-web:
 
   image:
     registry: docker.io
-    repository: chaosnative/hce-saas-chaos-web
+    repository: chaosnative/harness-smp-chaos-web
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "CHAOS-1338-latest"
+    tag: "0.9.x-linux"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -283,10 +283,10 @@ chaos-driver:
 
   image:
     registry: docker.io
-    repository: chaosnative/hce-saas-chaos-driver
+    repository: chaosnative/harness-smp-chaos-driver
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "CHAOS-1338-latest"
+    tag: "0.9.x-linux"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -353,92 +353,6 @@ chaos-driver:
 
   affinity: {}
 
-chaos-k8s-ifs:
-  replicaCount: 2
-  maxSurge: 1
-  maxUnavailable: 0
-
-  waitForInitContainer:
-    image:
-      registry: docker.io
-      repository: harness/helm-init-container
-      pullPolicy: IfNotPresent
-      tag: "latest"
-      digest: ""
-      imagePullSecrets: []
-      
-  image:
-    registry: docker.io
-    repository: chaosnative/hce-saas-k8s-ifs
-    pullPolicy: Always
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: "main-28f5433232b6c1e2d2512315753021e2df9474cc"
-    digest: ""
-    imagePullSecrets: ["chaos-regcred-secret"]
-
-  configmap: {}
-
-  mongoSecrets:
-    userName:
-      name: harness-secrets
-      key: mongodbUsername
-    password:
-      name: mongodb-replicaset-chart
-      key: mongodb-root-password
-
-  nameOverride: ""
-  fullnameOverride: ""
-
-  serviceAccount:
-    # Specifies whether a service account should be created
-    create: false
-    # Annotations to add to the service account
-    annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
-    name: "harness-default"
-
-  podAnnotations: {}
-
-  podSecurityContext: {}
-    # fsGroup: 2000
-
-  securityContext: {}
-    #runAsUser: 65534
-    #runAsNonRoot: true
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
-  service:
-    type: ClusterIP
-    port: 6000
-    targetport: 6000
-
-  resources:
-    limits:
-      cpu: 500m
-      memory: 512Mi
-    requests:
-      cpu: 500m
-      memory: 512Mi
-
-  autoscaling: {}
-    #enabled: false
-    #minReplicas: 1
-    #maxReplicas: 2
-    #targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
-
-  nodeSelector: {}
-
-  tolerations: []
-
-  affinity: {}
-
 chaos-linux-ifc:
 
   replicaCount: 2
@@ -457,12 +371,12 @@ chaos-linux-ifc:
   image:
     registry: docker.io
     #repository: chaosnative/harness-smp-chaos-delegate-controller
-    repository: chaosnative/delegate-controller
+    repository: chaosnative/harness-smp-chaos-linux-infra-controller
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "ci"
+    tag: ci
     digest: ""
-    imagePullSecrets: ["chaos-regcred-secret"]
+    #imagePullSecrets: ["chaos-regcred-secret"]
 
   configmap: {}
 
@@ -532,10 +446,10 @@ chaos-linux-ifs:
   image:
     registry: docker.io
     #repository: chaosnative/harness-smp-chaos-delegate-controller
-    repository: chaosnative/delegate-server
+    repository: chaosnative/harness-smp-chaos-linux-infra-server
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "ci"
+    tag: ci
     digest: ""
     imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -609,7 +523,7 @@ chaos-k8s-ifs:
     repository: chaosnative/harness-smp-chaos-k8s-ifs
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.8.2"
+    tag: 0.9.x-linux
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
