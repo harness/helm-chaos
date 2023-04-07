@@ -1,6 +1,6 @@
 # chaos-manager
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -24,12 +24,13 @@ A Helm chart for Kubernetes
 | argoWorkflowExecutorImage.image.repository | string | `"chaosnative/argoexec"` |  |
 | argoWorkflowExecutorImage.image.tag | string | `"v3.3.1"` |  |
 | autoscaling | object | `{}` |  |
-| chaosExperimentLimit | string | `"2000"` |  |
+| chaosExperimentLimit | string | `"1000"` |  |
 | chaosGamedayLimit | string | `"200"` |  |
 | chaosHubLimit | string | `"30"` |  |
 | chaosHubSize | string | `"200"` |  |
 | configmap | object | `{}` |  |
-| enterpriseHubBranchName | string | `"main"` |  |
+| deployAsSts | bool | `false` |  |
+| enterpriseHubBranchName | string | `"hce-3.0.2-saas"` |  |
 | fullnameOverride | string | `""` |  |
 | global.cd.enabled | bool | `true` | Enable to install CD |
 | global.ingress.className | string | `"harness"` |  |
@@ -46,14 +47,14 @@ A Helm chart for Kubernetes
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"chaosnative/harness-smp-chaos-manager"` |  |
-| image.tag | string | `"0.8.4"` |  |
+| image.tag | string | `"0.9.6"` |  |
 | jobs.chaos_db_upgrade.enabled | bool | `false` |  |
 | jobs.chaos_db_upgrade.image.digest | string | `""` |  |
 | jobs.chaos_db_upgrade.image.imagePullSecrets | list | `[]` |  |
 | jobs.chaos_db_upgrade.image.pullPolicy | string | `"Always"` |  |
 | jobs.chaos_db_upgrade.image.registry | string | `"docker.io"` |  |
 | jobs.chaos_db_upgrade.image.repository | string | `"chaosnative/harness-smp-chaos-db-upgrade-agent"` |  |
-| jobs.chaos_db_upgrade.image.tag | string | `"0.8.1"` |  |
+| jobs.chaos_db_upgrade.image.tag | string | `"0.9.0"` |  |
 | jobs.chaos_db_upgrade.slackURLToNotify | string | `"no-url"` |  |
 | litmusChaosExporterImage.image.digest | string | `""` |  |
 | litmusChaosExporterImage.image.registry | string | `"docker.io"` |  |
@@ -79,17 +80,21 @@ A Helm chart for Kubernetes
 | mongoSecrets.userName.name | string | `"harness-secrets"` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
-| parallelChaosExperimentRuns | string | `"500"` |  |
+| parallelChaosExperimentRuns | string | `"25"` |  |
 | platform.harness-manager.featureFlags.ADDITIONAL | string | `"CHAOS_ENABLED"` |  |
 | platform.harness-manager.featureFlags.OPA | string | `"OPA_PIPELINE_GOVERNANCE"` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
-| replicaCount | int | `1` |  |
-| resources.limits.cpu | string | `"1500m"` |  |
-| resources.limits.memory | string | `"2048Mi"` |  |
-| resources.requests.memory | string | `"2048Mi"` |  |
+| replicaCount | int | `3` |  |
+| replicaCountSts | int | `0` |  |
+| resources.limits.cpu | string | `"600m"` |  |
+| resources.limits.memory | string | `"512Mi"` |  |
+| resources.requests.cpu | string | `"600m"` |  |
+| resources.requests.memory | string | `"512Mi"` |  |
 | securityContext | object | `{}` |  |
+| service.grpcport | int | `8081` |  |
 | service.port | int | `8080` |  |
+| service.targetgrpcport | int | `8081` |  |
 | service.targetport | int | `8080` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
@@ -99,7 +104,7 @@ A Helm chart for Kubernetes
 | subscriberImage.image.digest | string | `""` |  |
 | subscriberImage.image.registry | string | `"docker.io"` |  |
 | subscriberImage.image.repository | string | `"chaosnative/harness-smp-chaos-subscriber"` |  |
-| subscriberImage.image.tag | string | `"0.8.2"` |  |
+| subscriberImage.image.tag | string | `"0.9.0"` |  |
 | tolerations | list | `[]` |  |
 | waitForInitContainer.image.digest | string | `""` |  |
 | waitForInitContainer.image.imagePullSecrets | list | `[]` |  |

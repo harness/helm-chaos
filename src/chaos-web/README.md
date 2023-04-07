@@ -1,6 +1,6 @@
 # chaos-web
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -34,7 +34,7 @@ A Helm chart for Kubernetes
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"chaosnative/harness-smp-chaos-web"` |  |
-| image.tag | string | `"0.8.6"` |  |
+| image.tag | string | `"0.9.6"` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | nameOverride | string | `""` |  |
@@ -44,10 +44,10 @@ A Helm chart for Kubernetes
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `3` |  |
-| resources.limits.cpu | string | `"250m"` |  |
-| resources.limits.memory | string | `"256Mi"` |  |
-| resources.requests.cpu | string | `"250m"` |  |
-| resources.requests.memory | string | `"256Mi"` |  |
+| resources.limits.cpu | string | `"500m"` |  |
+| resources.limits.memory | string | `"512Mi"` |  |
+| resources.requests.cpu | string | `"500m"` |  |
+| resources.requests.memory | string | `"512Mi"` |  |
 | securityContext | object | `{}` |  |
 | service.port | int | `8184` |  |
 | service.targetport | int | `8184` |  |

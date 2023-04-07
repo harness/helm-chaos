@@ -5,6 +5,8 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.9.0
   creationTimestamp: null
   name: linuxchaosexperiments.litmuschaos.io
+  labels:
+    {{- include "chaos-common.labels" . | nindent 4 }}
 spec:
   group: litmuschaos.io
   names:
@@ -395,6 +397,8 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.9.0
   creationTimestamp: null
   name: taskdefinitions.litmuschaos.io
+  labels:
+    {{- include "chaos-common.labels" . | nindent 4 }}
 spec:
   group: litmuschaos.io
   names:

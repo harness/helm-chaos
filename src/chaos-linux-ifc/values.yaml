@@ -47,7 +47,7 @@ waitForInitContainer:
     tag: "latest"
     digest: ""
     imagePullSecrets: []
-    
+
 image:
   registry: docker.io
   #repository: chaosnative/harness-smp-chaos-delegate-controller
