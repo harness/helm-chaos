@@ -42,11 +42,6 @@ spec:
         - name: chaos-manager
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          volumeMounts:
-            #- name: service-account
-            #  mountPath: /opt/harness/svc
-            - mountPath: "/data/chaos_hubs"
-              name: chaos-manager-hub-storage
           envFrom:
             - secretRef:
                 name: chaos-manager-secret
