@@ -36,7 +36,7 @@ platform:
       ADDITIONAL: "CHAOS_ENABLED,FF_CHAOS_LINUX_ENABLED"
 
 chaos-manager:
-  replicaCount: 2
+  replicaCount: 3
   maxSurge: 1
   maxUnavailable: 0
 
@@ -119,9 +119,9 @@ chaos-manager:
       tag: release-chaos-log-watcher-0.8.0
       digest: ""
 
-  enterpriseHubBranchName: 'main'
+  enterpriseHubBranchName: 'hce-3.0.2-saas'
 
-  chaosExperimentLimit: '2000'
+  chaosExperimentLimit: '1000'
 
   chaosHubLimit: '30'
 
@@ -129,7 +129,7 @@ chaos-manager:
 
   chaosHubSize: '200'
 
-  parallelChaosExperimentRuns: '500'
+  parallelChaosExperimentRuns: '25'
 
   skipSecureVerify: 'true'
 
@@ -174,14 +174,16 @@ chaos-manager:
     type: ClusterIP
     port: 8080
     targetport: 8080
+    grpcport: 8081
+    targetgrpcport: 8081
 
   resources:
     limits:
-      cpu: 250m
-      memory: 1024Mi
+      cpu: 600m
+      memory: 512Mi
     requests:
-      cpu: 250m
-      memory: 1024Mi
+      cpu: 600m
+      memory: 512Mi
 
   autoscaling: {}
     #enabled: false
@@ -248,11 +250,11 @@ chaos-web:
 
   resources:
     limits:
-      cpu: 250m
-      memory: 256Mi
+      cpu: 500m
+      memory: 512Mi
     requests:
-      cpu: 250m
-      memory: 256Mi
+      cpu: 500m
+      memory: 512Mi
 
   autoscaling: {}
     #enabled: false
@@ -334,11 +336,11 @@ chaos-driver:
 
   resources:
     limits:
-      cpu: 250m
-      memory: 256Mi
+      cpu: 500m
+      memory: 512Mi
     requests:
-      cpu: 250m
-      memory: 256Mi
+      cpu: 500m
+      memory: 512Mi
 
   autoscaling: {}
     #enabled: false
@@ -385,12 +387,12 @@ chaos-linux-ifc:
 
   serviceAccount:
     # Specifies whether a service account should be created
-    create: true
+    create: false
     # Annotations to add to the service account
     annotations: {}
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
-    name: "chaos-linux-ifc-sa"
+    name: "harness-default"
 
   podAnnotations: {}
 
@@ -460,12 +462,12 @@ chaos-linux-ifs:
 
   serviceAccount:
     # Specifies whether a service account should be created
-    create: true
+    create: false
     # Annotations to add to the service account
     annotations: {}
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
-    name: "chaos-linux-ifs-sa"
+    name: "harness-default"
 
   podAnnotations: {}
 

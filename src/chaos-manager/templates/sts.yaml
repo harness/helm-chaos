@@ -8,7 +8,7 @@ metadata:
     app: chaos-manager
     {{- include "chaos-manager.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaCountSts }}
   serviceName: chaos-manager-service
   selector:
     matchLabels:

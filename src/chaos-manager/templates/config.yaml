@@ -23,7 +23,7 @@ data:
   LITMUS_CHAOS_OPERATOR_IMAGE: {{ include "chaos-manager.litmusChaosOperatorImage" . }}
   LITMUS_CHAOS_RUNNER_IMAGE: {{ include "chaos-manager.litmusChaosRunnerImage" . }}
   LITMUS_CHAOS_EXPORTER_IMAGE: {{ include "chaos-manager.litmusChaosExporterImage" . }}
-  CHAOS_MANAGER_VERSION: '0.8.0'
+  CHAOS_MANAGER_VERSION: '0.9.0'
   INFRA_DEPLOYMENTS: '["app=chaos-exporter", "name=chaos-operator", "app=workflow-controller"]'
   ACCESS_CONTROL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/authz/api'
   NG_MANAGER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/ng/api'
@@ -38,7 +38,7 @@ data:
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
   ENTERPRISE_HUB_SECRET: ""
   ENTERPRISE_HUB_TOKEN: ""
-  K8S_IFS_VERSION: '0.8.0'
+  K8S_IFS_VERSION: '0.9.0'
   K8S_INFRA_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/kserver/api'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
   LOG_SERVICE_ENDPOINT: 'http://log-service.{{ .Release.Namespace }}.svc.cluster.local:8079'

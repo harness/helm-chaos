@@ -49,7 +49,7 @@ image:
   repository: chaosnative/harness-smp-chaos-driver
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.8.0"
+  tag: "0.9.0"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -97,11 +97,11 @@ service:
 
 resources:
   limits:
-    cpu: 250m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
   requests:
-    cpu: 250m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
 
 autoscaling: {}
   #enabled: false

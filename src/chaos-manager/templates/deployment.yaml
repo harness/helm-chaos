@@ -6,12 +6,10 @@ metadata:
   labels:
     component: chaos-manager
     app: chaos-manager
-    restart: "0"
-    {{- include "chaos-manager.labels" . | nindent 4 }}
-  annotations:
     restart: "1"
+    {{- include "chaos-manager.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCountDeployment }}
+  replicas: {{ .Values.replicaCount }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -33,16 +31,6 @@ spec:
       securityContext:
         fsGroup: 2000
       serviceAccountName: {{ include "chaos-manager.serviceAccountName" . }}
-      volumes:
-        #- name: service-account
-        #  secret:
-        #    secretName: chaos-redis-ca-truststore
-        #    items:
-        #      - key: redis-labs-ca-truststore
-        #        path: redis_labs_ca_truststore
-        #    defaultMode: 420
-        - name: chaos-manager-hub-storage
-          emptyDir: {}
       initContainers:
       - name: wait-for-mongo
         image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
@@ -102,11 +90,21 @@ spec:
                 configMapKeyRef:
                   name: chaos-common-config
                   key: NG_MANAGER_ENDPOINT
+            - name: ACCESS_CONTROL_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: ACCESS_CONTROL_ENDPOINT
             - name: NG_JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: chaos-common-secret
                   key: NG_JWT_SECRET
+            - name: JWT_IDENTITY_SERVICE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: chaos-common-secret
+                  key: JWT_IDENTITY_SERVICE_SECRET
             - name: SEGMENT_API_KEY
               valueFrom:
                 secretKeyRef:

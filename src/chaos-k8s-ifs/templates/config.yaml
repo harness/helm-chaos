@@ -4,6 +4,5 @@ metadata:
   name: chaos-k8s-ifs-config
   namespace: {{ .Release.Namespace | quote }}
 data:
-  CHAOS_MANAGER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/chaos/manager/api'
   LOG_SERVICE_TOKEN: c76e567a-b341-404d-a8dd-d9738714eb82
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'

@@ -31,9 +31,9 @@ platform:
       OPA: "OPA_PIPELINE_GOVERNANCE"
       ADDITIONAL: "CHAOS_ENABLED"
 
-replicaCount: 2
+replicaCount: 3
 # TODO: remove this
-replicaCountDeployment: 0
+replicaCountSts: 0
 maxSurge: 1
 maxUnavailable: 0
 
@@ -51,7 +51,7 @@ image:
   repository: chaosnative/harness-smp-chaos-manager
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.8.8"
+  tag: "0.9.6"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -61,7 +61,7 @@ jobs:
     slackURLToNotify: 'no-url'
     image:
       registry: docker.io
-      tag: "0.8.1"
+      tag: "0.9.0"
       repository: chaosnative/harness-smp-chaos-db-upgrade-agent
       pullPolicy: Always
       digest: ""
@@ -70,8 +70,8 @@ jobs:
 subscriberImage:
   image:
     registry: docker.io
-    repository: chaosnative/hce-saas-subscriber
-    tag: main-cfeb624d4dfb0a3b5a4640dee062e483cce64673
+    repository: chaosnative/harness-smp-chaos-subscriber
+    tag: 0.9.0
     digest: ""
 
 argoWorkflowControllerImage:
@@ -112,13 +112,13 @@ litmusChaosExporterImage:
 logWatcherImage:
   image:
     registry: docker.io
-    repository: chaosnative/hce-saas-log-watcher
-    tag: main-28f5433232b6c1e2d2512315753021e2df9474cc
+    repository: chaosnative/harness-chaos-log-watcher
+    tag: release-chaos-log-watcher-0.8.0
     digest: ""
 
-enterpriseHubBranchName: 'main'
+enterpriseHubBranchName: 'hce-3.0.2-saas'
 
-chaosExperimentLimit: '2000'
+chaosExperimentLimit: '1000'
 
 chaosHubLimit: '30'
 
@@ -126,7 +126,7 @@ chaosGamedayLimit: '200'
 
 chaosHubSize: '200'
 
-parallelChaosExperimentRuns: '500'
+parallelChaosExperimentRuns: '25'
 
 skipSecureVerify: 'true'
 
@@ -176,11 +176,11 @@ service:
 
 resources:
   limits:
-    cpu: 250m
-    memory: 1024Mi
+    cpu: 600m
+    memory: 512Mi
   requests:
-    cpu: 250m
-    memory: 1024Mi
+    cpu: 600m
+    memory: 512Mi
 
 autoscaling: {}
   #enabled: false
