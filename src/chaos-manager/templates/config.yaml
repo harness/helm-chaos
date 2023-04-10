@@ -39,7 +39,7 @@ data:
   ENTERPRISE_HUB_SECRET: ""
   ENTERPRISE_HUB_TOKEN: ""
   K8S_IFS_VERSION: '0.9.0'
-  K8S_INFRA_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/kserver/api'
+  K8S_INFRA_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/kserver'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
   LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
   LOG_SERVICE_EXTERNAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'

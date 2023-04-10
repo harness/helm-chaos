@@ -179,7 +179,7 @@ dependencies:
 | chaos-manager.image.pullPolicy | string | `"Always"` |  |
 | chaos-manager.image.registry | string | `"docker.io"` |  |
 | chaos-manager.image.repository | string | `"chaosnative/harness-smp-chaos-manager"` |  |
-| chaos-manager.image.tag | string | `"0.9.6"` |  |
+| chaos-manager.image.tag | string | `"0.9.7"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.enabled | bool | `false` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.digest | string | `""` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.imagePullSecrets | list | `[]` |  |
@@ -233,7 +233,7 @@ dependencies:
 | chaos-manager.subscriberImage.image.digest | string | `""` |  |
 | chaos-manager.subscriberImage.image.registry | string | `"docker.io"` |  |
 | chaos-manager.subscriberImage.image.repository | string | `"chaosnative/harness-smp-chaos-subscriber"` |  |
-| chaos-manager.subscriberImage.image.tag | string | `"0.9.0"` |  |
+| chaos-manager.subscriberImage.image.tag | string | `"0.9.1"` |  |
 | chaos-manager.tolerations | list | `[]` |  |
 | chaos-manager.waitForInitContainer.image.digest | string | `""` |  |
 | chaos-manager.waitForInitContainer.image.imagePullSecrets | list | `[]` |  |

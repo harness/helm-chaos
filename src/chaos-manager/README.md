@@ -47,7 +47,7 @@ A Helm chart for Kubernetes
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"chaosnative/harness-smp-chaos-manager"` |  |
-| image.tag | string | `"0.9.6"` |  |
+| image.tag | string | `"0.9.7"` |  |
 | jobs.chaos_db_upgrade.enabled | bool | `false` |  |
 | jobs.chaos_db_upgrade.image.digest | string | `""` |  |
 | jobs.chaos_db_upgrade.image.imagePullSecrets | list | `[]` |  |
@@ -104,7 +104,7 @@ A Helm chart for Kubernetes
 | subscriberImage.image.digest | string | `""` |  |
 | subscriberImage.image.registry | string | `"docker.io"` |  |
 | subscriberImage.image.repository | string | `"chaosnative/harness-smp-chaos-subscriber"` |  |
-| subscriberImage.image.tag | string | `"0.9.0"` |  |
+| subscriberImage.image.tag | string | `"0.9.1"` |  |
 | tolerations | list | `[]` |  |
 | waitForInitContainer.image.digest | string | `""` |  |
 | waitForInitContainer.image.imagePullSecrets | list | `[]` |  |

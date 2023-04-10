@@ -52,7 +52,7 @@ image:
   repository: chaosnative/harness-smp-chaos-manager
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.9.6"
+  tag: "0.9.7"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -72,7 +72,7 @@ subscriberImage:
   image:
     registry: docker.io
     repository: chaosnative/harness-smp-chaos-subscriber
-    tag: 0.9.0
+    tag: 0.9.1
     digest: ""
 
 argoWorkflowControllerImage:

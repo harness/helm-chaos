@@ -14,6 +14,6 @@ data:
   CHAOS_MANAGER_GRPC_ENDPOINT: 'chaos-manager-service:8081'
   LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
   LOG_SERVICE_EXTERNAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'
-  NG_MANAGER_ENDPOINT: 'http://ng-manager:7090/api'
+  NG_MANAGER_ENDPOINT: 'http://ng-manager:7090'
   CHAOS_MANAGER_ENDPOINT: 'http://chaos-manager-service:8080'
   ACCESS_CONTROL_ENDPOINT: 'http://access-control:9006/api'
