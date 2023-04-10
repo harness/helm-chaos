@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: chaos-k8s-ifs-config
   namespace: {{ .Release.Namespace | quote }}
+  labels: {{- include "chaos-k8s-ifs.labels" . | nindent 4 }}
 data:
-  LOG_SERVICE_TOKEN: c76e567a-b341-404d-a8dd-d9738714eb82
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'

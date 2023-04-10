@@ -65,8 +65,8 @@ spec:
                   key: REDIS_PASSWORD
             - name: LOG_SERVICE_TOKEN
               valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
+                secretKeyRef:
+                  name: chaos-k8s-ifs-secret
                   key: LOG_SERVICE_TOKEN
             - name: CHAOS_MANAGER_ENDPOINT
               valueFrom:
