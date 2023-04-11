@@ -54,7 +54,7 @@ chaos-manager:
     repository: chaosnative/harness-smp-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.9.7
+    tag: 0.9.8
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -116,7 +116,7 @@ chaos-manager:
     image:
       registry: docker.io
       repository: chaosnative/harness-chaos-log-watcher
-      tag: release-chaos-log-watcher-0.8.0
+      tag: release-chaos-log-watcher-0.9.0
       digest: ""
 
   enterpriseHubBranchName: 'hce-3.0.2-saas'
