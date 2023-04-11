@@ -113,8 +113,8 @@ litmusChaosExporterImage:
 logWatcherImage:
   image:
     registry: docker.io
-    repository: chaosnative/harness-chaos-log-watcher
-    tag: release-chaos-log-watcher-0.8.0
+    repository: chaosnative/hce-saas-log-watcher
+    tag: main-latest
     digest: ""
 
 enterpriseHubBranchName: 'hce-3.0.2-saas'
