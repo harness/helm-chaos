@@ -47,7 +47,7 @@ A Helm chart for Kubernetes
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"chaosnative/harness-smp-chaos-manager"` |  |
-| image.tag | string | `"0.9.7"` |  |
+| image.tag | string | `"0.9.8"` |  |
 | jobs.chaos_db_upgrade.enabled | bool | `false` |  |
 | jobs.chaos_db_upgrade.image.digest | string | `""` |  |
 | jobs.chaos_db_upgrade.image.imagePullSecrets | list | `[]` |  |
@@ -71,7 +71,7 @@ A Helm chart for Kubernetes
 | logWatcherImage.image.digest | string | `""` |  |
 | logWatcherImage.image.registry | string | `"docker.io"` |  |
 | logWatcherImage.image.repository | string | `"chaosnative/harness-chaos-log-watcher"` |  |
-| logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.8.0"` |  |
+| logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.9.0"` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | mongoSecrets.password.key | string | `"mongodb-root-password"` |  |

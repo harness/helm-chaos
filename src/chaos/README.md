@@ -179,7 +179,7 @@ dependencies:
 | chaos-manager.image.pullPolicy | string | `"Always"` |  |
 | chaos-manager.image.registry | string | `"docker.io"` |  |
 | chaos-manager.image.repository | string | `"chaosnative/harness-smp-chaos-manager"` |  |
-| chaos-manager.image.tag | string | `"0.9.7"` |  |
+| chaos-manager.image.tag | string | `"0.9.8"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.enabled | bool | `false` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.digest | string | `""` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.imagePullSecrets | list | `[]` |  |
@@ -203,7 +203,7 @@ dependencies:
 | chaos-manager.logWatcherImage.image.digest | string | `""` |  |
 | chaos-manager.logWatcherImage.image.registry | string | `"docker.io"` |  |
 | chaos-manager.logWatcherImage.image.repository | string | `"chaosnative/harness-chaos-log-watcher"` |  |
-| chaos-manager.logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.8.0"` |  |
+| chaos-manager.logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.9.0"` |  |
 | chaos-manager.maxSurge | int | `1` |  |
 | chaos-manager.maxUnavailable | int | `0` |  |
 | chaos-manager.mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
