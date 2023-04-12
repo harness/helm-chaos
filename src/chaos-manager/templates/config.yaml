@@ -23,12 +23,12 @@ data:
   LITMUS_CHAOS_OPERATOR_IMAGE: {{ include "chaos-manager.litmusChaosOperatorImage" . }}
   LITMUS_CHAOS_RUNNER_IMAGE: {{ include "chaos-manager.litmusChaosRunnerImage" . }}
   LITMUS_CHAOS_EXPORTER_IMAGE: {{ include "chaos-manager.litmusChaosExporterImage" . }}
-  CHAOS_MANAGER_VERSION: '0.8.0'
+  CHAOS_MANAGER_VERSION: '0.9.0'
   INFRA_DEPLOYMENTS: '["app=chaos-exporter", "name=chaos-operator", "app=workflow-controller"]'
-  ACCESS_CONTROL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/authz/api'
-  NG_MANAGER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/ng/api'
-  NG_MANAGER_SVC_ENDPOINT: 'http://ng-manager.{{ .Release.Namespace }}.svc.cluster.local:7090'
-  PLATFORM_SERVICE_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/audit/api'
+  ACCESS_CONTROL_ENDPOINT: 'http://access-control:9006/api'
+  NG_MANAGER_ENDPOINT: 'http://ng-manager:7090/api'
+  NG_MANAGER_SVC_ENDPOINT: 'http://ng-manager:7090'
+  PLATFORM_SERVICE_ENDPOINT: 'http://platform-service:9005/api'
   ENTERPRISE_HUB_BRANCH_NAME: '{{ .Values.enterpriseHubBranchName }}'
   DEFAULT_CHAOS_EXPERIMENT_LIMIT: '{{ .Values.chaosExperimentLimit }}'
   DEFAULT_CHAOS_HUB_LIMIT: '{{ .Values.chaosHubLimit }}'
@@ -38,7 +38,11 @@ data:
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
   ENTERPRISE_HUB_SECRET: ""
   ENTERPRISE_HUB_TOKEN: ""
-  K8S_IFS_VERSION: '0.8.0'
-  K8S_INFRA_SERVER_ENDPOINT: 'http://chaos-k8s-ifs-service.{{ .Release.Namespace }}.svc.cluster.local:6000'
+  K8S_IFS_VERSION: '0.9.0'
+  K8S_INFRA_SERVER_ENDPOINT: 'http://chaos-k8s-ifs-service:6000'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
-  LOG_SERVICE_ENDPOINT: 'http://log-service.{{ .Release.Namespace }}.svc.cluster.local:8079'
+  LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
+  LOG_SERVICE_EXTERNAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'
+  LINUX_INFRA_GQL_SERVER_ENDPOINT: 'http://chaos-linux-ifs-service:4000'
+  LINUX_INFRA_RPC_SERVER_ENDPOINT: 'chaos-linux-ifs-service:5000'
+  LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}

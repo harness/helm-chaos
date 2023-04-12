@@ -3,6 +3,10 @@
 # Declare variables to be passed into your templates.
 global:
   loadbalancerURL: "test@harness.io"
+  airgap: false
+  ha: false
+  opa:
+    enabled: false
   cd:
     # -- Enable to install CD
     enabled: true
@@ -44,12 +48,13 @@ waitForInitContainer:
     digest: ""
     imagePullSecrets: []
 
+
 image:
   registry: docker.io
   repository: chaosnative/harness-smp-chaos-k8s-ifs
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.8.2"
+  tag: "0.9.2"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 

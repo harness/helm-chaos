@@ -1,6 +1,6 @@
-# chaos-k8s-ifs
+# chaos-linux-ifs
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -35,8 +35,8 @@ A Helm chart for Kubernetes
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
-| image.repository | string | `"chaosnative/harness-smp-chaos-k8s-ifs"` |  |
-| image.tag | string | `"0.9.2"` |  |
+| image.repository | string | `"chaosnative/harness-smp-chaos-linux-infra-server"` |  |
+| image.tag | string | `"ci"` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -49,19 +49,20 @@ A Helm chart for Kubernetes
 | platform.harness-manager.featureFlags.OPA | string | `"OPA_PIPELINE_GOVERNANCE"` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
-| replicaCount | int | `3` |  |
+| replicaCount | int | `2` |  |
 | resources.limits.cpu | string | `"500m"` |  |
 | resources.limits.memory | string | `"512Mi"` |  |
 | resources.requests.cpu | string | `"500m"` |  |
 | resources.requests.memory | string | `"512Mi"` |  |
 | securityContext | object | `{}` |  |
-| service.port | int | `6000` |  |
-| service.targetport | int | `6000` |  |
+| service.grpcport | int | `5000` |  |
+| service.grpctargetport | int | `5000` |  |
+| service.port | int | `4000` |  |
+| service.targetport | int | `4000` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
-| serviceAccount.create | bool | `false` |  |
-| serviceAccount.name | string | `"harness-default"` |  |
-| skipSecureVerify | string | `"true"` |  |
+| serviceAccount.create | bool | `true` |  |
+| serviceAccount.name | string | `"chaos-linux-ifs-sa"` |  |
 | tolerations | list | `[]` |  |
 | waitForInitContainer.image.digest | string | `""` |  |
 | waitForInitContainer.image.imagePullSecrets | list | `[]` |  |

@@ -65,13 +65,13 @@ spec:
                   key: REDIS_PASSWORD
             - name: LOG_SERVICE_TOKEN
               valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
+                secretKeyRef:
+                  name: chaos-k8s-ifs-secret
                   key: LOG_SERVICE_TOKEN
             - name: CHAOS_MANAGER_ENDPOINT
               valueFrom:
                 configMapKeyRef:
-                  name: chaos-k8s-ifs-config
+                  name: chaos-common-config
                   key: CHAOS_MANAGER_ENDPOINT
             - name: LOG_SERVICE_ENDPOINT
               valueFrom:
@@ -115,11 +115,11 @@ spec:
                   key: {{ .Values.mongoSecrets.password.key }}
             - name: DB_SERVER
               value: {{ include "harnesscommon.database.mongo" (dict "database" "chaos-harness" "context" $) }}
-            - name: REDIS_CERT_PATH
+            - name: INFRA_COMPATIBLE_VERSIONS
               valueFrom:
                 configMapKeyRef:
                   name: chaos-common-config
-                  key: REDIS_CERT_PATH
+                  key: INFRA_COMPATIBLE_VERSIONS
             - name: SKIP_SECURE_VERIFY
               valueFrom:
                 configMapKeyRef:
@@ -144,6 +144,21 @@ spec:
             - containerPort: {{.Values.service.port}}
           resources:
               {{- toYaml .Values.resources | nindent 12 }}
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - "ls server"
+            initialDelaySeconds: 1
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /status
+              port: {{.Values.service.port}}
+            initialDelaySeconds: 1
+            periodSeconds: 5
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

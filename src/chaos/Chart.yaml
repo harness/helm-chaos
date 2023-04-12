@@ -16,21 +16,29 @@ appVersion: "0.2.0"
 
 dependencies:
   - name: chaos-common
-    version: 0.1.x
+    version: 0.2.x
     repository: "file://../chaos-common"
 
   - name: chaos-driver
-    version: 0.2.x
+    version: 0.3.x
     repository: "file://../chaos-driver"
 
   - name: chaos-manager
-    version: 0.2.x
+    version: 0.3.x
     repository: "file://../chaos-manager"
 
   - name: chaos-web
-    version: 0.2.x
+    version: 0.3.x
     repository: "file://../chaos-web"
 
   - name: chaos-k8s-ifs
-    version: 0.1.x
+    version: 0.2.x
     repository: "file://../chaos-k8s-ifs"
+
+  - name: chaos-linux-ifs
+    version: 0.1.x
+    repository: "file://../chaos-linux-ifs"
+
+  - name: chaos-linux-ifc
+    version: 0.1.x
+    repository: "file://../chaos-linux-ifc"

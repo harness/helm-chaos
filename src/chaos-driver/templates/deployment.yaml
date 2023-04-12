@@ -67,12 +67,26 @@ spec:
                   key: {{ .Values.mongoSecrets.password.key }}
             - name: DB_SERVER
               value: {{ include "harnesscommon.database.mongo" (dict "database" "chaos-harness" "context" $) }}
-              
             - name: NG_MANAGER_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   name: chaos-common-config
                   key: NG_MANAGER_ENDPOINT
+            - name: ACCESS_CONTROL_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: ACCESS_CONTROL_ENDPOINT
+            - name: CHAOS_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: CHAOS_MANAGER_ENDPOINT
+            - name: JWT_IDENTITY_SERVICE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: chaos-common-secret
+                  key: JWT_IDENTITY_SERVICE_SECRET
           ports:
             - containerPort: {{.Values.service.port}}
           resources:
