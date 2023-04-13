@@ -12,7 +12,7 @@ global:
   # Enable if using ingress objects
   ingress:
     enabled: true
-    loadBalancerIP: '34.23.21.25'
+    loadBalancerIP: '0.0.0.0'
     className: "harness"
     loadBalancerEnabled: true
     hosts:
@@ -26,14 +26,32 @@ global:
     defaultbackend:
       # -- Create will deploy a default backend into your cluster
       create: true
-
+  # Enable if using Istio setup
+  istio:
+    enabled: false
+    gateway:
+      create: true
+      port: 443
+      protocol: HTTPS
+    hosts:
+    - '*'
+    strict: true
+    tls:
+      credentialName: harness-wildcard
+      minProtocolVersion: TLSV1_2
+      mode: SIMPLE
+    virtualService:
+      gateways:
+      - ""
+      hosts:
+      - smp-istio.test.harness.io
 
 ## Platform Settings
 platform:
   harness-manager:
     featureFlags:
       OPA: "OPA_PIPELINE_GOVERNANCE"
-      ADDITIONAL: "CHAOS_ENABLED,FF_CHAOS_LINUX_ENABLED"
+      ADDITIONAL: "CHAOS_ENABLED,CHAOS_LINUX_ENABLED"
 
 chaos-manager:
   replicaCount: 3

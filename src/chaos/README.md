@@ -279,13 +279,24 @@ dependencies:
 | global.ingress.enabled | bool | `true` |  |
 | global.ingress.hosts[0] | string | `""` |  |
 | global.ingress.loadBalancerEnabled | bool | `true` |  |
-| global.ingress.loadBalancerIP | string | `"34.23.21.25"` |  |
+| global.ingress.loadBalancerIP | string | `"0.0.0.0"` |  |
 | global.ingress.nginx.create | bool | `true` | Create Nginx Controller.  True will deploy a controller into your cluster |
 | global.ingress.tls.enabled | bool | `false` |  |
 | global.ingress.tls.secretName | string | `"harness-ssl"` |  |
+| global.istio.enabled | bool | `false` |  |
+| global.istio.gateway.create | bool | `true` |  |
+| global.istio.gateway.port | int | `443` |  |
+| global.istio.gateway.protocol | string | `"HTTPS"` |  |
+| global.istio.hosts[0] | string | `"*"` |  |
+| global.istio.strict | bool | `true` |  |
+| global.istio.tls.credentialName | string | `"harness-wildcard"` |  |
+| global.istio.tls.minProtocolVersion | string | `"TLSV1_2"` |  |
+| global.istio.tls.mode | string | `"SIMPLE"` |  |
+| global.istio.virtualService.gateways[0] | string | `""` |  |
+| global.istio.virtualService.hosts[0] | string | `"smp-istio.test.harness.io"` |  |
 | global.loadbalancerURL | string | `"test@harness.io"` |  |
 | global.opa.enabled | bool | `false` |  |
-| platform.harness-manager.featureFlags.ADDITIONAL | string | `"CHAOS_ENABLED,FF_CHAOS_LINUX_ENABLED"` |  |
+| platform.harness-manager.featureFlags.ADDITIONAL | string | `"CHAOS_ENABLED,CHAOS_LINUX_ENABLED"` |  |
 | platform.harness-manager.featureFlags.OPA | string | `"OPA_PIPELINE_GOVERNANCE"` |  |
 
 ----------------------------------------------

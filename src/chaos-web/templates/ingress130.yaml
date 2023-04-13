@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: chaos-web-ingress-130
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "chaos-web.labels" . | nindent 4 }}
   annotations:
     nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
     nginx.ingress.kubernetes.io/rewrite-target: /$2

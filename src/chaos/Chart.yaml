@@ -42,3 +42,7 @@ dependencies:
   - name: chaos-linux-ifc
     version: 0.1.x
     repository: "file://../chaos-linux-ifc"
+
+  - name: chaos-infra
+    version: 0.1.x
+    repository: "file://../chaos-infra"

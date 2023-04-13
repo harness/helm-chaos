@@ -3,4 +3,6 @@ kind: ConfigMap
 metadata:
   name: chaos-driver-config
   namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "chaos-driver.labels" . | nindent 4 }}
 data:

@@ -1,0 +1,23 @@
+# Default values for chaos-infra
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global:
+  loadbalancerURL: "test@harness.io"
+  istio:
+    enabled: false
+    gateway:
+      create: false
+      port: 443
+      protocol: HTTPS
+    hosts:
+    - '*'
+    strict: false
+    tls:
+      credentialName: harness-wildcard
+      minProtocolVersion: TLSV1_2
+      mode: SIMPLE
+    virtualService:
+      gateways:
+      - ""
+      hosts:
+      - smp-istio.test.harness.io
