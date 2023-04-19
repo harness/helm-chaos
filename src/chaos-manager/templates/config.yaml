@@ -45,6 +45,6 @@ data:
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
   LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
   LOG_SERVICE_EXTERNAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'
-  LINUX_INFRA_GQL_SERVER_ENDPOINT: 'http://chaos-linux-ifs-service:4000'
+  LINUX_INFRA_GQL_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/lserver/api'
   LINUX_INFRA_RPC_SERVER_ENDPOINT: 'chaos-linux-ifs-service:5000'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
