@@ -7,7 +7,7 @@ dependencies:
   version: 0.3.0
 - name: chaos-manager
   repository: file://../chaos-manager
-  version: 0.3.0
+  version: 0.3.1
 - name: chaos-web
   repository: file://../chaos-web
   version: 0.3.0
@@ -23,5 +23,5 @@ dependencies:
 - name: chaos-infra
   repository: file://../chaos-infra
   version: 0.1.0
-digest: sha256:21daf6c72ae0bfb8dc55f26c73ff2218190461029543931206d3a315d2f7621c
-generated: "2023-04-13T19:21:29.158215+05:30"
+digest: sha256:9d88d4829ce47233aa560bfab56b319fba62368ceec327bda9bf7a057c185389
+generated: "2023-04-20T18:25:35.002221+05:30"
