@@ -3,6 +3,41 @@ entries:
   chaos:
   - apiVersion: v2
     appVersion: 0.3.0
+    created: "2023-04-20T12:59:33.718165902Z"
+    dependencies:
+    - name: chaos-common
+      repository: file://../chaos-common
+      version: 0.2.x
+    - name: chaos-driver
+      repository: file://../chaos-driver
+      version: 0.3.x
+    - name: chaos-manager
+      repository: file://../chaos-manager
+      version: 0.3.x
+    - name: chaos-web
+      repository: file://../chaos-web
+      version: 0.3.x
+    - name: chaos-k8s-ifs
+      repository: file://../chaos-k8s-ifs
+      version: 0.2.x
+    - name: chaos-linux-ifs
+      repository: file://../chaos-linux-ifs
+      version: 0.1.x
+    - name: chaos-linux-ifc
+      repository: file://../chaos-linux-ifc
+      version: 0.1.x
+    - name: chaos-infra
+      repository: file://../chaos-infra
+      version: 0.1.x
+    description: A Helm chart for harness chaos module
+    digest: 11d253ac2022dbb52c1827bafd3e478a46b81353973548f0bc0f9aa645f690b3
+    name: chaos
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-0.3.1/chaos-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    appVersion: 0.3.0
     created: "2023-04-12T14:08:28.554567902Z"
     dependencies:
     - name: chaos-common
@@ -325,4 +360,4 @@ entries:
     urls:
     - https://github.com/harness/helm-chaos/releases/download/chaos-web-0.1.0/chaos-web-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-20T12:22:54.665759613Z"
+generated: "2023-04-20T12:59:33.857868376Z"
