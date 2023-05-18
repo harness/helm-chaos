@@ -64,3 +64,10 @@ Create the name of the service account to use
 {{- define "chaos-linux-ifs.pullSecrets" -}}
 {{ include "common.images.pullSecrets" (dict "images" (list .Values.image ) "global" .Values.global ) }}
 {{- end -}}
+
+{{/*
+Create the name of the probeSourceImage image to use 
+*/}}
+{{- define "chaos-linux-ifs.probeSourceImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.probeSourceImage.image "global" .Values.global) }}
+{{- end }}

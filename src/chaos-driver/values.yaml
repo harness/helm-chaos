@@ -49,7 +49,7 @@ image:
   repository: chaosnative/harness-smp-chaos-driver
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.9.0"
+  tag: "0.10.0"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 

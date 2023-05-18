@@ -62,7 +62,7 @@ jobs:
     slackURLToNotify: 'no-url'
     image:
       registry: docker.io
-      tag: "0.9.0"
+      tag: "0.10.0"
       repository: chaosnative/harness-smp-chaos-db-upgrade-agent
       pullPolicy: Always
       digest: ""

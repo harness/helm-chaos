@@ -26,9 +26,9 @@ spec:
               name: chaos-db-upgrade-job-secret
         env:
           - name: PREV_VERSION
-            value: "0.8.0"
+            value: "0.10.0"
           - name: VERSION
-            value: "0.9.0"
+            value: "0.11.0"
           - name: DB_USER
             valueFrom:
               secretKeyRef:
@@ -76,6 +76,16 @@ spec:
               configMapKeyRef:
                 name: chaos-manager-config
                 key: DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS
+
+          - name: CHAOS_EXPERIMENT_RUN_LIMIT
+            value: "100000"
+
+          - name: CHAOS_GAMEDAY_RUN_PER_GAMEDAY_LIMIT
+            value: "1000"
+
+          - name: CHAOS_EXPERIMENTS_PER_GAMEDAY_RUN
+            value: "20"
+
       restartPolicy: Never
       {{- if .Values.nodeSelector }}
       nodeSelector:

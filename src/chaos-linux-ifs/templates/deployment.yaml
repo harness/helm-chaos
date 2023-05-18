@@ -39,6 +39,29 @@ spec:
         - name: chaos-linux-ifs
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
           env:
+          - name: PROBE_SOURCE_IMAGE
+            valueFrom:
+              configMapKeyRef:
+                name: chaos-linux-ifs-config      
+                key:  PROBE_SOURCE_IMAGE 
+          - name: LOG_SERVICE_ENABLED
+            value: "true"     
+          - name: LOG_SERVER_URL
+            valueFrom:
+              configMapKeyRef:
+                key: LOG_SERVICE_ENDPOINT
+                name: chaos-common-config
+          - name: LOG_SERVICE_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: LOG_SERVICE_TOKEN
+                name: chaos-k8s-ifs-secret
+          - name: LOG_TOKEN_RENEWAL_INTERVAL_IN_HOUR
+            value: "24"
+
+          - name: PROBE_SERVICE_ACCOUNT_NAME
+            value: {{ include "chaos-linux-ifs.serviceAccountName" . }}
+
           - name: CHAOS_NAMESPACE
             valueFrom:
               fieldRef:

@@ -25,7 +25,7 @@ data:
   LITMUS_CHAOS_OPERATOR_IMAGE: {{ include "chaos-manager.litmusChaosOperatorImage" . }}
   LITMUS_CHAOS_RUNNER_IMAGE: {{ include "chaos-manager.litmusChaosRunnerImage" . }}
   LITMUS_CHAOS_EXPORTER_IMAGE: {{ include "chaos-manager.litmusChaosExporterImage" . }}
-  CHAOS_MANAGER_VERSION: '0.9.0'
+  CHAOS_MANAGER_VERSION: '0.11.0'
   INFRA_DEPLOYMENTS: '["app=chaos-exporter", "name=chaos-operator", "app=workflow-controller"]'
   ACCESS_CONTROL_ENDPOINT: 'http://access-control:9006/api'
   NG_MANAGER_ENDPOINT: 'http://ng-manager:7090/api'
@@ -40,11 +40,20 @@ data:
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
   ENTERPRISE_HUB_SECRET: ""
   ENTERPRISE_HUB_TOKEN: ""
-  K8S_IFS_VERSION: '0.9.0'
+  K8S_IFS_VERSION: '0.11.0'
   K8S_INFRA_SERVER_ENDPOINT: 'http://chaos-k8s-ifs-service:6000'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
   LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
   LOG_SERVICE_EXTERNAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'
-  LINUX_INFRA_GQL_SERVER_ENDPOINT: 'http://chaos-linux-ifs-service:4000'
+  LINUX_INFRA_GQL_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/lserver/api'
   LINUX_INFRA_RPC_SERVER_ENDPOINT: 'chaos-linux-ifs-service:5000'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
+  DEFAULT_CHAOS_EXPERIMENT_RUN_LIMIT: '100000'
+  DEFAULT_GAME_DAY_RUNS_PER_GAME_DAY_LIMIT: '1000'
+  DEFAULT_EXPERIMENTS_PER_GAME_DAY_RUN_LIMIT: '20'
+  SRM_CHANGE_SOURCE_REDIS_STREAM: 'chaos_change_events'
+  REDIS_STREAM_ENV: 'qa'
+  {{- if .Values.global.imageRegistry }}
+  IMAGE_REGISTRY_REPO: '{{ .Values.global.imageRegistry }}'
+  {{- end -}}
+

@@ -58,6 +58,12 @@ image:
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
+probeSourceImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/source-probe
+    tag: "ci"
+  
 configmap: {}
 
 mongoSecrets:
