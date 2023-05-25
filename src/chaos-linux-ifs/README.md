@@ -1,6 +1,6 @@
 # chaos-linux-ifs
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -36,7 +36,7 @@ A Helm chart for Kubernetes
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"chaosnative/harness-smp-chaos-linux-infra-server"` |  |
-| image.tag | string | `"ci"` |  |
+| image.tag | string | `"0.11.0"` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -49,6 +49,9 @@ A Helm chart for Kubernetes
 | platform.harness-manager.featureFlags.OPA | string | `"OPA_PIPELINE_GOVERNANCE"` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
+| probeSourceImage.image.registry | string | `"docker.io"` |  |
+| probeSourceImage.image.repository | string | `"chaosnative/source-probe"` |  |
+| probeSourceImage.image.tag | string | `"ci"` |  |
 | replicaCount | int | `2` |  |
 | resources.limits.cpu | string | `"500m"` |  |
 | resources.limits.memory | string | `"512Mi"` |  |

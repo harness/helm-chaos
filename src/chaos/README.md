@@ -2,7 +2,7 @@
 
 A Helm chart for harness chaos module
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
 
 ## Usage
 
@@ -27,7 +27,7 @@ dependencies:
 | chaos-driver.image.pullPolicy | string | `"Always"` |  |
 | chaos-driver.image.registry | string | `"docker.io"` |  |
 | chaos-driver.image.repository | string | `"chaosnative/harness-smp-chaos-driver"` |  |
-| chaos-driver.image.tag | string | `"0.9.0"` |  |
+| chaos-driver.image.tag | string | `"0.11.0"` |  |
 | chaos-driver.maxSurge | int | `1` |  |
 | chaos-driver.maxUnavailable | int | `0` |  |
 | chaos-driver.mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -65,7 +65,7 @@ dependencies:
 | chaos-k8s-ifs.image.pullPolicy | string | `"Always"` |  |
 | chaos-k8s-ifs.image.registry | string | `"docker.io"` |  |
 | chaos-k8s-ifs.image.repository | string | `"chaosnative/harness-smp-chaos-k8s-ifs"` |  |
-| chaos-k8s-ifs.image.tag | string | `"0.9.2"` |  |
+| chaos-k8s-ifs.image.tag | string | `"0.11.0"` |  |
 | chaos-k8s-ifs.maxSurge | int | `1` |  |
 | chaos-k8s-ifs.maxUnavailable | int | `0` |  |
 | chaos-k8s-ifs.mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -104,7 +104,7 @@ dependencies:
 | chaos-linux-ifc.image.pullPolicy | string | `"Always"` |  |
 | chaos-linux-ifc.image.registry | string | `"docker.io"` |  |
 | chaos-linux-ifc.image.repository | string | `"chaosnative/harness-smp-chaos-linux-infra-controller"` |  |
-| chaos-linux-ifc.image.tag | string | `"ci"` |  |
+| chaos-linux-ifc.image.tag | string | `"0.11.0"` |  |
 | chaos-linux-ifc.maxSurge | int | `1` |  |
 | chaos-linux-ifc.maxUnavailable | int | `0` |  |
 | chaos-linux-ifc.nameOverride | string | `""` |  |
@@ -135,13 +135,16 @@ dependencies:
 | chaos-linux-ifs.image.pullPolicy | string | `"Always"` |  |
 | chaos-linux-ifs.image.registry | string | `"docker.io"` |  |
 | chaos-linux-ifs.image.repository | string | `"chaosnative/harness-smp-chaos-linux-infra-server"` |  |
-| chaos-linux-ifs.image.tag | string | `"ci"` |  |
+| chaos-linux-ifs.image.tag | string | `"0.11.0"` |  |
 | chaos-linux-ifs.maxSurge | int | `1` |  |
 | chaos-linux-ifs.maxUnavailable | int | `0` |  |
 | chaos-linux-ifs.nameOverride | string | `""` |  |
 | chaos-linux-ifs.nodeSelector | object | `{}` |  |
 | chaos-linux-ifs.podAnnotations | object | `{}` |  |
 | chaos-linux-ifs.podSecurityContext | object | `{}` |  |
+| chaos-linux-ifs.probeSourceImage.image.registry | string | `"docker.io"` |  |
+| chaos-linux-ifs.probeSourceImage.image.repository | string | `"chaosnative/source-probe"` |  |
+| chaos-linux-ifs.probeSourceImage.image.tag | string | `"ci"` |  |
 | chaos-linux-ifs.replicaCount | int | `2` |  |
 | chaos-linux-ifs.resources.limits.cpu | string | `"500m"` |  |
 | chaos-linux-ifs.resources.limits.memory | string | `"512Mi"` |  |
@@ -173,20 +176,20 @@ dependencies:
 | chaos-manager.chaosHubLimit | string | `"30"` |  |
 | chaos-manager.chaosHubSize | string | `"200"` |  |
 | chaos-manager.configmap | object | `{}` |  |
-| chaos-manager.enterpriseHubBranchName | string | `"hce-3.0.2-saas"` |  |
+| chaos-manager.enterpriseHubBranchName | string | `"hce-3.0.3-smp"` |  |
 | chaos-manager.fullnameOverride | string | `""` |  |
 | chaos-manager.image.digest | string | `""` |  |
 | chaos-manager.image.pullPolicy | string | `"Always"` |  |
 | chaos-manager.image.registry | string | `"docker.io"` |  |
 | chaos-manager.image.repository | string | `"chaosnative/harness-smp-chaos-manager"` |  |
-| chaos-manager.image.tag | string | `"0.9.8"` |  |
+| chaos-manager.image.tag | string | `"0.11.1"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.enabled | bool | `false` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.digest | string | `""` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.imagePullSecrets | list | `[]` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.pullPolicy | string | `"Always"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.registry | string | `"docker.io"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.repository | string | `"chaosnative/harness-smp-chaos-db-upgrade-agent"` |  |
-| chaos-manager.jobs.chaos_db_upgrade.image.tag | string | `"0.9.0"` |  |
+| chaos-manager.jobs.chaos_db_upgrade.image.tag | string | `"0.11.0"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.slackURLToNotify | string | `"no-url"` |  |
 | chaos-manager.litmusChaosExporterImage.image.digest | string | `""` |  |
 | chaos-manager.litmusChaosExporterImage.image.registry | string | `"docker.io"` |  |
@@ -203,7 +206,7 @@ dependencies:
 | chaos-manager.logWatcherImage.image.digest | string | `""` |  |
 | chaos-manager.logWatcherImage.image.registry | string | `"docker.io"` |  |
 | chaos-manager.logWatcherImage.image.repository | string | `"chaosnative/harness-chaos-log-watcher"` |  |
-| chaos-manager.logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.9.0"` |  |
+| chaos-manager.logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.11.0"` |  |
 | chaos-manager.maxSurge | int | `1` |  |
 | chaos-manager.maxUnavailable | int | `0` |  |
 | chaos-manager.mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -233,7 +236,7 @@ dependencies:
 | chaos-manager.subscriberImage.image.digest | string | `""` |  |
 | chaos-manager.subscriberImage.image.registry | string | `"docker.io"` |  |
 | chaos-manager.subscriberImage.image.repository | string | `"chaosnative/harness-smp-chaos-subscriber"` |  |
-| chaos-manager.subscriberImage.image.tag | string | `"0.9.1"` |  |
+| chaos-manager.subscriberImage.image.tag | string | `"0.11.0"` |  |
 | chaos-manager.tolerations | list | `[]` |  |
 | chaos-manager.waitForInitContainer.image.digest | string | `""` |  |
 | chaos-manager.waitForInitContainer.image.imagePullSecrets | list | `[]` |  |
@@ -250,7 +253,7 @@ dependencies:
 | chaos-web.image.pullPolicy | string | `"Always"` |  |
 | chaos-web.image.registry | string | `"docker.io"` |  |
 | chaos-web.image.repository | string | `"chaosnative/harness-smp-chaos-web"` |  |
-| chaos-web.image.tag | string | `"0.9.6"` |  |
+| chaos-web.image.tag | string | `"0.11.1"` |  |
 | chaos-web.maxSurge | int | `1` |  |
 | chaos-web.maxUnavailable | int | `0` |  |
 | chaos-web.nameOverride | string | `""` |  |
