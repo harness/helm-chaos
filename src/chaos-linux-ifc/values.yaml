@@ -54,7 +54,7 @@ image:
   repository: chaosnative/harness-smp-chaos-linux-infra-controller
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "ci"
+  tag: "0.11.0"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 

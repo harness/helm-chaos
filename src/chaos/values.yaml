@@ -226,7 +226,7 @@ chaos-web:
     repository: chaosnative/harness-smp-chaos-web
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.11.0
+    tag: 0.11.1
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 

@@ -56,4 +56,3 @@ data:
   {{- if .Values.global.imageRegistry }}
   IMAGE_REGISTRY_REPO: '{{ .Values.global.imageRegistry }}'
   {{- end -}}
-
