@@ -2,7 +2,7 @@ dependencies:
 - name: chaos-common
   repository: file://../chaos-common
   version: 0.3.0
-- name: chaos-drivers
+- name: chaos-driver
   repository: file://../chaos-driver
   version: 0.4.0
 - name: chaos-manager
@@ -23,5 +23,5 @@ dependencies:
 - name: chaos-infra
   repository: file://../chaos-infra
   version: 0.1.0
-digest: sha256:73404f46ee01cd8cea7fba5efd24ee93b3949701651ff3be8147104f04c23f73
-generated: "2023-05-25T11:02:36.12481+05:30"
+digest: sha256:c60447048efb882630ded6146d94dc6ad5d7ea7cb1237df1a7e9ba0c2ea94306
+generated: "2023-05-26T20:39:13.33022+05:30"
