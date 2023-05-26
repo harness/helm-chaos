@@ -54,10 +54,16 @@ image:
   repository: chaosnative/harness-smp-chaos-linux-infra-server
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "ci"
+  tag: "0.11.0"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
+probeSourceImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/source-probe
+    tag: "ci"
+  
 configmap: {}
 
 mongoSecrets:

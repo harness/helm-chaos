@@ -33,7 +33,7 @@ spec:
         - name: chaos-linux-ifc
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
           command:
-          - delegate-controller
+          - infrastructure-controller
           args:
           - -leader-elect=true
           env:

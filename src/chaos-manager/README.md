@@ -1,6 +1,6 @@
 # chaos-manager
 
-![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -30,7 +30,7 @@ A Helm chart for Kubernetes
 | chaosHubSize | string | `"200"` |  |
 | configmap | object | `{}` |  |
 | deployAsSts | bool | `false` |  |
-| enterpriseHubBranchName | string | `"hce-3.0.2-saas"` |  |
+| enterpriseHubBranchName | string | `"hce-3.0.3-smp"` |  |
 | fullnameOverride | string | `""` |  |
 | global.cd.enabled | bool | `true` | Enable to install CD |
 | global.ingress.className | string | `"harness"` |  |
@@ -47,14 +47,14 @@ A Helm chart for Kubernetes
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"chaosnative/harness-smp-chaos-manager"` |  |
-| image.tag | string | `"0.9.8"` |  |
+| image.tag | string | `"0.11.1"` |  |
 | jobs.chaos_db_upgrade.enabled | bool | `false` |  |
 | jobs.chaos_db_upgrade.image.digest | string | `""` |  |
 | jobs.chaos_db_upgrade.image.imagePullSecrets | list | `[]` |  |
 | jobs.chaos_db_upgrade.image.pullPolicy | string | `"Always"` |  |
 | jobs.chaos_db_upgrade.image.registry | string | `"docker.io"` |  |
 | jobs.chaos_db_upgrade.image.repository | string | `"chaosnative/harness-smp-chaos-db-upgrade-agent"` |  |
-| jobs.chaos_db_upgrade.image.tag | string | `"0.9.0"` |  |
+| jobs.chaos_db_upgrade.image.tag | string | `"0.11.0"` |  |
 | jobs.chaos_db_upgrade.slackURLToNotify | string | `"no-url"` |  |
 | litmusChaosExporterImage.image.digest | string | `""` |  |
 | litmusChaosExporterImage.image.registry | string | `"docker.io"` |  |
@@ -71,7 +71,7 @@ A Helm chart for Kubernetes
 | logWatcherImage.image.digest | string | `""` |  |
 | logWatcherImage.image.registry | string | `"docker.io"` |  |
 | logWatcherImage.image.repository | string | `"chaosnative/harness-chaos-log-watcher"` |  |
-| logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.9.0"` |  |
+| logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.11.0"` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -104,7 +104,7 @@ A Helm chart for Kubernetes
 | subscriberImage.image.digest | string | `""` |  |
 | subscriberImage.image.registry | string | `"docker.io"` |  |
 | subscriberImage.image.repository | string | `"chaosnative/harness-smp-chaos-subscriber"` |  |
-| subscriberImage.image.tag | string | `"0.9.1"` |  |
+| subscriberImage.image.tag | string | `"0.11.0"` |  |
 | tolerations | list | `[]` |  |
 | waitForInitContainer.image.digest | string | `""` |  |
 | waitForInitContainer.image.imagePullSecrets | list | `[]` |  |

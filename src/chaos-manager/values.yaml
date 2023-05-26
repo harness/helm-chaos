@@ -52,7 +52,7 @@ image:
   repository: chaosnative/harness-smp-chaos-manager
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.9.8"
+  tag: "0.11.1"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -62,7 +62,7 @@ jobs:
     slackURLToNotify: 'no-url'
     image:
       registry: docker.io
-      tag: "0.9.0"
+      tag: "0.11.0"
       repository: chaosnative/harness-smp-chaos-db-upgrade-agent
       pullPolicy: Always
       digest: ""
@@ -72,7 +72,7 @@ subscriberImage:
   image:
     registry: docker.io
     repository: chaosnative/harness-smp-chaos-subscriber
-    tag: 0.9.1
+    tag: 0.11.0
     digest: ""
 
 argoWorkflowControllerImage:
@@ -114,10 +114,10 @@ logWatcherImage:
   image:
     registry: docker.io
     repository: chaosnative/harness-chaos-log-watcher
-    tag: release-chaos-log-watcher-0.9.0
+    tag: release-chaos-log-watcher-0.11.0
     digest: ""
 
-enterpriseHubBranchName: 'hce-3.0.2-saas'
+enterpriseHubBranchName: 'hce-3.0.3-smp'
 
 chaosExperimentLimit: '1000'
 

@@ -8,6 +8,9 @@ metadata:
     name: chaos-linux-ifc
     {{- include "chaos-linux-ifc.labels" . | nindent 4 }}
 rules:
+  - apiGroups: [ "" ]
+    resources: [ "pods"]
+    verbs: ["delete","deletecollection"]
   - apiGroups: [""]
     resources: ["events"]
     verbs: ["create"]

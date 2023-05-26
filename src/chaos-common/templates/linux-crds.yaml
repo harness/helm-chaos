@@ -1,3 +1,4 @@
+---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
@@ -6,7 +7,7 @@ metadata:
   creationTimestamp: null
   name: linuxchaosexperiments.litmuschaos.io
   labels:
-    {{- include "chaos-common.labels" . | nindent 4 }}
+    {{- include "chaos-common.labels" . | nindent 4 }}  
 spec:
   group: litmuschaos.io
   names:
@@ -14,381 +15,824 @@ spec:
     listKind: LinuxChaosExperimentList
     plural: linuxchaosexperiments
     shortNames:
-      - lce
+    - lce
     singular: linuxchaosexperiment
   scope: Namespaced
   versions:
-    - name: v1alpha1
-      schema:
-        openAPIV3Schema:
-          description: LinuxChaosExperiment is the Schema for the linuxchaosexperiment
-            API
-          properties:
-            apiVersion:
-              description: 'APIVersion defines the versioned schema of this representation
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: LinuxChaosExperiment is the Schema for the linuxchaosexperiment
+          API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
               of an object. Servers should convert recognized schemas to the latest
               internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-              type: string
-            kind:
-              description: 'Kind is a string value representing the REST resource this
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
               object represents. Servers may infer this from the endpoint the client
               submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-              type: string
-            metadata:
-              type: object
-            spec:
-              description: LinuxChaosExperimentSpec defines the desired state of LinuxChaosExperiment
-              properties:
-                cleanupPolicy:
-                  type: string
-                experimentId:
-                  type: string
-                experimentRunId:
-                  type: string
-                experimentState:
-                  type: string
-                steps:
-                  items:
-                    items:
-                      properties:
-                        name:
-                          type: string
-                        status:
-                          type: string
-                      required:
-                        - name
-                      type: object
-                    type: array
-                  type: array
-                tasks:
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: LinuxChaosExperimentSpec defines the desired state of LinuxChaosExperiment
+            properties:
+              cleanupPolicy:
+                type: string
+              experimentId:
+                type: string
+              experimentRunId:
+                type: string
+              experimentState:
+                type: string
+              steps:
+                items:
                   items:
                     properties:
-                      chaosInfra:
+                      name:
                         type: string
-                      definition:
-                        properties:
-                          bash:
-                            properties:
-                              script:
-                                type: string
-                              vars:
-                                items:
-                                  properties:
-                                    name:
-                                      type: string
-                                    value:
-                                      type: string
-                                  required:
-                                    - name
-                                  type: object
-                                type: array
-                            type: object
-                          chaos:
-                            properties:
-                              dnsChaos/inputs:
+                      status:
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  type: array
+                type: array
+              tasks:
+                items:
+                  properties:
+                    chaosInfra:
+                      type: string
+                    definition:
+                      properties:
+                        bash:
+                          properties:
+                            script:
+                              type: string
+                            vars:
+                              items:
                                 properties:
-                                  dnsPort:
-                                    type: integer
-                                  duration:
-                                    type: integer
-                                  hostNames:
+                                  name:
                                     type: string
-                                  matchScheme:
+                                  value:
                                     type: string
-                                  rampTime:
-                                    type: integer
-                                  spoofMap:
-                                    type: string
-                                  upstreamServer:
-                                    type: string
+                                required:
+                                - name
                                 type: object
-                              experiment:
-                                type: string
-                              httpChaos/inputs:
+                              type: array
+                          type: object
+                        chaos:
+                          properties:
+                            diskFillChaos/inputs:
+                              properties:
+                                dataBlockSize:
+                                  type: integer
+                                duration:
+                                  type: integer
+                                fillPath:
+                                  type: string
+                                fillPercentage:
+                                  type: integer
+                                fillStorageMebibytes:
+                                  format: int64
+                                  type: integer
+                                rampTime:
+                                  type: integer
+                              type: object
+                            dnsChaos/inputs:
+                              properties:
+                                dnsPort:
+                                  type: integer
+                                duration:
+                                  type: integer
+                                hostNames:
+                                  type: string
+                                matchScheme:
+                                  type: string
+                                rampTime:
+                                  type: integer
+                                spoofMap:
+                                  type: string
+                                upstreamServer:
+                                  type: string
+                              type: object
+                            experiment:
+                              type: string
+                            httpChaos/inputs:
+                              properties:
+                                contentEncoding:
+                                  type: string
+                                contentType:
+                                  type: string
+                                duration:
+                                  type: integer
+                                headersMap:
+                                  type: string
+                                jitter:
+                                  type: integer
+                                latency:
+                                  type: integer
+                                mode:
+                                  type: string
+                                networkInterface:
+                                  type: string
+                                proxyPort:
+                                  type: string
+                                rampTime:
+                                  type: integer
+                                resetTimeout:
+                                  type: integer
+                                responseBody:
+                                  type: string
+                                statusCode:
+                                  type: string
+                                targetServicePort:
+                                  type: string
+                                toxicTypes:
+                                  type: string
+                                toxicity:
+                                  type: integer
+                              required:
+                              - targetServicePort
+                              - toxicTypes
+                              type: object
+                            networkChaos/inputs:
+                              properties:
+                                destinationHosts:
+                                  type: string
+                                destinationIPs:
+                                  type: string
+                                duration:
+                                  type: integer
+                                jitter:
+                                  type: integer
+                                networkInterface:
+                                  type: string
+                                networkLatency:
+                                  type: integer
+                                packetCorruptionPercentage:
+                                  type: integer
+                                packetDuplicationPercentage:
+                                  type: integer
+                                packetLossPercentage:
+                                  type: integer
+                                rampTime:
+                                  type: integer
+                              type: object
+                            probes:
+                              items:
                                 properties:
-                                  contentEncoding:
-                                    type: string
-                                  contentType:
-                                    type: string
-                                  duration:
-                                    type: integer
-                                  headersMap:
-                                    type: string
-                                  jitter:
-                                    type: integer
-                                  latency:
-                                    type: integer
+                                  cmdProbe/inputs:
+                                    properties:
+                                      command:
+                                        type: string
+                                      comparator:
+                                        properties:
+                                          criteria:
+                                            type: string
+                                          type:
+                                            type: string
+                                          value:
+                                            type: string
+                                        required:
+                                        - criteria
+                                        - value
+                                        type: object
+                                      source:
+                                        description: SourceDetails contains source
+                                          details of the cmdProbe
+                                        properties:
+                                          args:
+                                            description: Args for the source pod
+                                            items:
+                                              type: string
+                                            type: array
+                                          command:
+                                            description: Command for the source pod
+                                            items:
+                                              type: string
+                                            type: array
+                                          env:
+                                            description: ENVList contains ENV passed
+                                              to the source pod
+                                            items:
+                                              properties:
+                                                name:
+                                                  description: Name of the environment
+                                                    variable. Must be a C_IDENTIFIER.
+                                                  type: string
+                                                value:
+                                                  description: 'Variable references
+                                                    $(VAR_NAME) are expanded using
+                                                    the previous defined environment
+                                                    variables in the container and
+                                                    any service environment variables.
+                                                    If a variable cannot be resolved,
+                                                    the reference in the input string
+                                                    will be unchanged. The $(VAR_NAME)
+                                                    syntax can be escaped with a double
+                                                    $$, ie: $$(VAR_NAME). Escaped
+                                                    references will never be expanded,
+                                                    regardless of whether the variable
+                                                    exists or not. Defaults to "".'
+                                                  type: string
+                                                valueFrom:
+                                                  description: Source for the environment
+                                                    variable's value. Cannot be used
+                                                    if value is not empty.
+                                                  properties:
+                                                    configMapKeyRef:
+                                                      description: Selects a key of
+                                                        a ConfigMap.
+                                                      properties:
+                                                        key:
+                                                          description: The key to
+                                                            select.
+                                                          type: string
+                                                        name:
+                                                          description: 'Name of the
+                                                            referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                                            TODO: Add other useful
+                                                            fields. apiVersion, kind,
+                                                            uid?'
+                                                          type: string
+                                                        optional:
+                                                          description: Specify whether
+                                                            the ConfigMap or its key
+                                                            must be defined
+                                                          type: boolean
+                                                      required:
+                                                      - key
+                                                      type: object
+                                                    fieldRef:
+                                                      description: 'Selects a field
+                                                        of the pod: supports metadata.name,
+                                                        metadata.namespace, `metadata.labels[''<KEY>'']`,
+                                                        `metadata.annotations[''<KEY>'']`,
+                                                        spec.nodeName, spec.serviceAccountName,
+                                                        status.hostIP, status.podIP,
+                                                        status.podIPs.'
+                                                      properties:
+                                                        apiVersion:
+                                                          description: Version of
+                                                            the schema the FieldPath
+                                                            is written in terms of,
+                                                            defaults to "v1".
+                                                          type: string
+                                                        fieldPath:
+                                                          description: Path of the
+                                                            field to select in the
+                                                            specified API version.
+                                                          type: string
+                                                      required:
+                                                      - fieldPath
+                                                      type: object
+                                                    secretKeyRef:
+                                                      description: Selects a key of
+                                                        a secret in the pod's namespace
+                                                      properties:
+                                                        key:
+                                                          description: The key of
+                                                            the secret to select from.  Must
+                                                            be a valid secret key.
+                                                          type: string
+                                                        name:
+                                                          description: 'Name of the
+                                                            referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                                            TODO: Add other useful
+                                                            fields. apiVersion, kind,
+                                                            uid?'
+                                                          type: string
+                                                        optional:
+                                                          description: Specify whether
+                                                            the Secret or its key
+                                                            must be defined
+                                                          type: boolean
+                                                      required:
+                                                      - key
+                                                      type: object
+                                                  type: object
+                                              required:
+                                              - name
+                                              type: object
+                                            type: array
+                                          hostNetwork:
+                                            description: HostNetwork define the hostNetwork
+                                              of the external pod it supports boolean
+                                              values and default value is false
+                                            type: boolean
+                                          image:
+                                            description: Image for the source pod
+                                            type: string
+                                          imagePullPolicy:
+                                            description: ImagePullPolicy for the source
+                                              pod
+                                            type: string
+                                          imagePullSecrets:
+                                            description: ImagePullSecrets for source
+                                              pod
+                                            items:
+                                              description: LocalObjectReference contains
+                                                enough information to let you locate
+                                                the referenced object inside the same
+                                                namespace.
+                                              properties:
+                                                name:
+                                                  description: 'Name of the referent.
+                                                    More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                                    TODO: Add other useful fields.
+                                                    apiVersion, kind, uid?'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          privileged:
+                                            description: Privileged for the source
+                                              pod
+                                            type: boolean
+                                          volumeMount:
+                                            description: VolumesMount for the source
+                                              pod
+                                            items:
+                                              description: VolumeMount describes a
+                                                mounting of a Volume within a container.
+                                              properties:
+                                                mountPath:
+                                                  description: Path within the container
+                                                    at which the volume should be
+                                                    mounted.  Must not contain ':'.
+                                                  type: string
+                                                mountPropagation:
+                                                  description: mountPropagation determines
+                                                    how mounts are propagated from
+                                                    the host to container and the
+                                                    other way around. When not set,
+                                                    MountPropagationNone is used.
+                                                    This field is beta in 1.10.
+                                                  type: string
+                                                name:
+                                                  description: This must match the
+                                                    Name of a Volume.
+                                                  type: string
+                                                readOnly:
+                                                  description: Mounted read-only if
+                                                    true, read-write otherwise (false
+                                                    or unspecified). Defaults to false.
+                                                  type: boolean
+                                                subPath:
+                                                  description: Path within the volume
+                                                    from which the container's volume
+                                                    should be mounted. Defaults to
+                                                    "" (volume's root).
+                                                  type: string
+                                                subPathExpr:
+                                                  description: Expanded path within
+                                                    the volume from which the container's
+                                                    volume should be mounted. Behaves
+                                                    similarly to SubPath but environment
+                                                    variable references $(VAR_NAME)
+                                                    are expanded using the container's
+                                                    environment. Defaults to "" (volume's
+                                                    root). SubPathExpr and SubPath
+                                                    are mutually exclusive.
+                                                  type: string
+                                              required:
+                                              - mountPath
+                                              - name
+                                              type: object
+                                            type: array
+                                          volumes:
+                                            description: Volumes for the source pod
+                                            items:
+                                              description: Volume represents a named
+                                                volume in a pod that may be accessed
+                                                by any container in the pod.
+                                              properties:
+                                                configMap:
+                                                  description: ConfigMap represents
+                                                    a configMap that should populate
+                                                    this volume
+                                                  properties:
+                                                    defaultMode:
+                                                      description: 'Optional: mode
+                                                        bits used to set permissions
+                                                        on created files by default.
+                                                        Must be an octal value between
+                                                        0000 and 0777 or a decimal
+                                                        value between 0 and 511. YAML
+                                                        accepts both octal and decimal
+                                                        values, JSON requires decimal
+                                                        values for mode bits. Defaults
+                                                        to 0644. Directories within
+                                                        the path are not affected
+                                                        by this setting. This might
+                                                        be in conflict with other
+                                                        options that affect the file
+                                                        mode, like fsGroup, and the
+                                                        result can be other mode bits
+                                                        set.'
+                                                      format: int32
+                                                      type: integer
+                                                    items:
+                                                      description: If unspecified,
+                                                        each key-value pair in the
+                                                        Data field of the referenced
+                                                        ConfigMap will be projected
+                                                        into the volume as a file
+                                                        whose name is the key and
+                                                        content is the value. If specified,
+                                                        the listed keys will be projected
+                                                        into the specified paths,
+                                                        and unlisted keys will not
+                                                        be present. If a key is specified
+                                                        which is not present in the
+                                                        ConfigMap, the volume setup
+                                                        will error unless it is marked
+                                                        optional. Paths must be relative
+                                                        and may not contain the '..'
+                                                        path or start with '..'.
+                                                      items:
+                                                        properties:
+                                                          key:
+                                                            description: The key to
+                                                              project.
+                                                            type: string
+                                                          mode:
+                                                            description: 'Optional:
+                                                              mode bits used to set
+                                                              permissions on this
+                                                              file. Must be an octal
+                                                              value between 0000 and
+                                                              0777 or a decimal value
+                                                              between 0 and 511. YAML
+                                                              accepts both octal and
+                                                              decimal values, JSON
+                                                              requires decimal values
+                                                              for mode bits. If not
+                                                              specified, the volume
+                                                              defaultMode will be
+                                                              used. This might be
+                                                              in conflict with other
+                                                              options that affect
+                                                              the file mode, like
+                                                              fsGroup, and the result
+                                                              can be other mode bits
+                                                              set.'
+                                                            format: int32
+                                                            type: integer
+                                                          path:
+                                                            description: The relative
+                                                              path of the file to
+                                                              map the key to. May
+                                                              not be an absolute path.
+                                                              May not contain the
+                                                              path element '..'. May
+                                                              not start with the string
+                                                              '..'.
+                                                            type: string
+                                                        required:
+                                                        - key
+                                                        - path
+                                                        type: object
+                                                      type: array
+                                                    name:
+                                                      description: 'Name of the referent.
+                                                        More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                                        TODO: Add other useful fields.
+                                                        apiVersion, kind, uid?'
+                                                      type: string
+                                                    optional:
+                                                      description: Specify whether
+                                                        the ConfigMap or its keys
+                                                        must be defined
+                                                      type: boolean
+                                                  type: object
+                                                name:
+                                                  description: 'Volume''s name. Must
+                                                    be a DNS_LABEL and unique within
+                                                    the pod. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+                                                  type: string
+                                                secret:
+                                                  description: 'Secret represents
+                                                    a secret that should populate
+                                                    this volume. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret'
+                                                  properties:
+                                                    defaultMode:
+                                                      description: 'Optional: mode
+                                                        bits used to set permissions
+                                                        on created files by default.
+                                                        Must be an octal value between
+                                                        0000 and 0777 or a decimal
+                                                        value between 0 and 511. YAML
+                                                        accepts both octal and decimal
+                                                        values, JSON requires decimal
+                                                        values for mode bits. Defaults
+                                                        to 0644. Directories within
+                                                        the path are not affected
+                                                        by this setting. This might
+                                                        be in conflict with other
+                                                        options that affect the file
+                                                        mode, like fsGroup, and the
+                                                        result can be other mode bits
+                                                        set.'
+                                                      format: int32
+                                                      type: integer
+                                                    items:
+                                                      description: If unspecified,
+                                                        each key-value pair in the
+                                                        Data field of the referenced
+                                                        Secret will be projected into
+                                                        the volume as a file whose
+                                                        name is the key and content
+                                                        is the value. If specified,
+                                                        the listed keys will be projected
+                                                        into the specified paths,
+                                                        and unlisted keys will not
+                                                        be present. If a key is specified
+                                                        which is not present in the
+                                                        Secret, the volume setup will
+                                                        error unless it is marked
+                                                        optional. Paths must be relative
+                                                        and may not contain the '..'
+                                                        path or start with '..'.
+                                                      items:
+                                                        properties:
+                                                          key:
+                                                            description: The key to
+                                                              project.
+                                                            type: string
+                                                          mode:
+                                                            description: 'Optional:
+                                                              mode bits used to set
+                                                              permissions on this
+                                                              file. Must be an octal
+                                                              value between 0000 and
+                                                              0777 or a decimal value
+                                                              between 0 and 511. YAML
+                                                              accepts both octal and
+                                                              decimal values, JSON
+                                                              requires decimal values
+                                                              for mode bits. If not
+                                                              specified, the volume
+                                                              defaultMode will be
+                                                              used. This might be
+                                                              in conflict with other
+                                                              options that affect
+                                                              the file mode, like
+                                                              fsGroup, and the result
+                                                              can be other mode bits
+                                                              set.'
+                                                            format: int32
+                                                            type: integer
+                                                          path:
+                                                            description: The relative
+                                                              path of the file to
+                                                              map the key to. May
+                                                              not be an absolute path.
+                                                              May not contain the
+                                                              path element '..'. May
+                                                              not start with the string
+                                                              '..'.
+                                                            type: string
+                                                        required:
+                                                        - key
+                                                        - path
+                                                        type: object
+                                                      type: array
+                                                    optional:
+                                                      description: Specify whether
+                                                        the Secret or its keys must
+                                                        be defined
+                                                      type: boolean
+                                                    secretName:
+                                                      description: 'Name of the secret
+                                                        in the pod''s namespace to
+                                                        use. More info: https://kubernetes.io/docs/concepts/storage/volumes#secret'
+                                                      type: string
+                                                  type: object
+                                              required:
+                                              - name
+                                              type: object
+                                            type: array
+                                        type: object
+                                    required:
+                                    - command
+                                    - comparator
+                                    type: object
+                                  httpProbe/inputs:
+                                    properties:
+                                      insecureSkipVerify:
+                                        type: boolean
+                                      method:
+                                        properties:
+                                          get:
+                                            properties:
+                                              criteria:
+                                                type: string
+                                              responseCode:
+                                                type: string
+                                            required:
+                                            - criteria
+                                            - responseCode
+                                            type: object
+                                          post:
+                                            properties:
+                                              body:
+                                                type: string
+                                              bodyPath:
+                                                type: string
+                                              contentType:
+                                                type: string
+                                              criteria:
+                                                type: string
+                                              responseCode:
+                                                type: string
+                                            required:
+                                            - criteria
+                                            - responseCode
+                                            type: object
+                                        type: object
+                                      url:
+                                        type: string
+                                    required:
+                                    - method
+                                    - url
+                                    type: object
                                   mode:
                                     type: string
-                                  networkInterface:
+                                  name:
                                     type: string
-                                  proxyPort:
+                                  runProperties:
+                                    properties:
+                                      attempt:
+                                        type: integer
+                                      initialDelaySeconds:
+                                        type: integer
+                                      interval:
+                                        type: integer
+                                      probePollingInterval:
+                                        type: integer
+                                      probeTimeout:
+                                        type: integer
+                                      stopOnFailure:
+                                        type: boolean
+                                    required:
+                                    - attempt
+                                    type: object
+                                  type:
                                     type: string
-                                  rampTime:
-                                    type: integer
-                                  resetTimeout:
-                                    type: integer
-                                  responseBody:
-                                    type: string
-                                  statusCode:
-                                    type: string
-                                  targetServicePort:
-                                    type: string
-                                  toxicTypes:
-                                    type: string
-                                  toxicity:
-                                    type: integer
                                 required:
-                                  - targetServicePort
-                                  - toxicTypes
+                                - mode
+                                - name
+                                - type
                                 type: object
-                              networkChaos/inputs:
-                                properties:
-                                  destinationHosts:
-                                    type: string
-                                  destinationIPs:
-                                    type: string
-                                  duration:
-                                    type: integer
-                                  jitter:
-                                    type: integer
-                                  networkInterface:
-                                    type: string
-                                  networkLatency:
-                                    type: integer
-                                  packetCorruptionPercentage:
-                                    type: integer
-                                  packetDuplicationPercentage:
-                                    type: integer
-                                  packetLossPercentage:
-                                    type: integer
-                                  rampTime:
-                                    type: integer
-                                type: object
-                              probes:
-                                items:
-                                  properties:
-                                    cmdProbe/inputs:
-                                      properties:
-                                        command:
-                                          type: string
-                                        comparator:
-                                          properties:
-                                            criteria:
-                                              type: string
-                                            type:
-                                              type: string
-                                            value:
-                                              type: string
-                                          required:
-                                            - criteria
-                                            - value
-                                          type: object
-                                      required:
-                                        - command
-                                        - comparator
-                                      type: object
-                                    httpProbe/inputs:
-                                      properties:
-                                        insecureSkipVerify:
-                                          type: boolean
-                                        method:
-                                          properties:
-                                            get:
-                                              properties:
-                                                criteria:
-                                                  type: string
-                                                responseCode:
-                                                  type: string
-                                              required:
-                                                - criteria
-                                                - responseCode
-                                              type: object
-                                            post:
-                                              properties:
-                                                body:
-                                                  type: string
-                                                bodyPath:
-                                                  type: string
-                                                contentType:
-                                                  type: string
-                                                criteria:
-                                                  type: string
-                                                responseCode:
-                                                  type: string
-                                              required:
-                                                - criteria
-                                                - responseCode
-                                              type: object
-                                          type: object
-                                        url:
-                                          type: string
-                                      required:
-                                        - method
-                                        - url
-                                      type: object
-                                    mode:
-                                      type: string
-                                    name:
-                                      type: string
-                                    runProperties:
-                                      properties:
-                                        initialDelaySeconds:
-                                          type: integer
-                                        interval:
-                                          type: integer
-                                        probePollingInterval:
-                                          type: integer
-                                        probeTimeout:
-                                          type: integer
-                                        retry:
-                                          type: integer
-                                        stopOnFailure:
-                                          type: boolean
-                                      type: object
-                                    type:
-                                      type: string
-                                  required:
-                                    - mode
-                                    - name
-                                    - type
-                                  type: object
-                                type: array
-                              processKillChaos/inputs:
-                                properties:
-                                  duration:
-                                    type: integer
-                                  processIDs:
-                                    type: string
-                                  rampTime:
-                                    type: integer
-                                type: object
-                              serviceRestartChaos/inputs:
-                                properties:
-                                  delay:
-                                    type: integer
-                                  duration:
-                                    type: integer
-                                  interval:
-                                    type: integer
-                                  rampTime:
-                                    type: integer
-                                  selfHealingServices:
-                                    type: boolean
-                                  sequence:
-                                    type: string
-                                  services:
-                                    type: string
-                                  timeout:
-                                    type: integer
-                                type: object
-                              stressChaos/inputs:
-                                properties:
-                                  duration:
-                                    type: integer
-                                  fileSystemUtilisationBytes:
-                                    format: int64
-                                    type: integer
-                                  fileSystemUtilisationPercentage:
-                                    type: integer
-                                  load:
-                                    type: integer
-                                  memoryBytes:
-                                    format: int64
-                                    type: integer
-                                  memoryPercentage:
-                                    type: integer
-                                  rampTime:
-                                    type: integer
-                                  volumeMountPath:
-                                    type: string
-                                  workers:
-                                    type: integer
-                                type: object
-                              timeChaos/inputs:
-                                properties:
-                                  disableNTP:
-                                    type: boolean
-                                  duration:
-                                    type: integer
-                                  offset:
-                                    type: string
-                                  rampTime:
-                                    type: integer
-                                type: object
-                            required:
-                              - experiment
-                            type: object
-                        type: object
-                      name:
-                        type: string
-                      taskDefCRName:
-                        type: string
-                      taskState:
-                        type: string
-                      taskType:
-                        type: string
-                      weight:
-                        type: integer
-                    required:
-                      - chaosInfra
-                      - definition
-                      - name
-                      - taskType
-                    type: object
-                  type: array
-              required:
-                - experimentId
-                - experimentRunId
-                - steps
-                - tasks
-              type: object
-            status:
-              properties:
-                experimentStatus:
-                  type: string
-                finishedAt:
-                  format: date-time
-                  type: string
-                startedAt:
-                  format: date-time
-                  type: string
-                taskStatuses:
-                  items:
-                    properties:
-                      executionPhase:
-                        type: string
-                      finishedAt:
-                        format: date-time
-                        type: string
-                      name:
-                        type: string
-                      outputs:
-                        properties:
-                          errorCode:
-                            type: string
-                          failStep:
-                            type: string
-                        type: object
-                      startedAt:
-                        format: date-time
-                        type: string
-                      taskDefinitionCR:
-                        type: string
-                      taskStatus:
-                        type: string
-                      taskType:
-                        type: string
-                    required:
-                      - name
-                      - taskStatus
-                      - taskType
-                    type: object
-                  type: array
-              type: object
-          type: object
-      served: true
-      storage: true
+                              type: array
+                            processKillChaos/inputs:
+                              properties:
+                                duration:
+                                  type: integer
+                                forceKill:
+                                  type: boolean
+                                processCommand:
+                                  type: string
+                                processIDs:
+                                  type: string
+                                processNames:
+                                  type: string
+                                rampTime:
+                                  type: integer
+                              type: object
+                            serviceRestartChaos/inputs:
+                              properties:
+                                delay:
+                                  type: integer
+                                duration:
+                                  type: integer
+                                interval:
+                                  type: integer
+                                rampTime:
+                                  type: integer
+                                selfHealingServices:
+                                  type: boolean
+                                sequence:
+                                  type: string
+                                services:
+                                  type: string
+                                timeout:
+                                  type: integer
+                              type: object
+                            stressChaos/inputs:
+                              properties:
+                                duration:
+                                  type: integer
+                                fileSystemUtilisationBytes:
+                                  format: int64
+                                  type: integer
+                                fileSystemUtilisationPercentage:
+                                  type: integer
+                                load:
+                                  type: integer
+                                memoryBytes:
+                                  format: int64
+                                  type: integer
+                                memoryPercentage:
+                                  type: integer
+                                rampTime:
+                                  type: integer
+                                volumeMountPath:
+                                  type: string
+                                workers:
+                                  type: integer
+                              type: object
+                            timeChaos/inputs:
+                              properties:
+                                disableNTP:
+                                  type: boolean
+                                duration:
+                                  type: integer
+                                offset:
+                                  type: string
+                                rampTime:
+                                  type: integer
+                              type: object
+                          required:
+                          - experiment
+                          type: object
+                      type: object
+                    name:
+                      type: string
+                    taskDefCRName:
+                      type: string
+                    taskState:
+                      type: string
+                    taskType:
+                      type: string
+                    weight:
+                      type: integer
+                  required:
+                  - chaosInfra
+                  - definition
+                  - name
+                  - taskType
+                  type: object
+                type: array
+            required:
+            - experimentId
+            - experimentRunId
+            - steps
+            - tasks
+            type: object
+          status:
+            properties:
+              experimentStatus:
+                type: string
+              finishedAt:
+                format: date-time
+                type: string
+              startedAt:
+                format: date-time
+                type: string
+              taskStatuses:
+                items:
+                  properties:
+                    errorOutput:
+                      properties:
+                        errorCode:
+                          type: string
+                        reason:
+                          type: string
+                      required:
+                      - errorCode
+                      - reason
+                      type: object
+                    executionPhase:
+                      type: string
+                    finishedAt:
+                      format: date-time
+                      type: string
+                    name:
+                      type: string
+                    startedAt:
+                      format: date-time
+                      type: string
+                    taskDefinitionCR:
+                      type: string
+                    taskStatus:
+                      type: string
+                    taskType:
+                      type: string
+                  required:
+                  - name
+                  - taskStatus
+                  - taskType
+                  type: object
+                type: array
+            type: object
+        type: object
+    served: true
+    storage: true
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -398,7 +842,7 @@ metadata:
   creationTimestamp: null
   name: taskdefinitions.litmuschaos.io
   labels:
-    {{- include "chaos-common.labels" . | nindent 4 }}
+    {{- include "chaos-common.labels" . | nindent 4 }}  
 spec:
   group: litmuschaos.io
   names:
@@ -406,345 +850,743 @@ spec:
     listKind: TaskDefinitionList
     plural: taskdefinitions
     shortNames:
-      - taskd
+    - taskd
     singular: taskdefinition
   scope: Namespaced
   versions:
-    - name: v1alpha1
-      schema:
-        openAPIV3Schema:
-          description: TaskDefinition is the Schema for the taskdefinitions API
-          properties:
-            apiVersion:
-              description: 'APIVersion defines the versioned schema of this representation
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: TaskDefinition is the Schema for the taskdefinitions API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
               of an object. Servers should convert recognized schemas to the latest
               internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-              type: string
-            kind:
-              description: 'Kind is a string value representing the REST resource this
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
               object represents. Servers may infer this from the endpoint the client
               submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-              type: string
-            metadata:
-              type: object
-            spec:
-              description: TaskDefinitionSpec defines the desired state of TaskDefinition
-              properties:
-                action:
-                  properties:
-                    bash:
-                      properties:
-                        script:
-                          type: string
-                        vars:
-                          items:
-                            properties:
-                              name:
-                                type: string
-                              value:
-                                type: string
-                            required:
-                              - name
-                            type: object
-                          type: array
-                      type: object
-                    chaos:
-                      properties:
-                        dnsChaos/inputs:
-                          properties:
-                            dnsPort:
-                              type: integer
-                            duration:
-                              type: integer
-                            hostNames:
-                              type: string
-                            matchScheme:
-                              type: string
-                            rampTime:
-                              type: integer
-                            spoofMap:
-                              type: string
-                            upstreamServer:
-                              type: string
-                          type: object
-                        experiment:
-                          type: string
-                        httpChaos/inputs:
-                          properties:
-                            contentEncoding:
-                              type: string
-                            contentType:
-                              type: string
-                            duration:
-                              type: integer
-                            headersMap:
-                              type: string
-                            jitter:
-                              type: integer
-                            latency:
-                              type: integer
-                            mode:
-                              type: string
-                            networkInterface:
-                              type: string
-                            proxyPort:
-                              type: string
-                            rampTime:
-                              type: integer
-                            resetTimeout:
-                              type: integer
-                            responseBody:
-                              type: string
-                            statusCode:
-                              type: string
-                            targetServicePort:
-                              type: string
-                            toxicTypes:
-                              type: string
-                            toxicity:
-                              type: integer
-                          required:
-                            - targetServicePort
-                            - toxicTypes
-                          type: object
-                        networkChaos/inputs:
-                          properties:
-                            destinationHosts:
-                              type: string
-                            destinationIPs:
-                              type: string
-                            duration:
-                              type: integer
-                            jitter:
-                              type: integer
-                            networkInterface:
-                              type: string
-                            networkLatency:
-                              type: integer
-                            packetCorruptionPercentage:
-                              type: integer
-                            packetDuplicationPercentage:
-                              type: integer
-                            packetLossPercentage:
-                              type: integer
-                            rampTime:
-                              type: integer
-                          type: object
-                        probes:
-                          items:
-                            properties:
-                              cmdProbe/inputs:
-                                properties:
-                                  command:
-                                    type: string
-                                  comparator:
-                                    properties:
-                                      criteria:
-                                        type: string
-                                      type:
-                                        type: string
-                                      value:
-                                        type: string
-                                    required:
-                                      - criteria
-                                      - value
-                                    type: object
-                                required:
-                                  - command
-                                  - comparator
-                                type: object
-                              httpProbe/inputs:
-                                properties:
-                                  insecureSkipVerify:
-                                    type: boolean
-                                  method:
-                                    properties:
-                                      get:
-                                        properties:
-                                          criteria:
-                                            type: string
-                                          responseCode:
-                                            type: string
-                                        required:
-                                          - criteria
-                                          - responseCode
-                                        type: object
-                                      post:
-                                        properties:
-                                          body:
-                                            type: string
-                                          bodyPath:
-                                            type: string
-                                          contentType:
-                                            type: string
-                                          criteria:
-                                            type: string
-                                          responseCode:
-                                            type: string
-                                        required:
-                                          - criteria
-                                          - responseCode
-                                        type: object
-                                    type: object
-                                  url:
-                                    type: string
-                                required:
-                                  - method
-                                  - url
-                                type: object
-                              mode:
-                                type: string
-                              name:
-                                type: string
-                              runProperties:
-                                properties:
-                                  initialDelaySeconds:
-                                    type: integer
-                                  interval:
-                                    type: integer
-                                  probePollingInterval:
-                                    type: integer
-                                  probeTimeout:
-                                    type: integer
-                                  retry:
-                                    type: integer
-                                  stopOnFailure:
-                                    type: boolean
-                                type: object
-                              type:
-                                type: string
-                            required:
-                              - mode
-                              - name
-                              - type
-                            type: object
-                          type: array
-                        processKillChaos/inputs:
-                          properties:
-                            duration:
-                              type: integer
-                            processIDs:
-                              type: string
-                            rampTime:
-                              type: integer
-                          type: object
-                        serviceRestartChaos/inputs:
-                          properties:
-                            delay:
-                              type: integer
-                            duration:
-                              type: integer
-                            interval:
-                              type: integer
-                            rampTime:
-                              type: integer
-                            selfHealingServices:
-                              type: boolean
-                            sequence:
-                              type: string
-                            services:
-                              type: string
-                            timeout:
-                              type: integer
-                          type: object
-                        stressChaos/inputs:
-                          properties:
-                            duration:
-                              type: integer
-                            fileSystemUtilisationBytes:
-                              format: int64
-                              type: integer
-                            fileSystemUtilisationPercentage:
-                              type: integer
-                            load:
-                              type: integer
-                            memoryBytes:
-                              format: int64
-                              type: integer
-                            memoryPercentage:
-                              type: integer
-                            rampTime:
-                              type: integer
-                            volumeMountPath:
-                              type: string
-                            workers:
-                              type: integer
-                          type: object
-                        timeChaos/inputs:
-                          properties:
-                            disableNTP:
-                              type: boolean
-                            duration:
-                              type: integer
-                            offset:
-                              type: string
-                            rampTime:
-                              type: integer
-                          type: object
-                      required:
-                        - experiment
-                      type: object
-                  type: object
-                chaosInfra:
-                  type: string
-                siblings:
-                  type: integer
-                taskState:
-                  type: string
-              required:
-                - action
-                - chaosInfra
-                - taskState
-              type: object
-            status:
-              description: TaskDefinitionStatus defines the observed state of TaskDefinition
-              properties:
-                executionPhase:
-                  type: string
-                probeStatuses:
-                  items:
-                    description: ProbeStatus defines information about the status and
-                      result of the probes
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: TaskDefinitionSpec defines the desired state of TaskDefinition
+            properties:
+              action:
+                properties:
+                  bash:
                     properties:
-                      mode:
-                        description: 'Mode defined the mode of probe, supported values:
-                        SOT, EOT, Edge, OnChaos, Continuous'
+                      script:
                         type: string
-                      name:
-                        description: Name defines the name of probe
-                        type: string
-                      status:
-                        description: Status defines whether a probe is pass or fail
+                      vars:
+                        items:
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        type: array
+                    type: object
+                  chaos:
+                    properties:
+                      diskFillChaos/inputs:
                         properties:
-                          description:
-                            description: Description defines the description of probe
-                              status
+                          dataBlockSize:
+                            type: integer
+                          duration:
+                            type: integer
+                          fillPath:
                             type: string
-                          verdict:
-                            description: 'Verdict defines the verdict of the probe,
-                            range: Passed, Failed, N/A'
+                          fillPercentage:
+                            type: integer
+                          fillStorageMebibytes:
+                            format: int64
+                            type: integer
+                          rampTime:
+                            type: integer
+                        type: object
+                      dnsChaos/inputs:
+                        properties:
+                          dnsPort:
+                            type: integer
+                          duration:
+                            type: integer
+                          hostNames:
+                            type: string
+                          matchScheme:
+                            type: string
+                          rampTime:
+                            type: integer
+                          spoofMap:
+                            type: string
+                          upstreamServer:
                             type: string
                         type: object
-                      type:
-                        description: 'Type defined the type of probe, supported values:
-                        K8sProbe, HttpProbe, CmdProbe'
+                      experiment:
                         type: string
+                      httpChaos/inputs:
+                        properties:
+                          contentEncoding:
+                            type: string
+                          contentType:
+                            type: string
+                          duration:
+                            type: integer
+                          headersMap:
+                            type: string
+                          jitter:
+                            type: integer
+                          latency:
+                            type: integer
+                          mode:
+                            type: string
+                          networkInterface:
+                            type: string
+                          proxyPort:
+                            type: string
+                          rampTime:
+                            type: integer
+                          resetTimeout:
+                            type: integer
+                          responseBody:
+                            type: string
+                          statusCode:
+                            type: string
+                          targetServicePort:
+                            type: string
+                          toxicTypes:
+                            type: string
+                          toxicity:
+                            type: integer
+                        required:
+                        - targetServicePort
+                        - toxicTypes
+                        type: object
+                      networkChaos/inputs:
+                        properties:
+                          destinationHosts:
+                            type: string
+                          destinationIPs:
+                            type: string
+                          duration:
+                            type: integer
+                          jitter:
+                            type: integer
+                          networkInterface:
+                            type: string
+                          networkLatency:
+                            type: integer
+                          packetCorruptionPercentage:
+                            type: integer
+                          packetDuplicationPercentage:
+                            type: integer
+                          packetLossPercentage:
+                            type: integer
+                          rampTime:
+                            type: integer
+                        type: object
+                      probes:
+                        items:
+                          properties:
+                            cmdProbe/inputs:
+                              properties:
+                                command:
+                                  type: string
+                                comparator:
+                                  properties:
+                                    criteria:
+                                      type: string
+                                    type:
+                                      type: string
+                                    value:
+                                      type: string
+                                  required:
+                                  - criteria
+                                  - value
+                                  type: object
+                                source:
+                                  description: SourceDetails contains source details
+                                    of the cmdProbe
+                                  properties:
+                                    args:
+                                      description: Args for the source pod
+                                      items:
+                                        type: string
+                                      type: array
+                                    command:
+                                      description: Command for the source pod
+                                      items:
+                                        type: string
+                                      type: array
+                                    env:
+                                      description: ENVList contains ENV passed to
+                                        the source pod
+                                      items:
+                                        properties:
+                                          name:
+                                            description: Name of the environment variable.
+                                              Must be a C_IDENTIFIER.
+                                            type: string
+                                          value:
+                                            description: 'Variable references $(VAR_NAME)
+                                              are expanded using the previous defined
+                                              environment variables in the container
+                                              and any service environment variables.
+                                              If a variable cannot be resolved, the
+                                              reference in the input string will be
+                                              unchanged. The $(VAR_NAME) syntax can
+                                              be escaped with a double $$, ie: $$(VAR_NAME).
+                                              Escaped references will never be expanded,
+                                              regardless of whether the variable exists
+                                              or not. Defaults to "".'
+                                            type: string
+                                          valueFrom:
+                                            description: Source for the environment
+                                              variable's value. Cannot be used if
+                                              value is not empty.
+                                            properties:
+                                              configMapKeyRef:
+                                                description: Selects a key of a ConfigMap.
+                                                properties:
+                                                  key:
+                                                    description: The key to select.
+                                                    type: string
+                                                  name:
+                                                    description: 'Name of the referent.
+                                                      More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                                      TODO: Add other useful fields.
+                                                      apiVersion, kind, uid?'
+                                                    type: string
+                                                  optional:
+                                                    description: Specify whether the
+                                                      ConfigMap or its key must be
+                                                      defined
+                                                    type: boolean
+                                                required:
+                                                - key
+                                                type: object
+                                              fieldRef:
+                                                description: 'Selects a field of the
+                                                  pod: supports metadata.name, metadata.namespace,
+                                                  `metadata.labels[''<KEY>'']`, `metadata.annotations[''<KEY>'']`,
+                                                  spec.nodeName, spec.serviceAccountName,
+                                                  status.hostIP, status.podIP, status.podIPs.'
+                                                properties:
+                                                  apiVersion:
+                                                    description: Version of the schema
+                                                      the FieldPath is written in
+                                                      terms of, defaults to "v1".
+                                                    type: string
+                                                  fieldPath:
+                                                    description: Path of the field
+                                                      to select in the specified API
+                                                      version.
+                                                    type: string
+                                                required:
+                                                - fieldPath
+                                                type: object
+                                              secretKeyRef:
+                                                description: Selects a key of a secret
+                                                  in the pod's namespace
+                                                properties:
+                                                  key:
+                                                    description: The key of the secret
+                                                      to select from.  Must be a valid
+                                                      secret key.
+                                                    type: string
+                                                  name:
+                                                    description: 'Name of the referent.
+                                                      More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                                      TODO: Add other useful fields.
+                                                      apiVersion, kind, uid?'
+                                                    type: string
+                                                  optional:
+                                                    description: Specify whether the
+                                                      Secret or its key must be defined
+                                                    type: boolean
+                                                required:
+                                                - key
+                                                type: object
+                                            type: object
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
+                                    hostNetwork:
+                                      description: HostNetwork define the hostNetwork
+                                        of the external pod it supports boolean values
+                                        and default value is false
+                                      type: boolean
+                                    image:
+                                      description: Image for the source pod
+                                      type: string
+                                    imagePullPolicy:
+                                      description: ImagePullPolicy for the source
+                                        pod
+                                      type: string
+                                    imagePullSecrets:
+                                      description: ImagePullSecrets for source pod
+                                      items:
+                                        description: LocalObjectReference contains
+                                          enough information to let you locate the
+                                          referenced object inside the same namespace.
+                                        properties:
+                                          name:
+                                            description: 'Name of the referent. More
+                                              info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                              TODO: Add other useful fields. apiVersion,
+                                              kind, uid?'
+                                            type: string
+                                        type: object
+                                      type: array
+                                    privileged:
+                                      description: Privileged for the source pod
+                                      type: boolean
+                                    volumeMount:
+                                      description: VolumesMount for the source pod
+                                      items:
+                                        description: VolumeMount describes a mounting
+                                          of a Volume within a container.
+                                        properties:
+                                          mountPath:
+                                            description: Path within the container
+                                              at which the volume should be mounted.  Must
+                                              not contain ':'.
+                                            type: string
+                                          mountPropagation:
+                                            description: mountPropagation determines
+                                              how mounts are propagated from the host
+                                              to container and the other way around.
+                                              When not set, MountPropagationNone is
+                                              used. This field is beta in 1.10.
+                                            type: string
+                                          name:
+                                            description: This must match the Name
+                                              of a Volume.
+                                            type: string
+                                          readOnly:
+                                            description: Mounted read-only if true,
+                                              read-write otherwise (false or unspecified).
+                                              Defaults to false.
+                                            type: boolean
+                                          subPath:
+                                            description: Path within the volume from
+                                              which the container's volume should
+                                              be mounted. Defaults to "" (volume's
+                                              root).
+                                            type: string
+                                          subPathExpr:
+                                            description: Expanded path within the
+                                              volume from which the container's volume
+                                              should be mounted. Behaves similarly
+                                              to SubPath but environment variable
+                                              references $(VAR_NAME) are expanded
+                                              using the container's environment. Defaults
+                                              to "" (volume's root). SubPathExpr and
+                                              SubPath are mutually exclusive.
+                                            type: string
+                                        required:
+                                        - mountPath
+                                        - name
+                                        type: object
+                                      type: array
+                                    volumes:
+                                      description: Volumes for the source pod
+                                      items:
+                                        description: Volume represents a named volume
+                                          in a pod that may be accessed by any container
+                                          in the pod.
+                                        properties:
+                                          configMap:
+                                            description: ConfigMap represents a configMap
+                                              that should populate this volume
+                                            properties:
+                                              defaultMode:
+                                                description: 'Optional: mode bits
+                                                  used to set permissions on created
+                                                  files by default. Must be an octal
+                                                  value between 0000 and 0777 or a
+                                                  decimal value between 0 and 511.
+                                                  YAML accepts both octal and decimal
+                                                  values, JSON requires decimal values
+                                                  for mode bits. Defaults to 0644.
+                                                  Directories within the path are
+                                                  not affected by this setting. This
+                                                  might be in conflict with other
+                                                  options that affect the file mode,
+                                                  like fsGroup, and the result can
+                                                  be other mode bits set.'
+                                                format: int32
+                                                type: integer
+                                              items:
+                                                description: If unspecified, each
+                                                  key-value pair in the Data field
+                                                  of the referenced ConfigMap will
+                                                  be projected into the volume as
+                                                  a file whose name is the key and
+                                                  content is the value. If specified,
+                                                  the listed keys will be projected
+                                                  into the specified paths, and unlisted
+                                                  keys will not be present. If a key
+                                                  is specified which is not present
+                                                  in the ConfigMap, the volume setup
+                                                  will error unless it is marked optional.
+                                                  Paths must be relative and may not
+                                                  contain the '..' path or start with
+                                                  '..'.
+                                                items:
+                                                  properties:
+                                                    key:
+                                                      description: The key to project.
+                                                      type: string
+                                                    mode:
+                                                      description: 'Optional: mode
+                                                        bits used to set permissions
+                                                        on this file. Must be an octal
+                                                        value between 0000 and 0777
+                                                        or a decimal value between
+                                                        0 and 511. YAML accepts both
+                                                        octal and decimal values,
+                                                        JSON requires decimal values
+                                                        for mode bits. If not specified,
+                                                        the volume defaultMode will
+                                                        be used. This might be in
+                                                        conflict with other options
+                                                        that affect the file mode,
+                                                        like fsGroup, and the result
+                                                        can be other mode bits set.'
+                                                      format: int32
+                                                      type: integer
+                                                    path:
+                                                      description: The relative path
+                                                        of the file to map the key
+                                                        to. May not be an absolute
+                                                        path. May not contain the
+                                                        path element '..'. May not
+                                                        start with the string '..'.
+                                                      type: string
+                                                  required:
+                                                  - key
+                                                  - path
+                                                  type: object
+                                                type: array
+                                              name:
+                                                description: 'Name of the referent.
+                                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                                  TODO: Add other useful fields. apiVersion,
+                                                  kind, uid?'
+                                                type: string
+                                              optional:
+                                                description: Specify whether the ConfigMap
+                                                  or its keys must be defined
+                                                type: boolean
+                                            type: object
+                                          name:
+                                            description: 'Volume''s name. Must be
+                                              a DNS_LABEL and unique within the pod.
+                                              More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+                                            type: string
+                                          secret:
+                                            description: 'Secret represents a secret
+                                              that should populate this volume. More
+                                              info: https://kubernetes.io/docs/concepts/storage/volumes#secret'
+                                            properties:
+                                              defaultMode:
+                                                description: 'Optional: mode bits
+                                                  used to set permissions on created
+                                                  files by default. Must be an octal
+                                                  value between 0000 and 0777 or a
+                                                  decimal value between 0 and 511.
+                                                  YAML accepts both octal and decimal
+                                                  values, JSON requires decimal values
+                                                  for mode bits. Defaults to 0644.
+                                                  Directories within the path are
+                                                  not affected by this setting. This
+                                                  might be in conflict with other
+                                                  options that affect the file mode,
+                                                  like fsGroup, and the result can
+                                                  be other mode bits set.'
+                                                format: int32
+                                                type: integer
+                                              items:
+                                                description: If unspecified, each
+                                                  key-value pair in the Data field
+                                                  of the referenced Secret will be
+                                                  projected into the volume as a file
+                                                  whose name is the key and content
+                                                  is the value. If specified, the
+                                                  listed keys will be projected into
+                                                  the specified paths, and unlisted
+                                                  keys will not be present. If a key
+                                                  is specified which is not present
+                                                  in the Secret, the volume setup
+                                                  will error unless it is marked optional.
+                                                  Paths must be relative and may not
+                                                  contain the '..' path or start with
+                                                  '..'.
+                                                items:
+                                                  properties:
+                                                    key:
+                                                      description: The key to project.
+                                                      type: string
+                                                    mode:
+                                                      description: 'Optional: mode
+                                                        bits used to set permissions
+                                                        on this file. Must be an octal
+                                                        value between 0000 and 0777
+                                                        or a decimal value between
+                                                        0 and 511. YAML accepts both
+                                                        octal and decimal values,
+                                                        JSON requires decimal values
+                                                        for mode bits. If not specified,
+                                                        the volume defaultMode will
+                                                        be used. This might be in
+                                                        conflict with other options
+                                                        that affect the file mode,
+                                                        like fsGroup, and the result
+                                                        can be other mode bits set.'
+                                                      format: int32
+                                                      type: integer
+                                                    path:
+                                                      description: The relative path
+                                                        of the file to map the key
+                                                        to. May not be an absolute
+                                                        path. May not contain the
+                                                        path element '..'. May not
+                                                        start with the string '..'.
+                                                      type: string
+                                                  required:
+                                                  - key
+                                                  - path
+                                                  type: object
+                                                type: array
+                                              optional:
+                                                description: Specify whether the Secret
+                                                  or its keys must be defined
+                                                type: boolean
+                                              secretName:
+                                                description: 'Name of the secret in
+                                                  the pod''s namespace to use. More
+                                                  info: https://kubernetes.io/docs/concepts/storage/volumes#secret'
+                                                type: string
+                                            type: object
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
+                                  type: object
+                              required:
+                              - command
+                              - comparator
+                              type: object
+                            httpProbe/inputs:
+                              properties:
+                                insecureSkipVerify:
+                                  type: boolean
+                                method:
+                                  properties:
+                                    get:
+                                      properties:
+                                        criteria:
+                                          type: string
+                                        responseCode:
+                                          type: string
+                                      required:
+                                      - criteria
+                                      - responseCode
+                                      type: object
+                                    post:
+                                      properties:
+                                        body:
+                                          type: string
+                                        bodyPath:
+                                          type: string
+                                        contentType:
+                                          type: string
+                                        criteria:
+                                          type: string
+                                        responseCode:
+                                          type: string
+                                      required:
+                                      - criteria
+                                      - responseCode
+                                      type: object
+                                  type: object
+                                url:
+                                  type: string
+                              required:
+                              - method
+                              - url
+                              type: object
+                            mode:
+                              type: string
+                            name:
+                              type: string
+                            runProperties:
+                              properties:
+                                attempt:
+                                  type: integer
+                                initialDelaySeconds:
+                                  type: integer
+                                interval:
+                                  type: integer
+                                probePollingInterval:
+                                  type: integer
+                                probeTimeout:
+                                  type: integer
+                                stopOnFailure:
+                                  type: boolean
+                              required:
+                              - attempt
+                              type: object
+                            type:
+                              type: string
+                          required:
+                          - mode
+                          - name
+                          - type
+                          type: object
+                        type: array
+                      processKillChaos/inputs:
+                        properties:
+                          duration:
+                            type: integer
+                          forceKill:
+                            type: boolean
+                          processCommand:
+                            type: string
+                          processIDs:
+                            type: string
+                          processNames:
+                            type: string
+                          rampTime:
+                            type: integer
+                        type: object
+                      serviceRestartChaos/inputs:
+                        properties:
+                          delay:
+                            type: integer
+                          duration:
+                            type: integer
+                          interval:
+                            type: integer
+                          rampTime:
+                            type: integer
+                          selfHealingServices:
+                            type: boolean
+                          sequence:
+                            type: string
+                          services:
+                            type: string
+                          timeout:
+                            type: integer
+                        type: object
+                      stressChaos/inputs:
+                        properties:
+                          duration:
+                            type: integer
+                          fileSystemUtilisationBytes:
+                            format: int64
+                            type: integer
+                          fileSystemUtilisationPercentage:
+                            type: integer
+                          load:
+                            type: integer
+                          memoryBytes:
+                            format: int64
+                            type: integer
+                          memoryPercentage:
+                            type: integer
+                          rampTime:
+                            type: integer
+                          volumeMountPath:
+                            type: string
+                          workers:
+                            type: integer
+                        type: object
+                      timeChaos/inputs:
+                        properties:
+                          disableNTP:
+                            type: boolean
+                          duration:
+                            type: integer
+                          offset:
+                            type: string
+                          rampTime:
+                            type: integer
+                        type: object
+                    required:
+                    - experiment
                     type: object
-                  type: array
-                probeSuccessPercentage:
-                  type: string
-                taskOutput:
+                type: object
+              chaosInfra:
+                type: string
+              siblings:
+                type: integer
+              taskState:
+                type: string
+            required:
+            - action
+            - chaosInfra
+            - taskState
+            type: object
+          status:
+            description: TaskDefinitionStatus defines the observed state of TaskDefinition
+            properties:
+              errorOutput:
+                properties:
+                  errorCode:
+                    type: string
+                  reason:
+                    type: string
+                required:
+                - errorCode
+                - reason
+                type: object
+              executionPhase:
+                type: string
+              probeStatuses:
+                items:
+                  description: ProbeStatus defines information about the status and
+                    result of the probes
                   properties:
-                    errorCode:
+                    mode:
+                      description: 'Mode defined the mode of probe, supported values:
+                        SOT, EOT, Edge, OnChaos, Continuous'
                       type: string
-                    failStep:
+                    name:
+                      description: Name defines the name of probe
+                      type: string
+                    status:
+                      description: Status defines whether a probe is pass or fail
+                      properties:
+                        description:
+                          description: Description defines the description of probe
+                            status
+                          type: string
+                        verdict:
+                          description: 'Verdict defines the verdict of the probe,
+                            range: Passed, Failed, N/A'
+                          type: string
+                      type: object
+                    type:
+                      description: 'Type defined the type of probe, supported values:
+                        K8sProbe, HttpProbe, CmdProbe'
                       type: string
                   type: object
-                taskStatus:
-                  type: string
-                verdict:
-                  type: string
-              type: object
-          type: object
-      served: true
-      storage: true
+                type: array
+              probeSuccessPercentage:
+                type: string
+              taskStatus:
+                type: string
+              verdict:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true

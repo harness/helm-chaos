@@ -1,27 +1,27 @@
 dependencies:
 - name: chaos-common
   repository: file://../chaos-common
-  version: 0.2.0
-- name: chaos-driver
-  repository: file://../chaos-driver
   version: 0.3.0
+- name: chaos-drivers
+  repository: file://../chaos-driver
+  version: 0.4.0
 - name: chaos-manager
   repository: file://../chaos-manager
-  version: 0.3.1
+  version: 0.4.0
 - name: chaos-web
   repository: file://../chaos-web
-  version: 0.3.0
+  version: 0.4.0
 - name: chaos-k8s-ifs
   repository: file://../chaos-k8s-ifs
-  version: 0.2.0
+  version: 0.3.0
 - name: chaos-linux-ifs
   repository: file://../chaos-linux-ifs
-  version: 0.1.0
+  version: 0.2.0
 - name: chaos-linux-ifc
   repository: file://../chaos-linux-ifc
-  version: 0.1.0
+  version: 0.2.0
 - name: chaos-infra
   repository: file://../chaos-infra
   version: 0.1.0
-digest: sha256:9d88d4829ce47233aa560bfab56b319fba62368ceec327bda9bf7a057c185389
-generated: "2023-04-20T18:25:35.002221+05:30"
+digest: sha256:73404f46ee01cd8cea7fba5efd24ee93b3949701651ff3be8147104f04c23f73
+generated: "2023-05-25T11:02:36.12481+05:30"
