@@ -309,6 +309,20 @@ entries:
     version: 0.1.0
   chaos-linux-ifc:
   - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-05-29T16:19:17.801489337Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 910242ba65d514d80187e53ee1c52db59965a71348aefbf49d2613e272fe0218
+    name: chaos-linux-ifc
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-linux-ifc-0.2.0/chaos-linux-ifc-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: 0.3.0
     created: "2023-04-12T13:51:35.90032682Z"
     dependencies:
@@ -479,4 +493,4 @@ entries:
     urls:
     - https://github.com/harness/helm-chaos/releases/download/chaos-web-0.1.0/chaos-web-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-29T06:38:27.273007918Z"
+generated: "2023-05-29T16:19:18.300189543Z"
