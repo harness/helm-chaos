@@ -19,7 +19,7 @@ dependencies:
     version: 0.3.x
     repository: "file://../chaos-common"
 
-  - name: chaos-drivers
+  - name: chaos-driver
     version: 0.4.x
     repository: "file://../chaos-driver"
 
