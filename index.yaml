@@ -2,6 +2,41 @@ apiVersion: v1
 entries:
   chaos:
   - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-05-29T06:38:26.051704546Z"
+    dependencies:
+    - name: chaos-common
+      repository: file://../chaos-common
+      version: 0.3.x
+    - name: chaos-driver
+      repository: file://../chaos-driver
+      version: 0.4.x
+    - name: chaos-manager
+      repository: file://../chaos-manager
+      version: 0.4.x
+    - name: chaos-web
+      repository: file://../chaos-web
+      version: 0.4.x
+    - name: chaos-k8s-ifs
+      repository: file://../chaos-k8s-ifs
+      version: 0.3.x
+    - name: chaos-linux-ifs
+      repository: file://../chaos-linux-ifs
+      version: 0.2.x
+    - name: chaos-linux-ifc
+      repository: file://../chaos-linux-ifc
+      version: 0.2.x
+    - name: chaos-infra
+      repository: file://../chaos-infra
+      version: 0.1.x
+    description: A Helm chart for harness chaos module
+    digest: 2655613f94a70ac0d3098c8fe26a82fd379dfbbd4469c60daef38a7e538ec651
+    name: chaos
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-0.4.0/chaos-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     appVersion: 0.3.0
     created: "2023-04-20T12:59:33.718165902Z"
     dependencies:
@@ -116,6 +151,20 @@ entries:
     version: 0.1.0
   chaos-common:
   - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-05-29T06:38:26.237295793Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: aaa52bf06fd5e16e095f73393181a3ab9baa78bf8535cf0783f63202a4ef5510
+    name: chaos-common
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-common-0.3.0/chaos-common-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     appVersion: 0.3.0
     created: "2023-04-12T13:51:35.406928337Z"
     dependencies:
@@ -144,6 +193,20 @@ entries:
     - https://github.com/harness/helm-chaos/releases/download/chaos-common-0.1.0/chaos-common-0.1.0.tgz
     version: 0.1.0
   chaos-driver:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-05-29T06:38:26.424893949Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: c6df4188ce1737aee90e2f4c18bd0541b95d14a24660e66e7750c7330776b237
+    name: chaos-driver
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-driver-0.4.0/chaos-driver-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     appVersion: 0.3.0
     created: "2023-04-12T13:51:35.557438059Z"
@@ -203,6 +266,20 @@ entries:
     version: 0.1.0
   chaos-k8s-ifs:
   - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-05-29T06:38:26.756988464Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 86a25d5ec55c8ea143163617fc17ed2cff8a40a6a23df3b5c39fd1dbcc89e545
+    name: chaos-k8s-ifs
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-k8s-ifs-0.3.0/chaos-k8s-ifs-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     appVersion: 0.3.0
     created: "2023-04-12T13:51:35.711153727Z"
     dependencies:
@@ -247,6 +324,20 @@ entries:
     version: 0.1.0
   chaos-linux-ifs:
   - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-05-29T06:38:26.933278968Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 877271f2f1bed2af28261419e3e531268017fd183692e756c158d2664e8f0295
+    name: chaos-linux-ifs
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-linux-ifs-0.2.0/chaos-linux-ifs-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: 0.3.0
     created: "2023-04-12T13:51:36.033534586Z"
     dependencies:
@@ -261,6 +352,20 @@ entries:
     - https://github.com/harness/helm-chaos/releases/download/chaos-linux-ifs-0.1.0/chaos-linux-ifs-0.1.0.tgz
     version: 0.1.0
   chaos-manager:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-05-29T06:38:27.099663627Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: e1bbd35b1d3a2966ded5c178cb8641dd510143adffe4aeeb0f8c9c244c23ba60
+    name: chaos-manager
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-manager-0.4.0/chaos-manager-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     appVersion: 0.3.0
     created: "2023-04-20T12:22:54.665725712Z"
@@ -319,6 +424,20 @@ entries:
     version: 0.1.0
   chaos-web:
   - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2023-05-29T06:38:27.272778817Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: fbbd660aa9218c2ba381578c59268655e01ffcb7a217a854afba21a76d451dac
+    name: chaos-web
+    type: application
+    urls:
+    - https://github.com/harness/helm-chaos/releases/download/chaos-web-0.4.0/chaos-web-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     appVersion: 0.3.0
     created: "2023-04-12T13:51:36.355273035Z"
     dependencies:
@@ -360,4 +479,4 @@ entries:
     urls:
     - https://github.com/harness/helm-chaos/releases/download/chaos-web-0.1.0/chaos-web-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-20T12:59:33.857868376Z"
+generated: "2023-05-29T06:38:27.273007918Z"
