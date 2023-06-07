@@ -197,7 +197,6 @@ chaos-manager:
 
   resources:
     limits:
-      cpu: 600m
       memory: 512Mi
     requests:
       cpu: 600m
@@ -268,7 +267,6 @@ chaos-web:
 
   resources:
     limits:
-      cpu: 500m
       memory: 512Mi
     requests:
       cpu: 500m
@@ -354,7 +352,6 @@ chaos-driver:
 
   resources:
     limits:
-      cpu: 500m
       memory: 512Mi
     requests:
       cpu: 500m
@@ -429,7 +426,6 @@ chaos-linux-ifc:
 
   resources:
     limits:
-      cpu: 500m
       memory: 512Mi
     requests:
       cpu: 500m
@@ -508,7 +504,6 @@ chaos-linux-ifs:
 
   resources:
     limits:
-      cpu: 500m
       memory: 512Mi
     requests:
       cpu: 500m
@@ -595,7 +590,6 @@ chaos-k8s-ifs:
 
   resources:
     limits:
-      cpu: 500m
       memory: 512Mi
     requests:
       cpu: 500m
