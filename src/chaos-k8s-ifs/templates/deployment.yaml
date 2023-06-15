@@ -52,6 +52,13 @@ spec:
           #volumeMounts:
           #- name: service-account
           #  mountPath: /opt/harness/svc
+          {{- if .Values.lifecycleHooks }}
+          lifecycle: {{- include "harnesscommon.tplvalues.render" (dict "value" .Values.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.extraVolumeMounts }}
+          volumeMounts:
+          {{- include "harnesscommon.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+          {{- end }}
           env:
             - name: CHAOS_SERVICE_JWT_SECRET
               valueFrom:
@@ -166,4 +173,8 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.extraVolumes }}
+      volumes:
+      {{- include "harnesscommon.tplvalues.render" ( dict "value" .Values.extraVolumes "context" $ ) | nindent 8 }}
       {{- end }}
