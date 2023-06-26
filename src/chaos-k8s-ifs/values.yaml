@@ -60,6 +60,61 @@ image:
 
 configmap: {}
 
+subscriberImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/harness-smp-chaos-subscriber
+    tag: 0.11.0
+    digest: ""
+
+argoWorkflowControllerImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/workflow-controller
+    tag: v3.3.1
+    digest: ""
+
+argoWorkflowExecutorImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/argoexec
+    tag: v3.3.1
+    digest: ""
+
+litmusChaosOperatorImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/chaos-operator
+    tag: 3.0.0-stable
+    digest: ""
+
+litmusChaosRunnerImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/chaos-runner
+    tag: 3.0.0-stable
+    digest: ""
+
+litmusChaosExporterImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/chaos-exporter
+    tag: 3.0.0-stable
+    digest: ""
+
+
+
+chaosExperimentLimit: '1000'
+
+chaosHubLimit: '30'
+
+chaosGamedayLimit: '200'
+
+chaosHubSize: '200'
+
+parallelChaosExperimentRuns: '25'
+
+skipSecureVerify: 'true'
 mongoSecrets:
   userName:
     name: harness-secrets

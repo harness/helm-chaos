@@ -114,3 +114,4 @@ Create the name of the logWatcherImage image to use
 {{- define "chaos-manager.pullSecrets" -}}
 {{ include "common.images.pullSecrets" (dict "images" (list .Values.image ) "global" .Values.global ) }}
 {{- end -}}
+

@@ -1,31 +1,31 @@
 global:
-  loadbalancerURL: "test@harness.io"
+  loadbalancerURL: "http://34.23.21.25"
   airgap: false
   ha: false
   opa:
     enabled: false
   cd:
     # -- Enable to install CD
-    enabled: true
+    enabled: false
   chaos:
     enabled: true
   # Enable if using ingress objects
-  ingress:
-    enabled: true
-    loadBalancerIP: '0.0.0.0'
-    className: "harness"
-    loadBalancerEnabled: true
-    hosts:
-      - ''
-    tls:
-      enabled: false
-      secretName: harness-ssl
-    nginx:
-      # -- Create Nginx Controller.  True will deploy a controller into your cluster
-      create: true
-    defaultbackend:
-      # -- Create will deploy a default backend into your cluster
-      create: true
+  # ingress:
+  #   enabled: true
+  #   loadBalancerIP: '0.0.0.0'
+  #   className: "harness"
+  #   loadBalancerEnabled: true
+  #   hosts:
+  #     - ''
+  #   tls:
+  #     enabled: false
+  #     secretName: harness-ssl
+  #   nginx:
+  #     # -- Create Nginx Controller.  True will deploy a controller into your cluster
+  #     create: true
+  #   defaultbackend:
+  #     # -- Create will deploy a default backend into your cluster
+  #     create: true
   # Enable if using Istio setup
   istio:
     enabled: false
@@ -69,21 +69,22 @@ chaos-manager:
 
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-manager
+    repository: harness/smp-chaos-manager
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.11.1
+    tag: 0.13.5
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
+  #allowedOrigns: "[*.*.*.*]"
   jobs:
     chaos_db_upgrade:
       enabled: false
       slackURLToNotify: 'no-url'
       image:
         registry: docker.io
-        tag: 0.11.0
-        repository: chaosnative/harness-smp-chaos-db-upgrade-agent
+        tag: 0.13.1
+        repository: harness/smp-chaos-db-upgrade-agent
         pullPolicy: Always
         digest: ""
         imagePullSecrets: []
@@ -91,8 +92,8 @@ chaos-manager:
   subscriberImage:
     image:
       registry: docker.io
-      repository: chaosnative/harness-smp-chaos-subscriber
-      tag: 0.11.0
+      repository: harness/smp-chaos-subscriber
+      tag: 0.13.2
       digest: ""
 
   argoWorkflowControllerImage:
@@ -113,28 +114,28 @@ chaos-manager:
     image:
       registry: docker.io
       repository: chaosnative/chaos-operator
-      tag: 3.0.0-stable
+      tag: 0.13.0
       digest: ""
 
   litmusChaosRunnerImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-runner
-      tag: 3.0.0-stable
+      tag: 0.13.0
       digest: ""
 
   litmusChaosExporterImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-exporter
-      tag: 3.0.0-stable
+      tag: 0.13.1
       digest: ""
 
   logWatcherImage:
     image:
       registry: docker.io
       repository: chaosnative/harness-chaos-log-watcher
-      tag: release-chaos-log-watcher-0.11.0
+      tag: 0.13.0
       digest: ""
 
   enterpriseHubBranchName: 'hce-3.0.3-smp'
@@ -222,10 +223,10 @@ chaos-web:
 
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-web
+    repository: harness/smp-chaos-web
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.11.1
+    tag: 0.13.8
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -301,10 +302,10 @@ chaos-driver:
 
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-driver
+    repository: harness/smp-chaos-driver
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.11.0
+    tag: 0.13.0
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -387,11 +388,10 @@ chaos-linux-ifc:
 
   image:
     registry: docker.io
-    #repository: chaosnative/harness-smp-chaos-delegate-controller
-    repository: chaosnative/harness-smp-chaos-linux-infra-controller
+    repository: harness/smp-chaos-linux-infra-controller
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.11.0
+    tag: 0.13.4
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -466,10 +466,10 @@ chaos-linux-ifs:
 
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-linux-infra-server
+    repository: harness/smp-chaos-linux-infra-server
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.11.0
+    tag: 0.13.3
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -536,13 +536,54 @@ chaos-k8s-ifs:
       tag: "latest"
       digest: ""
       imagePullSecrets: []
+  subscriberImage:
+    image:
+      registry: docker.io
+      repository: harness/smp-chaos-subscriber
+      tag: 0.13.2
+      digest: ""
+
+  argoWorkflowControllerImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/workflow-controller
+      tag: v3.3.1
+      digest: ""
+
+  argoWorkflowExecutorImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/argoexec
+      tag: v3.3.1
+      digest: ""
+
+  litmusChaosOperatorImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/chaos-operator
+      tag: 0.13.0
+      digest: ""
+
+  litmusChaosRunnerImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/chaos-runner
+      tag: 0.13.0
+      digest: ""
+
+  litmusChaosExporterImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/chaos-exporter
+      tag: 0.13.1
+      digest: ""
 
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-k8s-ifs
+    repository: harness/smp-chaos-k8s-ifs
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.11.0
+    tag: 0.13.3
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 

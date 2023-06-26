@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chaos-linux-ifc-config
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "chaos-linux-ifc.labels" . | nindent 4 }}
+data:
+  CLEANUP_WINDOW: "4"

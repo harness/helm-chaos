@@ -10,7 +10,7 @@ data:
   REDIS_SSL_ENABLED: 'false'
   REDIS_CERT_PATH: '/opt/harness/svc/redis_labs_ca_truststore'
   REDIS_DATABASE: '0'
-  INFRA_COMPATIBLE_VERSIONS: '["0.8.0","0.9.0","0.10.0","0.11.0"]'
+  INFRA_COMPATIBLE_VERSIONS: '["0.13.0"]'
   CHAOS_MANAGER_GRPC_ENDPOINT: 'chaos-manager-service:8081'
   LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
   LOG_SERVICE_EXTERNAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'
