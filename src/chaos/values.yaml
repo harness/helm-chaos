@@ -1,5 +1,5 @@
 global:
-  loadbalancerURL: "http://34.23.21.25"
+  loadbalancerURL: "http://x.x.x."
   airgap: false
   ha: false
   opa:
@@ -9,23 +9,23 @@ global:
     enabled: false
   chaos:
     enabled: true
-  # Enable if using ingress objects
-  # ingress:
-  #   enabled: true
-  #   loadBalancerIP: '0.0.0.0'
-  #   className: "harness"
-  #   loadBalancerEnabled: true
-  #   hosts:
-  #     - ''
-  #   tls:
-  #     enabled: false
-  #     secretName: harness-ssl
-  #   nginx:
-  #     # -- Create Nginx Controller.  True will deploy a controller into your cluster
-  #     create: true
-  #   defaultbackend:
-  #     # -- Create will deploy a default backend into your cluster
-  #     create: true
+  #Enable if using ingress objects
+  ingress:
+    enabled: true
+    loadBalancerIP: '0.0.0.0'
+    className: "harness"
+    loadBalancerEnabled: true
+    hosts:
+      - ''
+    tls:
+      enabled: false
+      secretName: harness-ssl
+    nginx:
+      # -- Create Nginx Controller.  True will deploy a controller into your cluster
+      create: true
+    defaultbackend:
+      # -- Create will deploy a default backend into your cluster
+      create: true
   # Enable if using Istio setup
   istio:
     enabled: false
@@ -76,7 +76,7 @@ chaos-manager:
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
-  #allowedOrigns: "[*.*.*.*]"
+  #allowedOrigins: "[*.*.*.*]"
   jobs:
     chaos_db_upgrade:
       enabled: false

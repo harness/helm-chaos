@@ -17,7 +17,7 @@ data:
   REDIS_LOCK_SSL_ENABLED: 'false'
   REDIS_LOCK_NAMESPACE: ''
   REDIS_LOCK_DATABASE: '0'
-  CHAOS_MANAGER_VERSION: '0.11.0'
+  CHAOS_MANAGER_VERSION: '0.13.0'
   ACCESS_CONTROL_ENDPOINT: 'http://access-control:9006/api'
   NG_MANAGER_ENDPOINT: 'http://ng-manager:7090/api'
   NG_MANAGER_SVC_ENDPOINT: 'http://ng-manager:7090'
@@ -43,8 +43,8 @@ data:
   DEFAULT_EXPERIMENTS_PER_GAME_DAY_RUN_LIMIT: '20'
   SRM_CHANGE_SOURCE_REDIS_STREAM: 'chaos_change_events'
   REDIS_STREAM_ENV: 'qa'
-  {{- if .Values.allowedOrigns }}
-  ALLOWED_ORIGINS: '{{ .Values.allowedOrigns }}'
+  {{- if .Values.allowedOrigins }}
+  ALLOWED_ORIGINS: '{{ .Values.allowedOrigins }}'
   {{- else }}
   ALLOWED_ORIGINS: "[{{ .Values.global.loadbalancerURL }}]"
   {{- end -}}

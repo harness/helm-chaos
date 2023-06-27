@@ -46,10 +46,10 @@ waitForInitContainer:
 
 image:
   registry: docker.io
-  repository: chaosnative/harness-smp-chaos-driver
+  repository: harness/smp-chaos-driver
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.11.0"
+  tag: "0.13.0"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
