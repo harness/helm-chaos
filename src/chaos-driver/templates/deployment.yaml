@@ -87,6 +87,12 @@ spec:
                 secretKeyRef:
                   name: chaos-common-secret
                   key: JWT_IDENTITY_SERVICE_SECRET
+            - name: ALLOWED_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-manager-config
+                  key: ALLOWED_ORIGINS
+              
           ports:
             - containerPort: {{.Values.service.port}}
           resources:

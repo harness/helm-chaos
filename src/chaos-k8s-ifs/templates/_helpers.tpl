@@ -64,3 +64,44 @@ Create the name of the service account to use
 {{- define "chaos-k8s-ifs.pullSecrets" -}}
 {{ include "common.images.pullSecrets" (dict "images" (list .Values.image ) "global" .Values.global ) }}
 {{- end -}}
+{{/*
+Create the name of the subscriber image to use
+*/}}
+{{- define "chaos-k8s-ifs.subscriberImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.subscriberImage.image "global" .Values.global) }}
+{{- end }}
+
+{{/*
+Create the name of the argoWorkflowController image to use
+*/}}
+{{- define "chaos-k8s-ifs.argoWorkflowControllerImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.argoWorkflowControllerImage.image "global" .Values.global) }}
+{{- end }}
+
+{{/*
+Create the name of the argoWorkflowExecutorImage image to use
+*/}}
+{{- define "chaos-k8s-ifs.argoWorkflowExecutorImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.argoWorkflowExecutorImage.image "global" .Values.global) }}
+{{- end }}
+
+{{/*
+Create the name of the litmusChaosOperatorImage image to use
+*/}}
+{{- define "chaos-k8s-ifs.litmusChaosOperatorImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.litmusChaosOperatorImage.image "global" .Values.global) }}
+{{- end }}
+
+{{/*
+Create the name of the litmusChaosRunnerImage image to use
+*/}}
+{{- define "chaos-k8s-ifs.litmusChaosRunnerImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.litmusChaosRunnerImage.image "global" .Values.global) }}
+{{- end }}
+
+{{/*
+Create the name of the litmusChaosExporterImage image to use
+*/}}
+{{- define "chaos-k8s-ifs.litmusChaosExporterImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.litmusChaosExporterImage.image "global" .Values.global) }}
+{{- end }}

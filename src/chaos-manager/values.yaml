@@ -49,10 +49,10 @@ waitForInitContainer:
 
 image:
   registry: docker.io
-  repository: chaosnative/harness-smp-chaos-manager
+  repository: harness/smp-chaos-manager
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.11.1"
+  tag: "0.13.5"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -62,17 +62,19 @@ jobs:
     slackURLToNotify: 'no-url'
     image:
       registry: docker.io
-      tag: "0.11.0"
-      repository: chaosnative/harness-smp-chaos-db-upgrade-agent
+      tag: "0.13.1"
+      repository: harness/smp-chaos-db-upgrade-agent
       pullPolicy: Always
       digest: ""
       imagePullSecrets: []
 
+#allowedOrigins: "[*.*.*.*]"
+
 subscriberImage:
   image:
     registry: docker.io
-    repository: chaosnative/harness-smp-chaos-subscriber
-    tag: 0.11.0
+    repository: harness/smp-chaos-subscriber
+    tag: 0.13.1
     digest: ""
 
 argoWorkflowControllerImage:
@@ -93,28 +95,28 @@ litmusChaosOperatorImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-operator
-    tag: 3.0.0-stable
+    tag: 0.13.0
     digest: ""
 
 litmusChaosRunnerImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-runner
-    tag: 3.0.0-stable
+    tag: 0.13.0
     digest: ""
 
 litmusChaosExporterImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-exporter
-    tag: 3.0.0-stable
+    tag: 0.13.1
     digest: ""
 
 logWatcherImage:
   image:
     registry: docker.io
     repository: chaosnative/harness-chaos-log-watcher
-    tag: release-chaos-log-watcher-0.11.0
+    tag: 0.13.0
     digest: ""
 
 enterpriseHubBranchName: 'hce-3.0.3-smp'

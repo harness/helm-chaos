@@ -17,30 +17,15 @@ data:
   REDIS_LOCK_SSL_ENABLED: 'false'
   REDIS_LOCK_NAMESPACE: ''
   REDIS_LOCK_DATABASE: '0'
-  PORTAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/kserver/api'
-  SUBSCRIBER_IMAGE: {{ include "chaos-manager.subscriberImage" . }}
-  CONTAINER_RUNTIME_EXECUTOR: 'k8sapi'
-  ARGO_WORKFLOW_CONTROLLER_IMAGE: {{ include "chaos-manager.argoWorkflowControllerImage" . }}
-  ARGO_WORKFLOW_EXECUTOR_IMAGE: {{ include "chaos-manager.argoWorkflowExecutorImage" . }}
-  LITMUS_CHAOS_OPERATOR_IMAGE: {{ include "chaos-manager.litmusChaosOperatorImage" . }}
-  LITMUS_CHAOS_RUNNER_IMAGE: {{ include "chaos-manager.litmusChaosRunnerImage" . }}
-  LITMUS_CHAOS_EXPORTER_IMAGE: {{ include "chaos-manager.litmusChaosExporterImage" . }}
-  CHAOS_MANAGER_VERSION: '0.11.0'
-  INFRA_DEPLOYMENTS: '["app=chaos-exporter", "name=chaos-operator", "app=workflow-controller"]'
+  CHAOS_MANAGER_VERSION: '0.13.0'
   ACCESS_CONTROL_ENDPOINT: 'http://access-control:9006/api'
   NG_MANAGER_ENDPOINT: 'http://ng-manager:7090/api'
   NG_MANAGER_SVC_ENDPOINT: 'http://ng-manager:7090'
   PLATFORM_SERVICE_ENDPOINT: 'http://platform-service:9005/api'
   ENTERPRISE_HUB_BRANCH_NAME: '{{ .Values.enterpriseHubBranchName }}'
-  DEFAULT_CHAOS_EXPERIMENT_LIMIT: '{{ .Values.chaosExperimentLimit }}'
-  DEFAULT_CHAOS_HUB_LIMIT: '{{ .Values.chaosHubLimit }}'
-  DEFAULT_CHAOS_GAMEDAY_LIMIT: '{{ .Values.chaosGamedayLimit }}'
-  DEFAULT_CHAOS_HUB_SIZE: '{{ .Values.chaosHubSize }}'
-  DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS: '{{ .Values.parallelChaosExperimentRuns }}'
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
   ENTERPRISE_HUB_SECRET: ""
   ENTERPRISE_HUB_TOKEN: ""
-  K8S_IFS_VERSION: '0.11.0'
   K8S_INFRA_SERVER_ENDPOINT: 'http://chaos-k8s-ifs-service:6000'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
   LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
@@ -48,11 +33,21 @@ data:
   LINUX_INFRA_GQL_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/lserver/api'
   LINUX_INFRA_RPC_SERVER_ENDPOINT: 'chaos-linux-ifs-service:5000'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
+  DEFAULT_CHAOS_EXPERIMENT_LIMIT: '{{ .Values.chaosExperimentLimit }}'
+  DEFAULT_CHAOS_HUB_LIMIT: '{{ .Values.chaosHubLimit }}'
+  DEFAULT_CHAOS_GAMEDAY_LIMIT: '{{ .Values.chaosGamedayLimit }}'
+  DEFAULT_CHAOS_HUB_SIZE: '{{ .Values.chaosHubSize }}'
+  DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS: '{{ .Values.parallelChaosExperimentRuns }}'
   DEFAULT_CHAOS_EXPERIMENT_RUN_LIMIT: '100000'
   DEFAULT_GAME_DAY_RUNS_PER_GAME_DAY_LIMIT: '1000'
   DEFAULT_EXPERIMENTS_PER_GAME_DAY_RUN_LIMIT: '20'
   SRM_CHANGE_SOURCE_REDIS_STREAM: 'chaos_change_events'
   REDIS_STREAM_ENV: 'qa'
+  {{- if .Values.allowedOrigins }}
+  ALLOWED_ORIGINS: '{{ .Values.allowedOrigins }}'
+  {{- else }}
+  ALLOWED_ORIGINS: "[{{ .Values.global.loadbalancerURL }}]"
+  {{- end -}}
   {{- if .Values.global.imageRegistry }}
   IMAGE_REGISTRY_REPO: '{{ .Values.global.imageRegistry }}'
   {{- end -}}

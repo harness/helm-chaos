@@ -51,15 +51,70 @@ waitForInitContainer:
 
 image:
   registry: docker.io
-  repository: chaosnative/harness-smp-chaos-k8s-ifs
+  repository: harness/smp-chaos-k8s-ifs
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.11.0"
+  tag: "0.13.3"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
 configmap: {}
 
+subscriberImage:
+  image:
+    registry: docker.io
+    repository: harness/smp-chaos-subscriber
+    tag: 0.13.2
+    digest: ""
+
+argoWorkflowControllerImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/workflow-controller
+    tag: v3.3.1
+    digest: ""
+
+argoWorkflowExecutorImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/argoexec
+    tag: v3.3.1
+    digest: ""
+
+litmusChaosOperatorImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/chaos-operator
+    tag: 0.13.0
+    digest: ""
+
+litmusChaosRunnerImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/chaos-runner
+    tag: 0.13.0
+    digest: ""
+
+litmusChaosExporterImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/chaos-exporter
+    tag: 0.13.1
+    digest: ""
+
+
+
+chaosExperimentLimit: '1000'
+
+chaosHubLimit: '30'
+
+chaosGamedayLimit: '200'
+
+chaosHubSize: '200'
+
+parallelChaosExperimentRuns: '25'
+
+skipSecureVerify: 'true'
 mongoSecrets:
   userName:
     name: harness-secrets

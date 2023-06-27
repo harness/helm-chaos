@@ -57,7 +57,7 @@ spec:
                 key: LOG_SERVICE_TOKEN
                 name: chaos-k8s-ifs-secret
           - name: LOG_TOKEN_RENEWAL_INTERVAL_IN_HOUR
-            value: "24"
+            value: "1"
 
           - name: PROBE_SERVICE_ACCOUNT_NAME
             value: {{ include "chaos-linux-ifs.serviceAccountName" . }}

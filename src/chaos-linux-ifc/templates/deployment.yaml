@@ -51,6 +51,11 @@ spec:
               configMapKeyRef:
                 name: chaos-common-config
                 key: CHAOS_MANAGER_GRPC_ENDPOINT
+          - name: CLEANUP_WINDOW
+            valueFrom:
+              configMapKeyRef:
+                name: chaos-linux-ifc-config
+                key: CLEANUP_WINDOW
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
               {{- toYaml .Values.resources | nindent 12 }}
