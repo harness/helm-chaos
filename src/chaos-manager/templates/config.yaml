@@ -46,7 +46,7 @@ data:
   {{- if .Values.allowedOrigins }}
   ALLOWED_ORIGINS: '{{ .Values.allowedOrigins }}'
   {{- else }}
-  ALLOWED_ORIGINS: "[{{ .Values.global.loadbalancerURL }}]"
+  ALLOWED_ORIGINS: "{{ .Values.global.loadbalancerURL }}"
   {{- end -}}
   {{- if .Values.global.imageRegistry }}
   IMAGE_REGISTRY_REPO: '{{ .Values.global.imageRegistry }}'

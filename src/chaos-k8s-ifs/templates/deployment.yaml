@@ -252,7 +252,9 @@ spec:
                 configMapKeyRef:
                   name: chaos-k8s-ifs-config
                   key: INFRA_HEALTH_CHECK_TIMEOUT
-
+          envFrom:
+            - secretRef:
+                name: chaos-k8s-ifs-secret     
           ports:
             - containerPort: {{.Values.service.port}}
           resources:
