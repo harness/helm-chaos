@@ -68,7 +68,7 @@ jobs:
       digest: ""
       imagePullSecrets: []
 
-#allowedOrigins: "[*.*.*.*]"
+#allowedOrigins: "*.*.*.*"
 
 subscriberImage:
   image:
