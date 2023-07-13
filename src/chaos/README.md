@@ -2,7 +2,7 @@
 
 A Helm chart for harness chaos module
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
 
 ## Usage
 
@@ -26,8 +26,8 @@ dependencies:
 | chaos-driver.image.digest | string | `""` |  |
 | chaos-driver.image.pullPolicy | string | `"Always"` |  |
 | chaos-driver.image.registry | string | `"docker.io"` |  |
-| chaos-driver.image.repository | string | `"chaosnative/harness-smp-chaos-driver"` |  |
-| chaos-driver.image.tag | string | `"0.11.0"` |  |
+| chaos-driver.image.repository | string | `"harness/smp-chaos-driver"` |  |
+| chaos-driver.image.tag | string | `"0.13.0"` |  |
 | chaos-driver.maxSurge | int | `1` |  |
 | chaos-driver.maxUnavailable | int | `0` |  |
 | chaos-driver.mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -39,7 +39,6 @@ dependencies:
 | chaos-driver.podAnnotations | object | `{}` |  |
 | chaos-driver.podSecurityContext | object | `{}` |  |
 | chaos-driver.replicaCount | int | `3` |  |
-| chaos-driver.resources.limits.cpu | string | `"500m"` |  |
 | chaos-driver.resources.limits.memory | string | `"512Mi"` |  |
 | chaos-driver.resources.requests.cpu | string | `"500m"` |  |
 | chaos-driver.resources.requests.memory | string | `"512Mi"` |  |
@@ -58,14 +57,35 @@ dependencies:
 | chaos-driver.waitForInitContainer.image.repository | string | `"harness/helm-init-container"` |  |
 | chaos-driver.waitForInitContainer.image.tag | string | `"latest"` |  |
 | chaos-k8s-ifs.affinity | object | `{}` |  |
+| chaos-k8s-ifs.argoWorkflowControllerImage.image.digest | string | `""` |  |
+| chaos-k8s-ifs.argoWorkflowControllerImage.image.registry | string | `"docker.io"` |  |
+| chaos-k8s-ifs.argoWorkflowControllerImage.image.repository | string | `"chaosnative/workflow-controller"` |  |
+| chaos-k8s-ifs.argoWorkflowControllerImage.image.tag | string | `"v3.3.1"` |  |
+| chaos-k8s-ifs.argoWorkflowExecutorImage.image.digest | string | `""` |  |
+| chaos-k8s-ifs.argoWorkflowExecutorImage.image.registry | string | `"docker.io"` |  |
+| chaos-k8s-ifs.argoWorkflowExecutorImage.image.repository | string | `"chaosnative/argoexec"` |  |
+| chaos-k8s-ifs.argoWorkflowExecutorImage.image.tag | string | `"v3.3.1"` |  |
 | chaos-k8s-ifs.autoscaling | object | `{}` |  |
 | chaos-k8s-ifs.configmap | object | `{}` |  |
+| chaos-k8s-ifs.customTlsCert | string | `""` |  |
 | chaos-k8s-ifs.fullnameOverride | string | `""` |  |
 | chaos-k8s-ifs.image.digest | string | `""` |  |
 | chaos-k8s-ifs.image.pullPolicy | string | `"Always"` |  |
 | chaos-k8s-ifs.image.registry | string | `"docker.io"` |  |
-| chaos-k8s-ifs.image.repository | string | `"chaosnative/harness-smp-chaos-k8s-ifs"` |  |
-| chaos-k8s-ifs.image.tag | string | `"0.11.0"` |  |
+| chaos-k8s-ifs.image.repository | string | `"harness/smp-chaos-k8s-ifs"` |  |
+| chaos-k8s-ifs.image.tag | string | `"0.13.3"` |  |
+| chaos-k8s-ifs.litmusChaosExporterImage.image.digest | string | `""` |  |
+| chaos-k8s-ifs.litmusChaosExporterImage.image.registry | string | `"docker.io"` |  |
+| chaos-k8s-ifs.litmusChaosExporterImage.image.repository | string | `"chaosnative/chaos-exporter"` |  |
+| chaos-k8s-ifs.litmusChaosExporterImage.image.tag | string | `"0.13.1"` |  |
+| chaos-k8s-ifs.litmusChaosOperatorImage.image.digest | string | `""` |  |
+| chaos-k8s-ifs.litmusChaosOperatorImage.image.registry | string | `"docker.io"` |  |
+| chaos-k8s-ifs.litmusChaosOperatorImage.image.repository | string | `"chaosnative/chaos-operator"` |  |
+| chaos-k8s-ifs.litmusChaosOperatorImage.image.tag | string | `"0.13.0"` |  |
+| chaos-k8s-ifs.litmusChaosRunnerImage.image.digest | string | `""` |  |
+| chaos-k8s-ifs.litmusChaosRunnerImage.image.registry | string | `"docker.io"` |  |
+| chaos-k8s-ifs.litmusChaosRunnerImage.image.repository | string | `"chaosnative/chaos-runner"` |  |
+| chaos-k8s-ifs.litmusChaosRunnerImage.image.tag | string | `"0.13.0"` |  |
 | chaos-k8s-ifs.maxSurge | int | `1` |  |
 | chaos-k8s-ifs.maxUnavailable | int | `0` |  |
 | chaos-k8s-ifs.mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -77,7 +97,6 @@ dependencies:
 | chaos-k8s-ifs.podAnnotations | object | `{}` |  |
 | chaos-k8s-ifs.podSecurityContext | object | `{}` |  |
 | chaos-k8s-ifs.replicaCount | int | `3` |  |
-| chaos-k8s-ifs.resources.limits.cpu | string | `"500m"` |  |
 | chaos-k8s-ifs.resources.limits.memory | string | `"512Mi"` |  |
 | chaos-k8s-ifs.resources.requests.cpu | string | `"500m"` |  |
 | chaos-k8s-ifs.resources.requests.memory | string | `"512Mi"` |  |
@@ -89,6 +108,10 @@ dependencies:
 | chaos-k8s-ifs.serviceAccount.create | bool | `false` |  |
 | chaos-k8s-ifs.serviceAccount.name | string | `"harness-default"` |  |
 | chaos-k8s-ifs.skipSecureVerify | string | `"true"` |  |
+| chaos-k8s-ifs.subscriberImage.image.digest | string | `""` |  |
+| chaos-k8s-ifs.subscriberImage.image.registry | string | `"docker.io"` |  |
+| chaos-k8s-ifs.subscriberImage.image.repository | string | `"harness/smp-chaos-subscriber"` |  |
+| chaos-k8s-ifs.subscriberImage.image.tag | string | `"0.13.2"` |  |
 | chaos-k8s-ifs.tolerations | list | `[]` |  |
 | chaos-k8s-ifs.waitForInitContainer.image.digest | string | `""` |  |
 | chaos-k8s-ifs.waitForInitContainer.image.imagePullSecrets | list | `[]` |  |
@@ -103,8 +126,8 @@ dependencies:
 | chaos-linux-ifc.image.digest | string | `""` |  |
 | chaos-linux-ifc.image.pullPolicy | string | `"Always"` |  |
 | chaos-linux-ifc.image.registry | string | `"docker.io"` |  |
-| chaos-linux-ifc.image.repository | string | `"chaosnative/harness-smp-chaos-linux-infra-controller"` |  |
-| chaos-linux-ifc.image.tag | string | `"0.11.0"` |  |
+| chaos-linux-ifc.image.repository | string | `"harness/smp-chaos-linux-infra-controller"` |  |
+| chaos-linux-ifc.image.tag | string | `"0.13.4"` |  |
 | chaos-linux-ifc.maxSurge | int | `1` |  |
 | chaos-linux-ifc.maxUnavailable | int | `0` |  |
 | chaos-linux-ifc.nameOverride | string | `""` |  |
@@ -112,7 +135,6 @@ dependencies:
 | chaos-linux-ifc.podAnnotations | object | `{}` |  |
 | chaos-linux-ifc.podSecurityContext | object | `{}` |  |
 | chaos-linux-ifc.replicaCount | int | `2` |  |
-| chaos-linux-ifc.resources.limits.cpu | string | `"500m"` |  |
 | chaos-linux-ifc.resources.limits.memory | string | `"512Mi"` |  |
 | chaos-linux-ifc.resources.requests.cpu | string | `"500m"` |  |
 | chaos-linux-ifc.resources.requests.memory | string | `"512Mi"` |  |
@@ -134,8 +156,8 @@ dependencies:
 | chaos-linux-ifs.image.digest | string | `""` |  |
 | chaos-linux-ifs.image.pullPolicy | string | `"Always"` |  |
 | chaos-linux-ifs.image.registry | string | `"docker.io"` |  |
-| chaos-linux-ifs.image.repository | string | `"chaosnative/harness-smp-chaos-linux-infra-server"` |  |
-| chaos-linux-ifs.image.tag | string | `"0.11.0"` |  |
+| chaos-linux-ifs.image.repository | string | `"harness/smp-chaos-linux-infra-server"` |  |
+| chaos-linux-ifs.image.tag | string | `"0.13.3"` |  |
 | chaos-linux-ifs.maxSurge | int | `1` |  |
 | chaos-linux-ifs.maxUnavailable | int | `0` |  |
 | chaos-linux-ifs.nameOverride | string | `""` |  |
@@ -146,7 +168,6 @@ dependencies:
 | chaos-linux-ifs.probeSourceImage.image.repository | string | `"chaosnative/source-probe"` |  |
 | chaos-linux-ifs.probeSourceImage.image.tag | string | `"ci"` |  |
 | chaos-linux-ifs.replicaCount | int | `2` |  |
-| chaos-linux-ifs.resources.limits.cpu | string | `"500m"` |  |
 | chaos-linux-ifs.resources.limits.memory | string | `"512Mi"` |  |
 | chaos-linux-ifs.resources.requests.cpu | string | `"500m"` |  |
 | chaos-linux-ifs.resources.requests.memory | string | `"512Mi"` |  |
@@ -181,32 +202,32 @@ dependencies:
 | chaos-manager.image.digest | string | `""` |  |
 | chaos-manager.image.pullPolicy | string | `"Always"` |  |
 | chaos-manager.image.registry | string | `"docker.io"` |  |
-| chaos-manager.image.repository | string | `"chaosnative/harness-smp-chaos-manager"` |  |
-| chaos-manager.image.tag | string | `"0.11.1"` |  |
+| chaos-manager.image.repository | string | `"harness/smp-chaos-manager"` |  |
+| chaos-manager.image.tag | string | `"0.13.5"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.enabled | bool | `false` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.digest | string | `""` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.imagePullSecrets | list | `[]` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.pullPolicy | string | `"Always"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.image.registry | string | `"docker.io"` |  |
-| chaos-manager.jobs.chaos_db_upgrade.image.repository | string | `"chaosnative/harness-smp-chaos-db-upgrade-agent"` |  |
-| chaos-manager.jobs.chaos_db_upgrade.image.tag | string | `"0.11.0"` |  |
+| chaos-manager.jobs.chaos_db_upgrade.image.repository | string | `"harness/smp-chaos-db-upgrade-agent"` |  |
+| chaos-manager.jobs.chaos_db_upgrade.image.tag | string | `"0.13.1"` |  |
 | chaos-manager.jobs.chaos_db_upgrade.slackURLToNotify | string | `"no-url"` |  |
 | chaos-manager.litmusChaosExporterImage.image.digest | string | `""` |  |
 | chaos-manager.litmusChaosExporterImage.image.registry | string | `"docker.io"` |  |
 | chaos-manager.litmusChaosExporterImage.image.repository | string | `"chaosnative/chaos-exporter"` |  |
-| chaos-manager.litmusChaosExporterImage.image.tag | string | `"3.0.0-stable"` |  |
+| chaos-manager.litmusChaosExporterImage.image.tag | string | `"0.13.1"` |  |
 | chaos-manager.litmusChaosOperatorImage.image.digest | string | `""` |  |
 | chaos-manager.litmusChaosOperatorImage.image.registry | string | `"docker.io"` |  |
 | chaos-manager.litmusChaosOperatorImage.image.repository | string | `"chaosnative/chaos-operator"` |  |
-| chaos-manager.litmusChaosOperatorImage.image.tag | string | `"3.0.0-stable"` |  |
+| chaos-manager.litmusChaosOperatorImage.image.tag | string | `"0.13.0"` |  |
 | chaos-manager.litmusChaosRunnerImage.image.digest | string | `""` |  |
 | chaos-manager.litmusChaosRunnerImage.image.registry | string | `"docker.io"` |  |
 | chaos-manager.litmusChaosRunnerImage.image.repository | string | `"chaosnative/chaos-runner"` |  |
-| chaos-manager.litmusChaosRunnerImage.image.tag | string | `"3.0.0-stable"` |  |
+| chaos-manager.litmusChaosRunnerImage.image.tag | string | `"0.13.0"` |  |
 | chaos-manager.logWatcherImage.image.digest | string | `""` |  |
 | chaos-manager.logWatcherImage.image.registry | string | `"docker.io"` |  |
 | chaos-manager.logWatcherImage.image.repository | string | `"chaosnative/harness-chaos-log-watcher"` |  |
-| chaos-manager.logWatcherImage.image.tag | string | `"release-chaos-log-watcher-0.11.0"` |  |
+| chaos-manager.logWatcherImage.image.tag | string | `"0.13.0"` |  |
 | chaos-manager.maxSurge | int | `1` |  |
 | chaos-manager.maxUnavailable | int | `0` |  |
 | chaos-manager.mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -219,7 +240,6 @@ dependencies:
 | chaos-manager.podAnnotations | object | `{}` |  |
 | chaos-manager.podSecurityContext | object | `{}` |  |
 | chaos-manager.replicaCount | int | `3` |  |
-| chaos-manager.resources.limits.cpu | string | `"600m"` |  |
 | chaos-manager.resources.limits.memory | string | `"512Mi"` |  |
 | chaos-manager.resources.requests.cpu | string | `"600m"` |  |
 | chaos-manager.resources.requests.memory | string | `"512Mi"` |  |
@@ -235,8 +255,8 @@ dependencies:
 | chaos-manager.skipSecureVerify | string | `"true"` |  |
 | chaos-manager.subscriberImage.image.digest | string | `""` |  |
 | chaos-manager.subscriberImage.image.registry | string | `"docker.io"` |  |
-| chaos-manager.subscriberImage.image.repository | string | `"chaosnative/harness-smp-chaos-subscriber"` |  |
-| chaos-manager.subscriberImage.image.tag | string | `"0.11.0"` |  |
+| chaos-manager.subscriberImage.image.repository | string | `"harness/smp-chaos-subscriber"` |  |
+| chaos-manager.subscriberImage.image.tag | string | `"0.13.2"` |  |
 | chaos-manager.tolerations | list | `[]` |  |
 | chaos-manager.waitForInitContainer.image.digest | string | `""` |  |
 | chaos-manager.waitForInitContainer.image.imagePullSecrets | list | `[]` |  |
@@ -252,8 +272,8 @@ dependencies:
 | chaos-web.image.digest | string | `""` |  |
 | chaos-web.image.pullPolicy | string | `"Always"` |  |
 | chaos-web.image.registry | string | `"docker.io"` |  |
-| chaos-web.image.repository | string | `"chaosnative/harness-smp-chaos-web"` |  |
-| chaos-web.image.tag | string | `"0.11.1"` |  |
+| chaos-web.image.repository | string | `"harness/smp-chaos-web"` |  |
+| chaos-web.image.tag | string | `"0.13.8"` |  |
 | chaos-web.maxSurge | int | `1` |  |
 | chaos-web.maxUnavailable | int | `0` |  |
 | chaos-web.nameOverride | string | `""` |  |
@@ -261,7 +281,6 @@ dependencies:
 | chaos-web.podAnnotations | object | `{}` |  |
 | chaos-web.podSecurityContext | object | `{}` |  |
 | chaos-web.replicaCount | int | `3` |  |
-| chaos-web.resources.limits.cpu | string | `"500m"` |  |
 | chaos-web.resources.limits.memory | string | `"512Mi"` |  |
 | chaos-web.resources.requests.cpu | string | `"500m"` |  |
 | chaos-web.resources.requests.memory | string | `"512Mi"` |  |
@@ -274,7 +293,7 @@ dependencies:
 | chaos-web.serviceAccount.name | string | `"harness-default"` |  |
 | chaos-web.tolerations | list | `[]` |  |
 | global.airgap | bool | `false` |  |
-| global.cd.enabled | bool | `true` | Enable to install CD |
+| global.cd.enabled | bool | `false` | Enable to install CD |
 | global.chaos.enabled | bool | `true` |  |
 | global.ha | bool | `false` |  |
 | global.ingress.className | string | `"harness"` |  |
@@ -297,7 +316,7 @@ dependencies:
 | global.istio.tls.mode | string | `"SIMPLE"` |  |
 | global.istio.virtualService.gateways[0] | string | `""` |  |
 | global.istio.virtualService.hosts[0] | string | `"smp-istio.test.harness.io"` |  |
-| global.loadbalancerURL | string | `"test@harness.io"` |  |
+| global.loadbalancerURL | string | `"http://x.x.x."` |  |
 | global.opa.enabled | bool | `false` |  |
 | platform.harness-manager.featureFlags.ADDITIONAL | string | `"CHAOS_ENABLED,CHAOS_LINUX_ENABLED"` |  |
 | platform.harness-manager.featureFlags.OPA | string | `"OPA_PIPELINE_GOVERNANCE"` |  |
