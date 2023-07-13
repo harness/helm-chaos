@@ -1,6 +1,6 @@
 # chaos-k8s-ifs
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -15,8 +15,23 @@ A Helm chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
+| argoWorkflowControllerImage.image.digest | string | `""` |  |
+| argoWorkflowControllerImage.image.registry | string | `"docker.io"` |  |
+| argoWorkflowControllerImage.image.repository | string | `"chaosnative/workflow-controller"` |  |
+| argoWorkflowControllerImage.image.tag | string | `"v3.3.1"` |  |
+| argoWorkflowExecutorImage.image.digest | string | `""` |  |
+| argoWorkflowExecutorImage.image.registry | string | `"docker.io"` |  |
+| argoWorkflowExecutorImage.image.repository | string | `"chaosnative/argoexec"` |  |
+| argoWorkflowExecutorImage.image.tag | string | `"v3.3.1"` |  |
 | autoscaling | object | `{}` |  |
+| chaosExperimentLimit | string | `"1000"` |  |
+| chaosGamedayLimit | string | `"200"` |  |
+| chaosHubLimit | string | `"30"` |  |
+| chaosHubSize | string | `"200"` |  |
 | configmap | object | `{}` |  |
+| customTlsCert | string | `""` |  |
+| extraVolumeMounts | list | `[]` |  |
+| extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
 | global.airgap | bool | `false` |  |
 | global.cd.enabled | bool | `true` | Enable to install CD |
@@ -35,8 +50,21 @@ A Helm chart for Kubernetes
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
-| image.repository | string | `"chaosnative/harness-smp-chaos-k8s-ifs"` |  |
-| image.tag | string | `"0.11.0"` |  |
+| image.repository | string | `"harness/smp-chaos-k8s-ifs"` |  |
+| image.tag | string | `"0.13.3"` |  |
+| lifecycleHooks | object | `{}` |  |
+| litmusChaosExporterImage.image.digest | string | `""` |  |
+| litmusChaosExporterImage.image.registry | string | `"docker.io"` |  |
+| litmusChaosExporterImage.image.repository | string | `"chaosnative/chaos-exporter"` |  |
+| litmusChaosExporterImage.image.tag | string | `"0.13.1"` |  |
+| litmusChaosOperatorImage.image.digest | string | `""` |  |
+| litmusChaosOperatorImage.image.registry | string | `"docker.io"` |  |
+| litmusChaosOperatorImage.image.repository | string | `"chaosnative/chaos-operator"` |  |
+| litmusChaosOperatorImage.image.tag | string | `"0.13.0"` |  |
+| litmusChaosRunnerImage.image.digest | string | `""` |  |
+| litmusChaosRunnerImage.image.registry | string | `"docker.io"` |  |
+| litmusChaosRunnerImage.image.repository | string | `"chaosnative/chaos-runner"` |  |
+| litmusChaosRunnerImage.image.tag | string | `"0.13.0"` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
@@ -45,12 +73,12 @@ A Helm chart for Kubernetes
 | mongoSecrets.userName.name | string | `"harness-secrets"` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
+| parallelChaosExperimentRuns | string | `"25"` |  |
 | platform.harness-manager.featureFlags.ADDITIONAL | string | `"CHAOS_ENABLED"` |  |
 | platform.harness-manager.featureFlags.OPA | string | `"OPA_PIPELINE_GOVERNANCE"` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `3` |  |
-| resources.limits.cpu | string | `"500m"` |  |
 | resources.limits.memory | string | `"512Mi"` |  |
 | resources.requests.cpu | string | `"500m"` |  |
 | resources.requests.memory | string | `"512Mi"` |  |
@@ -62,6 +90,11 @@ A Helm chart for Kubernetes
 | serviceAccount.create | bool | `false` |  |
 | serviceAccount.name | string | `"harness-default"` |  |
 | skipSecureVerify | string | `"true"` |  |
+| skipSecureVerify | string | `"true"` |  |
+| subscriberImage.image.digest | string | `""` |  |
+| subscriberImage.image.registry | string | `"docker.io"` |  |
+| subscriberImage.image.repository | string | `"harness/smp-chaos-subscriber"` |  |
+| subscriberImage.image.tag | string | `"0.13.2"` |  |
 | tolerations | list | `[]` |  |
 | waitForInitContainer.image.digest | string | `""` |  |
 | waitForInitContainer.image.imagePullSecrets | list | `[]` |  |
