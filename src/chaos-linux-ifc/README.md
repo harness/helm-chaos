@@ -1,6 +1,6 @@
 # chaos-linux-ifc
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -17,6 +17,8 @@ A Helm chart for Kubernetes
 | affinity | object | `{}` |  |
 | autoscaling | object | `{}` |  |
 | configmap | object | `{}` |  |
+| extraVolumeMounts | list | `[]` |  |
+| extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
 | global.airgap | bool | `false` |  |
 | global.cd.enabled | bool | `true` | Enable to install CD |
@@ -35,8 +37,9 @@ A Helm chart for Kubernetes
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
-| image.repository | string | `"chaosnative/harness-smp-chaos-linux-infra-controller"` |  |
-| image.tag | string | `"0.11.0"` |  |
+| image.repository | string | `"harness/smp-chaos-linux-infra-controller"` |  |
+| image.tag | string | `"0.13.4"` |  |
+| lifecycleHooks | object | `{}` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | nameOverride | string | `""` |  |
@@ -46,7 +49,6 @@ A Helm chart for Kubernetes
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `2` |  |
-| resources.limits.cpu | string | `"500m"` |  |
 | resources.limits.memory | string | `"512Mi"` |  |
 | resources.requests.cpu | string | `"500m"` |  |
 | resources.requests.memory | string | `"512Mi"` |  |
