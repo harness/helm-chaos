@@ -8,7 +8,9 @@ metadata:
     app: chaos-linux-ifs
     {{- include "chaos-linux-ifs.labels" . | nindent 4 }}
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   strategy:
     type: RollingUpdate
     rollingUpdate:

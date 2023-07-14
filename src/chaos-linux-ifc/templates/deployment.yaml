@@ -9,7 +9,9 @@ metadata:
     app: chaos-linux-ifc
     {{- include "chaos-linux-ifc.labels" . | nindent 4 }}
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
