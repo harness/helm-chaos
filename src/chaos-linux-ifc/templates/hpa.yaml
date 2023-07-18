@@ -1,0 +1,17 @@
+{{- if .Values.autoscaling.enabled }}
+apiVersion: {{ include "harnesscommon.capabilities.hpa.apiVersion" ( dict "context" $ ) }}
+kind: HorizontalPodAutoscaler
+metadata:
+  name: chaos-linux-ifc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "chaos-linux-ifc.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: chaos-linux-ifc
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  {{ include "harnesscommon.hpa.metrics.apiVersion" . }}
+{{- end }}
