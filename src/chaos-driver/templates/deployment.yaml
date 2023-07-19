@@ -1,0 +1,135 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chaos-driver
+  namespace: {{ .Release.Namespace }}
+  labels:
+    component: chaos-driver
+    app: chaos-driver
+    {{- include "chaos-driver.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.maxSurge }}
+      maxUnavailable: {{ .Values.maxUnavailable }}
+  selector:
+    matchLabels:
+      component: chaos-driver
+      app: chaos-driver
+      {{- include "chaos-driver.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        component: chaos-driver
+        app: chaos-driver
+        {{- include "chaos-driver.selectorLabels" . | nindent 8 }}
+    spec:
+      {{ include "chaos-driver.pullSecrets" . | nindent 6 }}
+      serviceAccountName: {{ include "chaos-driver.serviceAccountName" . }}
+      initContainers:
+      - name: wait-for-mongo
+        image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+        imagePullPolicy: IfNotPresent
+        args:
+          - "pod"
+          - "-lapp=mongodb-replicaset"
+      containers:
+        - name: chaos-driver
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: chaos-driver-secret
+            - configMapRef:
+                name: chaos-driver-config
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mongoSecrets.userName.name }}
+                  key: {{ .Values.mongoSecrets.userName.key }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mongoSecrets.password.name }}
+                  key: {{ .Values.mongoSecrets.password.key }}
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mongoSecrets.userName.name }}
+                  key: {{ .Values.mongoSecrets.userName.key }}
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mongoSecrets.password.name }}
+                  key: {{ .Values.mongoSecrets.password.key }}
+            - name: DB_SERVER
+              value: {{ include "harnesscommon.database.mongo" (dict "database" "chaos-harness" "context" $) }}
+            - name: NG_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: NG_MANAGER_ENDPOINT
+            - name: ACCESS_CONTROL_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: ACCESS_CONTROL_ENDPOINT
+            - name: CHAOS_MANAGER_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-common-config
+                  key: CHAOS_MANAGER_ENDPOINT
+            - name: JWT_IDENTITY_SERVICE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: chaos-common-secret
+                  key: JWT_IDENTITY_SERVICE_SECRET
+            - name: ALLOWED_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: chaos-manager-config
+                  key: ALLOWED_ORIGINS
+              
+          ports:
+            - containerPort: {{.Values.service.port}}
+          resources:
+              {{- toYaml .Values.resources | nindent 12 }}
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - "ls chaos-driver"
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /status
+              port: {{.Values.service.port}}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+        {{- if .Values.lifecycleHooks }}
+          lifecycle: {{- include "harnesscommon.tplvalues.render" (dict "value" .Values.lifecycleHooks "context" $) | nindent 12 }}
+        {{- end }}
+          {{- if .Values.extraVolumeMounts }}
+          volumeMounts:
+          {{- include "harnesscommon.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.extraVolumes }}
+      volumes:
+      {{- include "harnesscommon.tplvalues.render" ( dict "value" .Values.extraVolumes "context" $ ) | nindent 8 }}
+      {{- end }}
