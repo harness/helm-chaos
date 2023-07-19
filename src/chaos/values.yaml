@@ -206,7 +206,7 @@ chaos-manager:
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 100
+    maxReplicas: 10
     targetCPU: ""
     targetMemory: ""
 
@@ -276,7 +276,7 @@ chaos-web:
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 100
+    maxReplicas: 10
     targetCPU: ""
     targetMemory: ""
 
@@ -361,7 +361,7 @@ chaos-driver:
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 100
+    maxReplicas: 10
     targetCPU: ""
     targetMemory: ""
 
@@ -434,7 +434,7 @@ chaos-linux-ifc:
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 100
+    maxReplicas: 10
     targetCPU: ""
     targetMemory: ""
 
@@ -512,7 +512,7 @@ chaos-linux-ifs:
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 100
+    maxReplicas: 10
     targetCPU: ""
     targetMemory: ""
 
@@ -640,7 +640,7 @@ chaos-k8s-ifs:
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 100
+    maxReplicas: 10
     targetCPU: ""
     targetMemory: ""
 
