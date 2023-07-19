@@ -203,12 +203,12 @@ chaos-manager:
       cpu: 600m
       memory: 512Mi
 
-  autoscaling: {}
-    #enabled: false
-    #minReplicas: 1
-    #maxReplicas: 2
-    #targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPU: ""
+    targetMemory: ""
 
   nodeSelector: {}
 
@@ -273,12 +273,12 @@ chaos-web:
       cpu: 500m
       memory: 512Mi
 
-  autoscaling: {}
-    #enabled: false
-    #minReplicas: 1
-    #maxReplicas: 2
-    #targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPU: ""
+    targetMemory: ""
 
   nodeSelector: {}
 
@@ -358,12 +358,12 @@ chaos-driver:
       cpu: 500m
       memory: 512Mi
 
-  autoscaling: {}
-    #enabled: false
-    #minReplicas: 1
-    #maxReplicas: 2
-    #targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPU: ""
+    targetMemory: ""
 
   nodeSelector: {}
 
@@ -431,12 +431,12 @@ chaos-linux-ifc:
       cpu: 500m
       memory: 512Mi
 
-  autoscaling: {}
-    #enabled: false
-    #minReplicas: 1
-    #maxReplicas: 2
-    #targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPU: ""
+    targetMemory: ""
 
   nodeSelector: {}
 
@@ -509,12 +509,12 @@ chaos-linux-ifs:
       cpu: 500m
       memory: 512Mi
 
-  autoscaling: {}
-    #enabled: false
-    #minReplicas: 1
-    #maxReplicas: 2
-    #targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPU: ""
+    targetMemory: ""
 
   nodeSelector: {}
 
@@ -637,12 +637,12 @@ chaos-k8s-ifs:
       cpu: 500m
       memory: 512Mi
 
-  autoscaling: {}
-    #enabled: false
-    #minReplicas: 1
-    #maxReplicas: 2
-    #targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPU: ""
+    targetMemory: ""
 
   nodeSelector: {}
 
