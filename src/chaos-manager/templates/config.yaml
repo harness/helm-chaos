@@ -7,32 +7,14 @@ metadata:
     {{- include "chaos-manager.labels" . | nindent 4 }}
 data:
   DEPLOY_MODE: KUBERNETES_ONPREM
-  REDIS_SSL_ENABLED: 'false'
-  REDIS_CERT_PATH: '/opt/harness/svc/redis_labs_ca_truststore'
-  REDIS_EVENTS_FWK_NAMESPACE: ''
-  REDIS_CERT_PATH: '/opt/harness/svc/redis_labs_ca_truststore'
-  REDIS_DATABASE: '0'
-  REDIS_ENDPOINT: 'redis://redis-sentinel-harness.{{ .Release.Namespace }}:6379'
-  REDIS_LOCK_ENDPOINT: 'redis://redis-sentinel-harness.{{ .Release.Namespace }}:6379'
-  REDIS_LOCK_SSL_ENABLED: 'false'
-  REDIS_LOCK_NAMESPACE: ''
-  REDIS_LOCK_DATABASE: '0'
-  CHAOS_MANAGER_VERSION: '0.13.0'
-  ACCESS_CONTROL_ENDPOINT: 'http://access-control:9006/api'
-  NG_MANAGER_ENDPOINT: 'http://ng-manager:7090/api'
-  NG_MANAGER_SVC_ENDPOINT: 'http://ng-manager:7090'
   PLATFORM_SERVICE_ENDPOINT: 'http://platform-service:9005/api'
   ENTERPRISE_HUB_BRANCH_NAME: '{{ .Values.enterpriseHubBranchName }}'
+  EXPERIMENT_HELPER_IMAGE_VERSION: '{{ .Values.expHelperImageVersion }}'
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
-  ENTERPRISE_HUB_SECRET: ""
-  ENTERPRISE_HUB_TOKEN: ""
   K8S_INFRA_SERVER_ENDPOINT: 'http://chaos-k8s-ifs-service:6000'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
-  LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
-  LOG_SERVICE_EXTERNAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'
   LINUX_INFRA_GQL_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/lserver/api'
   LINUX_INFRA_RPC_SERVER_ENDPOINT: 'chaos-linux-ifs-service:5000'
-  LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
   DEFAULT_CHAOS_EXPERIMENT_LIMIT: '{{ .Values.chaosExperimentLimit }}'
   DEFAULT_CHAOS_HUB_LIMIT: '{{ .Values.chaosHubLimit }}'
   DEFAULT_CHAOS_GAMEDAY_LIMIT: '{{ .Values.chaosGamedayLimit }}'
@@ -42,12 +24,21 @@ data:
   DEFAULT_GAME_DAY_RUNS_PER_GAME_DAY_LIMIT: '1000'
   DEFAULT_EXPERIMENTS_PER_GAME_DAY_RUN_LIMIT: '20'
   SRM_CHANGE_SOURCE_REDIS_STREAM: 'chaos_change_events'
-  REDIS_STREAM_ENV: 'qa'
+
   {{- if .Values.allowedOrigins }}
   ALLOWED_ORIGINS: '{{ .Values.allowedOrigins }}'
   {{- else }}
   ALLOWED_ORIGINS: "{{ .Values.global.loadbalancerURL }}"
   {{- end -}}
+
   {{- if .Values.global.imageRegistry }}
-  IMAGE_REGISTRY_REPO: '{{ .Values.global.imageRegistry }}'
+  DEFAULT_IMAGE_REGISTRY_SERVER: '{{ .Values.global.imageRegistry }}'
+  {{- else }}
+  DEFAULT_IMAGE_REGISTRY_SERVER: 'docker.io'
+  {{- end -}}
+
+  {{- if .Values.imageRegistryAccount }}
+  DEFAULT_IMAGE_REGISTRY_ACCOUNT: '{{ .Values.imageRegistryAccount }}'
+  {{- else }}
+  DEFAULT_IMAGE_REGISTRY_ACCOUNT: 'chaosnative'
   {{- end -}}

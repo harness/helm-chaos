@@ -31,7 +31,7 @@ platform:
       OPA: "OPA_PIPELINE_GOVERNANCE"
       ADDITIONAL: "CHAOS_ENABLED"
 
-replicaCount: 3
+replicaCount: 2
 # TODO: remove this
 deployAsSts: false
 replicaCountSts: 0
@@ -52,7 +52,7 @@ image:
   repository: harness/smp-chaos-manager
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.13.5"
+  tag: "1.15.5"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -62,7 +62,7 @@ jobs:
     slackURLToNotify: 'no-url'
     image:
       registry: docker.io
-      tag: "0.13.1"
+      tag: "1.15.0"
       repository: harness/smp-chaos-db-upgrade-agent
       pullPolicy: Always
       digest: ""
@@ -116,12 +116,12 @@ logWatcherImage:
   image:
     registry: docker.io
     repository: chaosnative/harness-chaos-log-watcher
-    tag: 0.13.0
+    tag: 1.15.1
     digest: ""
 
 enterpriseHubBranchName: 'hce-3.0.3-smp'
 
-chaosExperimentLimit: '1000'
+chaosExperimentLimit: '2000'
 
 chaosHubLimit: '30'
 
@@ -129,9 +129,11 @@ chaosGamedayLimit: '200'
 
 chaosHubSize: '200'
 
-parallelChaosExperimentRuns: '25'
+parallelChaosExperimentRuns: '500'
 
 skipSecureVerify: 'true'
+
+expHelperImageVersion: "0.13.0"
 
 configmap: {}
 
@@ -179,6 +181,7 @@ service:
 
 resources:
   limits:
+    cpu: 600m
     memory: 512Mi
   requests:
     cpu: 600m
@@ -202,12 +205,18 @@ affinity: {}
 #     configMap:
 #       name: test-config
 #       # readOnly: true
-extraVolumes: []
+extraVolumes:
+  - name: chaos-dashboard-config
+    configMap:
+      name: chaos-dashboard-config
 
 # extraVolumeMounts:
 #   - name: volume-test
 #     mountPath: /opt/harness/config
-extraVolumeMounts: []
+extraVolumeMounts:
+  - name: chaos-dashboard-config
+    mountPath: /tmp/dashboard.yaml
+    subPath: dashboard.yaml
 
 lifecycleHooks: {}
 # lifecycleHooks:

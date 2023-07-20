@@ -35,7 +35,7 @@ platform:
       OPA: "OPA_PIPELINE_GOVERNANCE"
       ADDITIONAL: "CHAOS_ENABLED"
 
-replicaCount: 3
+replicaCount: 2
 maxSurge: 1
 maxUnavailable: 0
 customTlsCert: ""
@@ -55,7 +55,7 @@ image:
   repository: harness/smp-chaos-k8s-ifs
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.13.3"
+  tag: "1.15.2"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -65,7 +65,7 @@ subscriberImage:
   image:
     registry: docker.io
     repository: harness/smp-chaos-subscriber
-    tag: 0.13.2
+    tag: 1.15.1
     digest: ""
 
 argoWorkflowControllerImage:
@@ -86,26 +86,26 @@ litmusChaosOperatorImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-operator
-    tag: 0.13.0
+    tag: 1.15.0
     digest: ""
 
 litmusChaosRunnerImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-runner
-    tag: 0.13.0
+    tag: 1.15.0
     digest: ""
 
 litmusChaosExporterImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-exporter
-    tag: 0.13.1
+    tag: 1.15.0
     digest: ""
 
 
 
-chaosExperimentLimit: '1000'
+chaosExperimentLimit: '2000'
 
 chaosHubLimit: '30'
 
@@ -113,7 +113,7 @@ chaosGamedayLimit: '200'
 
 chaosHubSize: '200'
 
-parallelChaosExperimentRuns: '25'
+parallelChaosExperimentRuns: '500'
 
 skipSecureVerify: 'true'
 mongoSecrets:
@@ -158,9 +158,10 @@ service:
 
 resources:
   limits:
+    cpu: 500m
     memory: 512Mi
   requests:
-    cpu: 500m
+    cpu: 401m
     memory: 512Mi
 
 autoscaling:

@@ -19,10 +19,6 @@ dependencies:
     version: 0.4.x
     repository: "file://../chaos-common"
 
-  - name: chaos-driver
-    version: 0.5.x
-    repository: "file://../chaos-driver"
-
   - name: chaos-manager
     version: 0.5.x
     repository: "file://../chaos-manager"

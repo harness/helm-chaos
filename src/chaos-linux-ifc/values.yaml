@@ -54,7 +54,7 @@ image:
   repository: harness/smp-chaos-linux-infra-controller
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.13.4"
+  tag: "1.15.1"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -91,6 +91,7 @@ securityContext: {}
 
 resources:
   limits:
+    cpu: 500m
     memory: 512Mi
   requests:
     cpu: 500m
