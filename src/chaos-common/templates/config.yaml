@@ -23,4 +23,5 @@ data:
   REDIS_LOCK_NAMESPACE: ''
   REDIS_LOCK_DATABASE: '0'
   NG_MANAGER_SVC_ENDPOINT: 'http://ng-manager:7090'
-  #REDIS_STREAM_ENV: 'smp'
+  REDIS_STREAM_ENV: ''
+  SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
