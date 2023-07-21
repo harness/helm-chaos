@@ -133,7 +133,7 @@ parallelChaosExperimentRuns: '500'
 
 skipSecureVerify: 'true'
 
-expHelperImageVersion: "0.13.0"
+expHelperImageVersion: "1.15.0"
 
 configmap: {}
 
