@@ -87,8 +87,6 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-
-
 resources:
   limits:
     cpu: 500m

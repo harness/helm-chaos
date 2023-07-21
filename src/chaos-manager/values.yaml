@@ -74,7 +74,7 @@ subscriberImage:
   image:
     registry: docker.io
     repository: harness/smp-chaos-subscriber
-    tag: 0.13.1
+    tag: 1.15.1
     digest: ""
 
 argoWorkflowControllerImage:
@@ -95,21 +95,21 @@ litmusChaosOperatorImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-operator
-    tag: 0.13.0
+    tag: 1.15.0
     digest: ""
 
 litmusChaosRunnerImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-runner
-    tag: 0.13.0
+    tag: 1.15.0
     digest: ""
 
 litmusChaosExporterImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-exporter
-    tag: 0.13.1
+    tag: 1.15.0
     digest: ""
 
 logWatcherImage:
