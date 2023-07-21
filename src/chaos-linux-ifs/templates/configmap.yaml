@@ -4,6 +4,6 @@ metadata:
   name: chaos-linux-ifs-config
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "chaos-driver.labels" . | nindent 4 }}
+    {{- include "chaos-linux-ifs.labels" . | nindent 4 }}
 data:
   PROBE_SOURCE_IMAGE: {{ include "chaos-linux-ifs.probeSourceImage" . }}
