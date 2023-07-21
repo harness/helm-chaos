@@ -15,7 +15,7 @@ data:
   LITMUS_CHAOS_EXPORTER_IMAGE: {{ include "chaos-k8s-ifs.litmusChaosExporterImage" . }}
   SUBSCRIBER_IMAGE: {{ include "chaos-k8s-ifs.subscriberImage" . }}  
   CONTAINER_RUNTIME_EXECUTOR: 'k8sapi'
-  K8S_IFS_VERSION: '0.13.0'
+  K8S_IFS_VERSION: '1.15.0'
   K8S_INFRA_CONNECTION_TYPE: "https"
   DEFAULT_CHAOS_EXPERIMENT_LIMIT: '{{ .Values.chaosExperimentLimit }}'
   DEFAULT_CHAOS_HUB_LIMIT: '{{ .Values.chaosHubLimit }}'

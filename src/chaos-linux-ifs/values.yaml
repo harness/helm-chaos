@@ -51,10 +51,10 @@ waitForInitContainer:
 image:
   registry: docker.io
   #repository: chaosnative/harness-smp-chaos-delegate-server
-  repository: harness/smp-chaos-linux-infra-server
+  repository: harness/smp-chaos-linux-infra-server-signed
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.13.3"
+  tag: "1.15.1"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -110,6 +110,7 @@ service:
 
 resources:
   limits:
+    cpu: 500m
     memory: 512Mi
   requests:
     cpu: 500m

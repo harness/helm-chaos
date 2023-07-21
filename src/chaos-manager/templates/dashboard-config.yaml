@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chaos-dashboard-config
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "chaos-manager.labels" . | nindent 4 }}
+data:
+  dashboard.yaml: |
+    - title: "Chaos Experiment Runs by Users"
+      description: "This dashboard shows the chaos experiment runs by users"
+      id: 16827
+    - title: "Chaos Infrastructures by Users"
+      description: "This dashboard shows the chaos infrastructures by users"
+      id: 16828

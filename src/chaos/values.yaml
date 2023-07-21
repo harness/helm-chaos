@@ -54,7 +54,7 @@ platform:
       ADDITIONAL: "CHAOS_ENABLED,CHAOS_LINUX_ENABLED"
 
 chaos-manager:
-  replicaCount: 3
+  replicaCount: 2
   maxSurge: 1
   maxUnavailable: 0
 
@@ -69,10 +69,10 @@ chaos-manager:
 
   image:
     registry: docker.io
-    repository: harness/smp-chaos-manager
+    repository: harness/smp-chaos-manager-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.13.5
+    tag: 1.15.6
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -83,8 +83,8 @@ chaos-manager:
       slackURLToNotify: 'no-url'
       image:
         registry: docker.io
-        tag: 0.13.1
-        repository: harness/smp-chaos-db-upgrade-agent
+        tag: 1.15.0
+        repository: harness/smp-chaos-db-upgrade-agent-signed
         pullPolicy: Always
         digest: ""
         imagePullSecrets: []
@@ -92,8 +92,8 @@ chaos-manager:
   subscriberImage:
     image:
       registry: docker.io
-      repository: harness/smp-chaos-subscriber
-      tag: 0.13.2
+      repository: harness/smp-chaos-subscriber-signed
+      tag: 1.15.1
       digest: ""
 
   argoWorkflowControllerImage:
@@ -114,33 +114,33 @@ chaos-manager:
     image:
       registry: docker.io
       repository: chaosnative/chaos-operator
-      tag: 0.13.0
+      tag: 1.15.0
       digest: ""
 
   litmusChaosRunnerImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-runner
-      tag: 0.13.0
+      tag: 1.15.0
       digest: ""
 
   litmusChaosExporterImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-exporter
-      tag: 0.13.1
+      tag: 1.15.0
       digest: ""
 
   logWatcherImage:
     image:
       registry: docker.io
       repository: chaosnative/harness-chaos-log-watcher
-      tag: 0.13.0
+      tag: 1.15.1
       digest: ""
 
-  enterpriseHubBranchName: 'hce-3.0.3-smp'
+  enterpriseHubBranchName: 'release/1.15.x'
 
-  chaosExperimentLimit: '1000'
+  chaosExperimentLimit: '2000'
 
   chaosHubLimit: '30'
 
@@ -148,7 +148,7 @@ chaos-manager:
 
   chaosHubSize: '200'
 
-  parallelChaosExperimentRuns: '25'
+  parallelChaosExperimentRuns: '500'
 
   skipSecureVerify: 'true'
 
@@ -198,13 +198,14 @@ chaos-manager:
 
   resources:
     limits:
+      cpu: 600m
       memory: 512Mi
     requests:
       cpu: 600m
       memory: 512Mi
 
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 1
     maxReplicas: 10
     targetCPU: ""
@@ -216,6 +217,33 @@ chaos-manager:
 
   affinity: {}
 
+  # extraVolumes:
+  #   - name: volume-test
+  #     configMap:
+  #       name: test-config
+  #       # readOnly: true
+  extraVolumes:
+    - name: chaos-dashboard-config
+      configMap:
+        name: chaos-dashboard-config
+
+  # extraVolumeMounts:
+  #   - name: volume-test
+  #     mountPath: /opt/harness/config
+  extraVolumeMounts:
+    - name: chaos-dashboard-config
+      mountPath: /tmp/dashboard.yaml
+      subPath: dashboard.yaml
+
+  lifecycleHooks: {}
+  # lifecycleHooks:
+  #   postStart:
+  #     exec:
+  #       command:
+  #   preStop:
+  #     exec:
+  #       command:
+
 chaos-web:
   replicaCount: 3
   maxSurge: 1
@@ -223,10 +251,10 @@ chaos-web:
 
   image:
     registry: docker.io
-    repository: harness/smp-chaos-web
+    repository: harness/smp-chaos-web-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.13.8
+    tag: "1.15.7"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -268,13 +296,14 @@ chaos-web:
 
   resources:
     limits:
-      memory: 512Mi
-    requests:
       cpu: 500m
       memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
 
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 1
     maxReplicas: 10
     targetCPU: ""
@@ -286,93 +315,28 @@ chaos-web:
 
   affinity: {}
 
-chaos-driver:
-  replicaCount: 3
-  maxSurge: 1
-  maxUnavailable: 0
+  # extraVolumes:
+  #   - name: volume-test
+  #     configMap:
+  #       name: test-config
+  #       # readOnly: true
+  extraVolumes: []
 
-  waitForInitContainer:
-    image:
-      registry: docker.io
-      repository: harness/helm-init-container
-      pullPolicy: IfNotPresent
-      tag: "latest"
-      digest: ""
-      imagePullSecrets: []
+  # extraVolumeMounts:
+  #   - name: volume-test
+  #     mountPath: /opt/harness/config
+  extraVolumeMounts: []
 
-  image:
-    registry: docker.io
-    repository: harness/smp-chaos-driver
-    pullPolicy: Always
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.13.0
-    digest: ""
-    #imagePullSecrets: ["chaos-regcred-secret"]
-
-  configmap: {}
-
-  mongoSecrets:
-    userName:
-      name: harness-secrets
-      key: mongodbUsername
-    password:
-      name: mongodb-replicaset-chart
-      key: mongodb-root-password
-
-  nameOverride: ""
-  fullnameOverride: ""
-
-  serviceAccount:
-    # Specifies whether a service account should be created
-    create: false
-    # Annotations to add to the service account
-    annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
-    name: "harness-default"
-
-  podAnnotations: {}
-
-  podSecurityContext: {}
-    # fsGroup: 2000
-
-  securityContext: {}
-    #runAsUser: 65534
-    #runAsNonRoot: true
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
-  service:
-    type: ClusterIP
-    port: 9000
-    targetport: 9000
-
-  resources:
-    limits:
-      memory: 512Mi
-    requests:
-      cpu: 500m
-      memory: 512Mi
-
-  autoscaling:
-    enabled: true
-    minReplicas: 1
-    maxReplicas: 10
-    targetCPU: ""
-    targetMemory: ""
-
-  nodeSelector: {}
-
-  tolerations: []
-
-  affinity: {}
+  lifecycleHooks: {}
+  # lifecycleHooks:
+  #   postStart:
+  #     exec:
+  #       command:
+  #   preStop:
+  #     exec:
+  #       command:
 
 chaos-linux-ifc:
-
   replicaCount: 2
   maxSurge: 1
   maxUnavailable: 0
@@ -388,10 +352,11 @@ chaos-linux-ifc:
 
   image:
     registry: docker.io
-    repository: harness/smp-chaos-linux-infra-controller
+    #repository: chaosnative/harness-smp-chaos-delegate-controller
+    repository: harness/smp-chaos-linux-infra-controller-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.13.4
+    tag: "1.15.1"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -426,13 +391,14 @@ chaos-linux-ifc:
 
   resources:
     limits:
+      cpu: 500m
       memory: 512Mi
     requests:
       cpu: 500m
       memory: 512Mi
 
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 1
     maxReplicas: 10
     targetCPU: ""
@@ -444,13 +410,28 @@ chaos-linux-ifc:
 
   affinity: {}
 
-chaos-linux-ifs:
-  probeSourceImage:
-    image:
-      registry: docker.io
-      repository: chaosnative/source-probe
-      tag: "ci"
+  # extraVolumes:
+  #   - name: volume-test
+  #     configMap:
+  #       name: test-config
+  #       # readOnly: true
+  extraVolumes: []
 
+  # extraVolumeMounts:
+  #   - name: volume-test
+  #     mountPath: /opt/harness/config
+  extraVolumeMounts: []
+
+  lifecycleHooks: {}
+  # lifecycleHooks:
+  #   postStart:
+  #     exec:
+  #       command:
+  #   preStop:
+  #     exec:
+  #       command:
+
+chaos-linux-ifs:
   replicaCount: 2
   maxSurge: 1
   maxUnavailable: 0
@@ -466,14 +447,29 @@ chaos-linux-ifs:
 
   image:
     registry: docker.io
-    repository: harness/smp-chaos-linux-infra-server
+    #repository: chaosnative/harness-smp-chaos-delegate-server
+    repository: harness/smp-chaos-linux-infra-server-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.13.3
+    tag: "1.15.1"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
+  probeSourceImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/source-probe
+      tag: "ci"
+
   configmap: {}
+
+  mongoSecrets:
+    userName:
+      name: harness-secrets
+      key: mongodbUsername
+    password:
+      name: mongodb-replicaset-chart
+      key: mongodb-root-password
 
   nameOverride: ""
   fullnameOverride: ""
@@ -502,15 +498,23 @@ chaos-linux-ifs:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  service:
+    type: ClusterIP
+    port: 4000
+    targetport: 4000
+    grpcport: 5000
+    grpctargetport: 5000
+
   resources:
     limits:
+      cpu: 500m
       memory: 512Mi
     requests:
       cpu: 500m
       memory: 512Mi
 
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 1
     maxReplicas: 10
     targetCPU: ""
@@ -522,13 +526,33 @@ chaos-linux-ifs:
 
   affinity: {}
 
+  # extraVolumes:
+  #   - name: volume-test
+  #     configMap:
+  #       name: test-config
+  #       # readOnly: true
+  extraVolumes: []
+
+  # extraVolumeMounts:
+  #   - name: volume-test
+  #     mountPath: /opt/harness/config
+  extraVolumeMounts: []
+
+  lifecycleHooks: {}
+  # lifecycleHooks:
+  #   postStart:
+  #     exec:
+  #       command:
+  #   preStop:
+  #     exec:
+  #       command:
+
 chaos-k8s-ifs:
-  replicaCount: 3
+  replicaCount: 2
   maxSurge: 1
   maxUnavailable: 0
   customTlsCert: ""
   skipSecureVerify: "true"
-
   waitForInitContainer:
     image:
       registry: docker.io
@@ -537,11 +561,24 @@ chaos-k8s-ifs:
       tag: "latest"
       digest: ""
       imagePullSecrets: []
+
+
+  image:
+    registry: docker.io
+    repository: harness/smp-chaos-k8s-ifs-signed
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.15.2"
+    digest: ""
+    #imagePullSecrets: ["chaos-regcred-secret"]
+
+  configmap: {}
+
   subscriberImage:
     image:
       registry: docker.io
-      repository: harness/smp-chaos-subscriber
-      tag: 0.13.2
+      repository: harness/smp-chaos-subscriber-signed
+      tag: 1.15.1
       digest: ""
 
   argoWorkflowControllerImage:
@@ -562,34 +599,34 @@ chaos-k8s-ifs:
     image:
       registry: docker.io
       repository: chaosnative/chaos-operator
-      tag: 0.13.0
+      tag: 1.15.0
       digest: ""
 
   litmusChaosRunnerImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-runner
-      tag: 0.13.0
+      tag: 1.15.0
       digest: ""
 
   litmusChaosExporterImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-exporter
-      tag: 0.13.1
+      tag: 1.15.0
       digest: ""
 
-  image:
-    registry: docker.io
-    repository: harness/smp-chaos-k8s-ifs
-    pullPolicy: Always
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: 0.13.3
-    digest: ""
-    #imagePullSecrets: ["chaos-regcred-secret"]
+  chaosExperimentLimit: '2000'
 
-  configmap: {}
+  chaosHubLimit: '30'
 
+  chaosGamedayLimit: '200'
+
+  chaosHubSize: '200'
+
+  parallelChaosExperimentRuns: '500'
+
+  skipSecureVerify: 'true'
   mongoSecrets:
     userName:
       name: harness-secrets
@@ -632,13 +669,14 @@ chaos-k8s-ifs:
 
   resources:
     limits:
+      cpu: 500m
       memory: 512Mi
     requests:
-      cpu: 500m
+      cpu: 401m
       memory: 512Mi
 
   autoscaling:
-    enabled: true
+    enabled: false
     minReplicas: 1
     maxReplicas: 10
     targetCPU: ""
@@ -649,3 +687,24 @@ chaos-k8s-ifs:
   tolerations: []
 
   affinity: {}
+
+  # extraVolumes:
+  #   - name: volume-test
+  #     configMap:
+  #       name: test-config
+  #       # readOnly: true
+  extraVolumes: []
+
+  # extraVolumeMounts:
+  #   - name: volume-test
+  #     mountPath: /opt/harness/config
+  extraVolumeMounts: []
+
+  lifecycleHooks: {}
+  # lifecycleHooks:
+  #   postStart:
+  #     exec:
+  #       command:
+  #   preStop:
+  #     exec:
+  #       command:

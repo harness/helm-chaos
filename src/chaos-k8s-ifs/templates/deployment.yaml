@@ -132,7 +132,7 @@ spec:
             - name: SKIP_SECURE_VERIFY
               valueFrom:
                 configMapKeyRef:
-                  name: chaos-k8s-ifs-config
+                  name: chaos-common-config
                   key: SKIP_SECURE_VERIFY
             - name: NG_MANAGER_ENDPOINT
               valueFrom:
@@ -152,7 +152,7 @@ spec:
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: chaos-manager-secret
+                  name: chaos-common-secret
                   key: JWT_SECRET
             - name: PORTAL_ENDPOINT
               valueFrom:
