@@ -119,7 +119,7 @@ logWatcherImage:
     tag: 1.15.1
     digest: ""
 
-enterpriseHubBranchName: 'hce-3.0.3-smp'
+enterpriseHubBranchName: 'release/1.15.x'
 
 chaosExperimentLimit: '2000'
 
