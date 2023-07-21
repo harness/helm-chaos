@@ -37,10 +37,10 @@ maxUnavailable: 0
 
 image:
   registry: docker.io
-  repository: harness/smp-chaos-web
+  repository: harness/smp-chaos-web-signed
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.15.6"
+  tag: "1.15.7"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 

@@ -52,7 +52,7 @@ waitForInitContainer:
 
 image:
   registry: docker.io
-  repository: harness/smp-chaos-k8s-ifs
+  repository: harness/smp-chaos-k8s-ifs-signed
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.15.2"
@@ -64,7 +64,7 @@ configmap: {}
 subscriberImage:
   image:
     registry: docker.io
-    repository: harness/smp-chaos-subscriber
+    repository: harness/smp-chaos-subscriber-signed
     tag: 1.15.1
     digest: ""
 

@@ -69,10 +69,10 @@ chaos-manager:
 
   image:
     registry: docker.io
-    repository: harness/smp-chaos-manager
+    repository: harness/smp-chaos-manager-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 1.15.5
+    tag: 1.15.6
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -84,7 +84,7 @@ chaos-manager:
       image:
         registry: docker.io
         tag: 1.15.0
-        repository: harness/smp-chaos-db-upgrade-agent
+        repository: harness/smp-chaos-db-upgrade-agent-signed
         pullPolicy: Always
         digest: ""
         imagePullSecrets: []
@@ -92,7 +92,7 @@ chaos-manager:
   subscriberImage:
     image:
       registry: docker.io
-      repository: harness/smp-chaos-subscriber
+      repository: harness/smp-chaos-subscriber-signed
       tag: 1.15.1
       digest: ""
 
@@ -251,10 +251,10 @@ chaos-web:
 
   image:
     registry: docker.io
-    repository: harness/smp-chaos-web
+    repository: harness/smp-chaos-web-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.15.6"
+    tag: "1.15.7"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -353,7 +353,7 @@ chaos-linux-ifc:
   image:
     registry: docker.io
     #repository: chaosnative/harness-smp-chaos-delegate-controller
-    repository: harness/smp-chaos-linux-infra-controller
+    repository: harness/smp-chaos-linux-infra-controller-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "1.15.1"
@@ -448,7 +448,7 @@ chaos-linux-ifs:
   image:
     registry: docker.io
     #repository: chaosnative/harness-smp-chaos-delegate-server
-    repository: harness/smp-chaos-linux-infra-server
+    repository: harness/smp-chaos-linux-infra-server-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "1.15.1"
@@ -565,7 +565,7 @@ chaos-k8s-ifs:
 
   image:
     registry: docker.io
-    repository: harness/smp-chaos-k8s-ifs
+    repository: harness/smp-chaos-k8s-ifs-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "1.15.2"
@@ -577,7 +577,7 @@ chaos-k8s-ifs:
   subscriberImage:
     image:
       registry: docker.io
-      repository: harness/smp-chaos-subscriber
+      repository: harness/smp-chaos-subscriber-signed
       tag: 1.15.1
       digest: ""
 

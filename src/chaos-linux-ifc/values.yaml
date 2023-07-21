@@ -51,7 +51,7 @@ waitForInitContainer:
 image:
   registry: docker.io
   #repository: chaosnative/harness-smp-chaos-delegate-controller
-  repository: harness/smp-chaos-linux-infra-controller
+  repository: harness/smp-chaos-linux-infra-controller-signed
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.15.1"

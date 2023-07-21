@@ -49,10 +49,10 @@ waitForInitContainer:
 
 image:
   registry: docker.io
-  repository: harness/smp-chaos-manager
+  repository: harness/smp-chaos-manager-signed
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.15.5"
+  tag: "1.15.6"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -63,7 +63,7 @@ jobs:
     image:
       registry: docker.io
       tag: "1.15.0"
-      repository: harness/smp-chaos-db-upgrade-agent
+      repository: harness/smp-chaos-db-upgrade-agent-signed
       pullPolicy: Always
       digest: ""
       imagePullSecrets: []
