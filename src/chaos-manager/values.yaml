@@ -23,6 +23,16 @@ global:
     defaultbackend:
       # -- Create will deploy a default backend into your cluster
       create: true
+  database:
+    mongo:
+      installed: true
+      protocol: mongodb
+      # --  provide default values if mongo.installed is set to false
+      hosts: []
+      secretName: ""
+      userKey: ""
+      passwordKey: ""
+      extraArgs: ""
 
 ## Platform Settings
 platform:

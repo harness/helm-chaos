@@ -1,6 +1,6 @@
 # chaos-linux-ifs
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -15,11 +15,24 @@ A Helm chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| autoscaling | object | `{}` |  |
+| autoscaling.enabled | bool | `false` |  |
+| autoscaling.maxReplicas | int | `10` |  |
+| autoscaling.minReplicas | int | `1` |  |
+| autoscaling.targetCPU | string | `""` |  |
+| autoscaling.targetMemory | string | `""` |  |
 | configmap | object | `{}` |  |
+| extraVolumeMounts | list | `[]` |  |
+| extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
 | global.airgap | bool | `false` |  |
 | global.cd.enabled | bool | `true` | Enable to install CD |
+| global.database.mongo.extraArgs | string | `""` |  |
+| global.database.mongo.hosts | list | `[]` | provide default values if mongo.installed is set to false |
+| global.database.mongo.installed | bool | `true` |  |
+| global.database.mongo.passwordKey | string | `""` |  |
+| global.database.mongo.protocol | string | `"mongodb"` |  |
+| global.database.mongo.secretName | string | `""` |  |
+| global.database.mongo.userKey | string | `""` |  |
 | global.ha | bool | `false` |  |
 | global.ingress.className | string | `"harness"` |  |
 | global.ingress.defaultbackend.create | bool | `true` | Create will deploy a default backend into your cluster |
@@ -35,8 +48,9 @@ A Helm chart for Kubernetes
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
-| image.repository | string | `"chaosnative/harness-smp-chaos-linux-infra-server"` |  |
-| image.tag | string | `"0.11.0"` |  |
+| image.repository | string | `"harness/smp-chaos-linux-infra-server-signed"` |  |
+| image.tag | string | `"1.15.1"` |  |
+| lifecycleHooks | object | `{}` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | mongoSecrets.password.key | string | `"mongodb-root-password"` |  |
