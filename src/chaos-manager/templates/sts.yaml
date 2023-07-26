@@ -37,6 +37,7 @@ spec:
       securityContext:
         fsGroup: 2000
       serviceAccountName: {{ include "chaos-manager.serviceAccountName" . }}
+      {{- if .Values.global.database.mongo.installed }}
       initContainers:
       - name: wait-for-mongo
         image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
@@ -44,6 +45,7 @@ spec:
         args:
           - "pod"
           - "-lapp=mongodb-replicaset"
+      {{- end }}
       containers:
         - name: chaos-manager
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}

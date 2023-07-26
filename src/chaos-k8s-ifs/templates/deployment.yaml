@@ -32,6 +32,7 @@ spec:
       securityContext:
         fsGroup: 2000
       serviceAccountName: {{ include "chaos-k8s-ifs.serviceAccountName" . }}
+      {{- if .Values.global.database.mongo.installed }}
       initContainers:
       - name: wait-for-mongo
         image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
@@ -39,6 +40,7 @@ spec:
         args:
           - "pod"
           - "-lapp=mongodb-replicaset"
+      {{- end }}
       #volumes:
       #- name: service-account
       #  secret:
