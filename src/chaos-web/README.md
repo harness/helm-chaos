@@ -1,6 +1,6 @@
 # chaos-web
 
-![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -15,7 +15,11 @@ A Helm chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| autoscaling | object | `{}` |  |
+| autoscaling.enabled | bool | `false` |  |
+| autoscaling.maxReplicas | int | `10` |  |
+| autoscaling.minReplicas | int | `1` |  |
+| autoscaling.targetCPU | string | `""` |  |
+| autoscaling.targetMemory | string | `""` |  |
 | configmap | object | `{}` |  |
 | enableCDN | string | `"false"` |  |
 | extraVolumeMounts | list | `[]` |  |
@@ -35,8 +39,8 @@ A Helm chart for Kubernetes
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
 | image.registry | string | `"docker.io"` |  |
-| image.repository | string | `"harness/smp-chaos-web"` |  |
-| image.tag | string | `"0.13.8"` |  |
+| image.repository | string | `"harness/smp-chaos-web-signed"` |  |
+| image.tag | string | `"1.15.7"` |  |
 | lifecycleHooks | object | `{}` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
@@ -47,9 +51,10 @@ A Helm chart for Kubernetes
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `3` |  |
+| resources.limits.cpu | string | `"500m"` |  |
 | resources.limits.memory | string | `"512Mi"` |  |
-| resources.requests.cpu | string | `"500m"` |  |
-| resources.requests.memory | string | `"512Mi"` |  |
+| resources.requests.cpu | string | `"250m"` |  |
+| resources.requests.memory | string | `"256Mi"` |  |
 | securityContext | object | `{}` |  |
 | service.port | int | `8184` |  |
 | service.targetport | int | `8184` |  |

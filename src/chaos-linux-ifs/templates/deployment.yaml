@@ -30,6 +30,7 @@ spec:
     spec:
       {{ include "chaos-linux-ifs.pullSecrets" . | nindent 6 }}
       serviceAccountName: {{ include "chaos-linux-ifs.serviceAccountName" . }}
+      {{- if .Values.global.database.mongo.installed }}
       initContainers:
       - name: wait-for-mongo
         image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
@@ -37,6 +38,7 @@ spec:
         args:
           - "pod"
           - "-lapp=mongodb-replicaset"
+      {{- end }}
       containers:
         - name: chaos-linux-ifs
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
