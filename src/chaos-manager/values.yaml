@@ -52,7 +52,7 @@ image:
   repository: harness/smp-chaos-manager-signed
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.15.6"
+  tag: "1.19.2"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -62,7 +62,7 @@ jobs:
     slackURLToNotify: 'no-url'
     image:
       registry: docker.io
-      tag: "1.15.0"
+      tag: "1.19.0"
       repository: harness/smp-chaos-db-upgrade-agent-signed
       pullPolicy: Always
       digest: ""
@@ -70,56 +70,15 @@ jobs:
 
 #allowedOrigins: "*.*.*.*"
 
-subscriberImage:
-  image:
-    registry: docker.io
-    repository: harness/smp-chaos-subscriber
-    tag: 1.15.1
-    digest: ""
-
-argoWorkflowControllerImage:
-  image:
-    registry: docker.io
-    repository: chaosnative/workflow-controller
-    tag: v3.3.1
-    digest: ""
-
-argoWorkflowExecutorImage:
-  image:
-    registry: docker.io
-    repository: chaosnative/argoexec
-    tag: v3.3.1
-    digest: ""
-
-litmusChaosOperatorImage:
-  image:
-    registry: docker.io
-    repository: chaosnative/chaos-operator
-    tag: 1.15.0
-    digest: ""
-
-litmusChaosRunnerImage:
-  image:
-    registry: docker.io
-    repository: chaosnative/chaos-runner
-    tag: 1.15.0
-    digest: ""
-
-litmusChaosExporterImage:
-  image:
-    registry: docker.io
-    repository: chaosnative/chaos-exporter
-    tag: 1.15.0
-    digest: ""
 
 logWatcherImage:
   image:
     registry: docker.io
     repository: chaosnative/harness-chaos-log-watcher
-    tag: 1.15.1
+    tag: 1.19.1
     digest: ""
 
-enterpriseHubBranchName: 'release/1.15.x'
+enterpriseHubBranchName: 'release/1.19.x'
 
 chaosExperimentLimit: '2000'
 
@@ -176,8 +135,6 @@ service:
   type: ClusterIP
   port: 8080
   targetport: 8080
-  grpcport: 8081
-  targetgrpcport: 8081
 
 resources:
   limits:

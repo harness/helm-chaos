@@ -7,3 +7,5 @@ metadata:
     {{- include "chaos-linux-ifs.labels" . | nindent 4 }}
 data:
   PROBE_SOURCE_IMAGE: {{ include "chaos-linux-ifs.probeSourceImage" . }}
+  LOG_SERVICE_ENABLED: '{{.Values.LOG_SERVICE_ENABLED}}'
+  LOG_TOKEN_RENEWAL_INTERVAL_IN_HOUR: '{{.Values.LOG_TOKEN_RENEWAL_INTERVAL_IN_HOUR}}'
