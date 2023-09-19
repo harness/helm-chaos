@@ -10,7 +10,7 @@ data:
   REDIS_SSL_ENABLED: 'false'
   REDIS_CERT_PATH: '/opt/harness/svc/redis_labs_ca_truststore'
   REDIS_DATABASE: '0'
-  INFRA_COMPATIBLE_VERSIONS: '["0.13.0","0.14.0","1.15.0"]'
+  INFRA_COMPATIBLE_VERSIONS: '["0.13.0","0.14.0","1.15.0","1.16.0","1.17.0","1.18.0","1.19.0"]'
   CHAOS_MANAGER_GRPC_ENDPOINT: 'chaos-manager-service:8081'
   LOG_SERVICE_ENDPOINT: 'http://log-service:8079'
   LOG_SERVICE_EXTERNAL_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/gateway/log-service'
@@ -25,3 +25,5 @@ data:
   NG_MANAGER_SVC_ENDPOINT: 'http://ng-manager:7090'
   REDIS_STREAM_ENV: ''
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
+  ENTITY_CRUD_REDIS_STREAM: "freemium:streams:entity_crud"
+  CG_MANAGER_ENDPOINT: "http://harness-manager.{{ .Release.Namespace }}:9090"

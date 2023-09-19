@@ -43,21 +43,13 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
-          - name: CHAOS_SERVICE_JWT_SECRET
-            valueFrom:
-              secretKeyRef:
+          envFrom:
+            - secretRef:
                 name: chaos-common-secret
-                key: CHAOS_SERVICE_JWT_SECRET
-          - name: CHAOS_MANAGER_GRPC_ENDPOINT
-            valueFrom:
-              configMapKeyRef:
-                name: chaos-common-config
-                key: CHAOS_MANAGER_GRPC_ENDPOINT
-          - name: CLEANUP_WINDOW
-            valueFrom:
-              configMapKeyRef:
+            - configMapRef:
                 name: chaos-linux-ifc-config
-                key: CLEANUP_WINDOW
+            - configMapRef:
+                name: chaos-common-config        
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
               {{- toYaml .Values.resources | nindent 12 }}

@@ -105,3 +105,10 @@ Create the name of the litmusChaosExporterImage image to use
 {{- define "chaos-k8s-ifs.litmusChaosExporterImage" -}}
 {{ include "common.images.image" (dict "imageRoot" .Values.litmusChaosExporterImage.image "global" .Values.global) }}
 {{- end }}
+
+{{/*
+Create the name of the k8sInfraUpgraderImage image to use
+*/}}
+{{- define "chaos-k8s-ifs.k8sInfraUpgraderImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.k8sInfraUpgraderImage.image "global" .Values.global) }}
+{{- end }}

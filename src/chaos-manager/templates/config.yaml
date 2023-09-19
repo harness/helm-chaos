@@ -13,8 +13,8 @@ data:
   SKIP_SECURE_VERIFY: '{{ .Values.skipSecureVerify }}'
   K8S_INFRA_SERVER_ENDPOINT: 'http://chaos-k8s-ifs-service:6000'
   LOG_WATCHER_IMAGE: {{ include "chaos-manager.logWatcherImage" . }}
-  LINUX_INFRA_GQL_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/lserver/api'
-  LINUX_INFRA_RPC_SERVER_ENDPOINT: 'chaos-linux-ifs-service:5000'
+  LINUX_INFRA_SERVER_ENDPOINT: '{{ .Values.global.loadbalancerURL }}/chaos/lserver/api'
+  LINUX_INFRA_SERVER_SVC_ENDPOINT: 'http://chaos-linux-ifs-service:4000'
   DEFAULT_CHAOS_EXPERIMENT_LIMIT: '{{ .Values.chaosExperimentLimit }}'
   DEFAULT_CHAOS_HUB_LIMIT: '{{ .Values.chaosHubLimit }}'
   DEFAULT_CHAOS_GAMEDAY_LIMIT: '{{ .Values.chaosGamedayLimit }}'
@@ -24,7 +24,10 @@ data:
   DEFAULT_GAME_DAY_RUNS_PER_GAME_DAY_LIMIT: '1000'
   DEFAULT_EXPERIMENTS_PER_GAME_DAY_RUN_LIMIT: '20'
   SRM_CHANGE_SOURCE_REDIS_STREAM: 'chaos_change_events'
-
+  SAAS_ENABLED: 'false'
+  APP_AI_ENDPOINT: ''
+  LOG_INDIRECT_UPLOAD: 'false'
+  LINUX_CHAOS_ENABLED: 'true'
   {{- if .Values.allowedOrigins }}
   ALLOWED_ORIGINS: '{{ .Values.allowedOrigins }}'
   {{- else }}

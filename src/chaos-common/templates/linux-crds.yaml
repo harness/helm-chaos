@@ -165,7 +165,7 @@ spec:
                                   type: integer
                                 jitter:
                                   type: integer
-                                networkInterface:
+                                networkInterfaces:
                                   type: string
                                 networkLatency:
                                   type: integer
@@ -617,6 +617,24 @@ spec:
                                     - command
                                     - comparator
                                     type: object
+                                  datadogProbe/inputs:
+                                    properties:
+                                      datadogSite:
+                                        type: string
+                                      syntheticsTest:
+                                        properties:
+                                          publicId:
+                                            type: string
+                                          testType:
+                                            type: string
+                                        required:
+                                        - publicId
+                                        - testType
+                                        type: object
+                                    required:
+                                    - datadogSite
+                                    - syntheticsTest
+                                    type: object
                                   httpProbe/inputs:
                                     properties:
                                       insecureSkipVerify:
@@ -830,6 +848,8 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.9.0
   name: taskdefinitions.litmuschaos.io
+  labels:
+    {{- include "chaos-common.labels" . | nindent 4 }}
 spec:
   group: litmuschaos.io
   names:
@@ -961,7 +981,7 @@ spec:
                             type: integer
                           jitter:
                             type: integer
-                          networkInterface:
+                          networkInterfaces:
                             type: string
                           networkLatency:
                             type: integer
@@ -1367,6 +1387,24 @@ spec:
                               required:
                               - command
                               - comparator
+                              type: object
+                            datadogProbe/inputs:
+                              properties:
+                                datadogSite:
+                                  type: string
+                                syntheticsTest:
+                                  properties:
+                                    publicId:
+                                      type: string
+                                    testType:
+                                      type: string
+                                  required:
+                                  - publicId
+                                  - testType
+                                  type: object
+                              required:
+                              - datadogSite
+                              - syntheticsTest
                               type: object
                             httpProbe/inputs:
                               properties:
