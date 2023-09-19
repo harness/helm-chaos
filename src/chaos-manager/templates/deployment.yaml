@@ -46,16 +46,15 @@ spec:
           image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
-           # - secretRef:
-           #     name: chaos-manager-secret
-            - configMapRef:
+           - secretRef:
+               name: chaos-manager-secret
+           - secretRef:
+               name: chaos-common-secret
+           - configMapRef:
                 name: chaos-manager-config
+           - configMapRef:
+                name: chaos-common-config
           env:
-            - name: LOG_SERVICE_EXTERNAL_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: LOG_SERVICE_EXTERNAL_ENDPOINT
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
@@ -78,124 +77,9 @@ spec:
                   key: {{ .Values.mongoSecrets.password.key }}
             - name: DB_SERVER
               value: {{ include "harnesscommon.database.mongo" (dict "database" "chaos-harness" "context" $) }}
-            - name: INFRA_COMPATIBLE_VERSIONS
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: INFRA_COMPATIBLE_VERSIONS
-            - name: NG_MANAGER_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: NG_MANAGER_ENDPOINT
-            - name: ACCESS_CONTROL_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: ACCESS_CONTROL_ENDPOINT
-            - name: NG_JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: NG_JWT_SECRET
-            - name: JWT_IDENTITY_SERVICE_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: JWT_IDENTITY_SERVICE_SECRET
-            - name: SEGMENT_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: SEGMENT_API_KEY
-            - name: REDIS_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_ENDPOINT
-            - name: REDIS_SSL_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_SSL_ENABLED
-            - name: REDIS_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_DATABASE
-            - name: REDIS_CERT_PATH
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_CERT_PATH
-            - name: REDIS_EVENTS_FWK_NAMESPACE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_EVENTS_FWK_NAMESPACE
-            - name: REDIS_STREAM_ENV
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_STREAM_ENV
-            - name: ENTERPRISE_HUB_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-manager-secret
-                  key: ENTERPRISE_HUB_SECRET
-            - name: ENTERPRISE_HUB_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-manager-secret
-                  key: ENTERPRISE_HUB_TOKEN
-            - name: REDIS_LOCK_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_LOCK_ENDPOINT
-            - name: REDIS_LOCK_SSL_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_LOCK_SSL_ENABLED
-            - name: REDIS_LOCK_NAMESPACE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_LOCK_NAMESPACE
-            - name: REDIS_LOCK_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_LOCK_DATABASE
-            - name: REDIS_LOCK_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-manager-secret
-                  key: REDIS_LOCK_PASSWORD
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: REDIS_PASSWORD
-            - name: SKIP_SECURE_VERIFY
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: SKIP_SECURE_VERIFY
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: JWT_SECRET
-            - name: CHAOS_SERVICE_JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: CHAOS_SERVICE_JWT_SECRET
+
           ports:
             - containerPort: {{.Values.service.port}}
-            - containerPort: {{.Values.service.grpcport}}
           resources:
               {{- toYaml .Values.resources | nindent 12 }}
           livenessProbe:

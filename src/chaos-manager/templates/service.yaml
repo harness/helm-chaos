@@ -12,9 +12,7 @@ spec:
     port: {{.Values.service.port}}
     protocol: TCP
     targetPort: {{.Values.service.targetport}}
-  - name: chaos-manager-grpc
-    port: {{.Values.service.grpcport}}
-    targetPort: {{.Values.service.targetgrpcport}}
+
   selector:
     component: chaos-manager
      {{- include "chaos-manager.selectorLabels" . | nindent 4 }}

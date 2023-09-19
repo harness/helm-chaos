@@ -1,4 +1,5 @@
 {{- if .Values.global.ingress.enabled -}}
+{{- $svcPort := .Values.service.port -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -12,13 +13,15 @@ metadata:
 spec:
   ingressClassName: {{ .Values.global.ingress.className | quote }}
   rules:
-    - http:
+    {{- range .Values.global.ingress.hosts }}
+    - host: {{ . | quote }}
+      http:
         paths:
           - backend:
               service:
                 name: chaos-web-service
                 port:
-                  number: {{ .Values.service.port }}
+                  number: {{ $svcPort }}
             path: /smp/chaos(/|$)(.*)
             pathType: Prefix
           - path: /chaos(/|$)(.*)
@@ -27,11 +30,9 @@ spec:
               service:
                 name: chaos-web-service
                 port:
-                  number: {{ .Values.service.port }}
-  {{- if .Values.global.ingress.tls.enabled }}
-    {{- range .Values.global.ingress.hosts }}
-      host: {{ . | quote }}
+                  number: {{ $svcPort }}
     {{- end }}
+  {{- if .Values.global.ingress.tls.enabled }}
   tls:
     - hosts:
         {{- range .Values.global.ingress.hosts }}

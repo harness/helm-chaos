@@ -64,7 +64,7 @@ image:
   repository: harness/smp-chaos-linux-infra-server-signed
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.15.1"
+  tag: "1.19.0"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -115,8 +115,7 @@ service:
   type: ClusterIP
   port: 4000
   targetport: 4000
-  grpcport: 5000
-  grpctargetport: 5000
+
 
 resources:
   limits:
@@ -159,3 +158,5 @@ lifecycleHooks: {}
 #   preStop:
 #     exec:
 #       command:
+LOG_SERVICE_ENABLED: 'true'
+LOG_TOKEN_RENEWAL_INTERVAL_IN_HOUR: '1'

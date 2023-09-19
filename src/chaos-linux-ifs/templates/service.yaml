@@ -11,9 +11,7 @@ spec:
     - name: chaos-linux-gql-ifs
       port: {{.Values.service.port}}
       targetPort: {{.Values.service.targetport}}
-    - name: chaos-linux-grpc-ifs
-      port: {{.Values.service.grpcport}}
-      targetPort: {{.Values.service.grpctargetport}}
+
   selector:
     component: chaos-linux-ifs
    {{- include "chaos-linux-ifs.selectorLabels" . | nindent 4 }}
