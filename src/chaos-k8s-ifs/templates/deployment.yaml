@@ -32,6 +32,7 @@ spec:
       securityContext:
         fsGroup: 2000
       serviceAccountName: {{ include "chaos-k8s-ifs.serviceAccountName" . }}
+   
       initContainers:
       - name: wait-for-mongo
         image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
@@ -39,6 +40,7 @@ spec:
         args:
           - "pod"
           - "-lapp=mongodb-replicaset"
+
       #volumes:
       #- name: service-account
       #  secret:
@@ -62,46 +64,6 @@ spec:
           {{- include "harnesscommon.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
           {{- end }}
           env:
-            - name: CHAOS_SERVICE_JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: CHAOS_SERVICE_JWT_SECRET
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: REDIS_PASSWORD
-            - name: LOG_SERVICE_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-k8s-ifs-secret
-                  key: LOG_SERVICE_TOKEN
-            - name: CHAOS_MANAGER_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: CHAOS_MANAGER_ENDPOINT
-            - name: LOG_SERVICE_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: LOG_SERVICE_ENDPOINT
-            - name: REDIS_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_ENDPOINT
-            - name: REDIS_SSL_ENABLED
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_SSL_ENABLED
-            - name: REDIS_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: REDIS_DATABASE
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
@@ -124,139 +86,15 @@ spec:
                   key: {{ .Values.mongoSecrets.password.key }}
             - name: DB_SERVER
               value: {{ include "harnesscommon.database.mongo" (dict "database" "chaos-harness" "context" $) }}
-            - name: INFRA_COMPATIBLE_VERSIONS
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: INFRA_COMPATIBLE_VERSIONS
-            - name: SKIP_SECURE_VERIFY
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: SKIP_SECURE_VERIFY
-            - name: NG_MANAGER_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-common-config
-                  key: NG_MANAGER_ENDPOINT
-            - name: NG_JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: NG_JWT_SECRET
-            - name: SEGMENT_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: SEGMENT_API_KEY
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: chaos-common-secret
-                  key: JWT_SECRET
-            - name: PORTAL_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: PORTAL_ENDPOINT
-            - name: ARGO_WORKFLOW_CONTROLLER_IMAGE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: ARGO_WORKFLOW_CONTROLLER_IMAGE
-            - name: ARGO_WORKFLOW_EXECUTOR_IMAGE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: ARGO_WORKFLOW_EXECUTOR_IMAGE
-            - name: LITMUS_CHAOS_EXPORTER_IMAGE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: LITMUS_CHAOS_EXPORTER_IMAGE
-            - name: LITMUS_CHAOS_OPERATOR_IMAGE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: LITMUS_CHAOS_OPERATOR_IMAGE
-            - name: LITMUS_CHAOS_RUNNER_IMAGE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: LITMUS_CHAOS_RUNNER_IMAGE
-            - name: SUBSCRIBER_IMAGE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: SUBSCRIBER_IMAGE
-            - name: CONTAINER_RUNTIME_EXECUTOR
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: CONTAINER_RUNTIME_EXECUTOR
-            - name: INFRA_DEPLOYMENTS
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: INFRA_DEPLOYMENTS
-            - name: K8S_IFS_VERSION
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: K8S_IFS_VERSION
-            - name: K8S_INFRA_CONNECTION_TYPE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: K8S_INFRA_CONNECTION_TYPE
-            - name: DEFAULT_CHAOS_EXPERIMENT_LIMIT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: DEFAULT_CHAOS_EXPERIMENT_LIMIT
-            - name: DEFAULT_CHAOS_GAMEDAY_LIMIT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: DEFAULT_CHAOS_GAMEDAY_LIMIT
-            - name: DEFAULT_CHAOS_HUB_LIMIT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: DEFAULT_CHAOS_HUB_LIMIT
-            - name: DEFAULT_CHAOS_HUB_SIZE
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: DEFAULT_CHAOS_HUB_SIZE
-            - name: DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: DEFAULT_PARALLEL_CHAOS_EXPERIMENT_RUNS
-            - name: DEFAULT_CHAOS_EXPERIMENT_RUN_LIMIT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: DEFAULT_CHAOS_EXPERIMENT_RUN_LIMIT
-            - name: DEFAULT_GAME_DAY_RUNS_PER_GAME_DAY_LIMIT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: DEFAULT_GAME_DAY_RUNS_PER_GAME_DAY_LIMIT
-            - name: DEFAULT_EXPERIMENTS_PER_GAME_DAY_RUN_LIMIT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: DEFAULT_EXPERIMENTS_PER_GAME_DAY_RUN_LIMIT
-            - name: INFRA_HEALTH_CHECK_TIMEOUT
-              valueFrom:
-                configMapKeyRef:
-                  name: chaos-k8s-ifs-config
-                  key: INFRA_HEALTH_CHECK_TIMEOUT
           envFrom:
+            - configMapRef:
+                name: chaos-k8s-ifs-config
+            - configMapRef:
+                name: chaos-common-config
             - secretRef:
-                name: chaos-k8s-ifs-secret     
+                name: chaos-common-secret
+            - secretRef:
+                name: chaos-k8s-ifs-secret        
           ports:
             - containerPort: {{.Values.service.port}}
           resources:

@@ -55,7 +55,7 @@ image:
   repository: harness/smp-chaos-k8s-ifs-signed
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.15.2"
+  tag: "1.19.0"
   digest: ""
   #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -65,44 +65,50 @@ subscriberImage:
   image:
     registry: docker.io
     repository: harness/smp-chaos-subscriber-signed
-    tag: 1.15.1
+    tag: 1.19.0
     digest: ""
 
 argoWorkflowControllerImage:
   image:
     registry: docker.io
     repository: chaosnative/workflow-controller
-    tag: v3.3.1
+    tag: v3.4.10
     digest: ""
 
 argoWorkflowExecutorImage:
   image:
     registry: docker.io
     repository: chaosnative/argoexec
-    tag: v3.3.1
+    tag: v3.4.10
     digest: ""
 
 litmusChaosOperatorImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-operator
-    tag: 1.15.0
+    tag: 1.19.0
     digest: ""
 
 litmusChaosRunnerImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-runner
-    tag: 1.15.0
+    tag: 1.19.0
     digest: ""
 
 litmusChaosExporterImage:
   image:
     registry: docker.io
     repository: chaosnative/chaos-exporter
-    tag: 1.15.0
+    tag: 1.19.0
     digest: ""
-
+    
+k8sInfraUpgraderImage:
+  image:
+    registry: docker.io
+    repository: chaosnative/harness-k8s-chaos-infrastructure-upgrader
+    tag: 1.19.0
+    digest: ""
 
 
 chaosExperimentLimit: '2000'

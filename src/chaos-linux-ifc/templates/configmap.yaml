@@ -7,3 +7,4 @@ metadata:
     {{- include "chaos-linux-ifc.labels" . | nindent 4 }}
 data:
   CLEANUP_WINDOW: "4"
+  IFS_ENDPOINT: "http://chaos-linux-ifs-service:4000"

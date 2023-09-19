@@ -72,7 +72,7 @@ chaos-manager:
     repository: harness/smp-chaos-manager-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: 1.15.6
+    tag: 1.19.2
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -83,62 +83,20 @@ chaos-manager:
       slackURLToNotify: 'no-url'
       image:
         registry: docker.io
-        tag: 1.15.0
+        tag: 1.19.0
         repository: harness/smp-chaos-db-upgrade-agent-signed
         pullPolicy: Always
         digest: ""
         imagePullSecrets: []
 
-  subscriberImage:
-    image:
-      registry: docker.io
-      repository: harness/smp-chaos-subscriber-signed
-      tag: 1.15.1
-      digest: ""
-
-  argoWorkflowControllerImage:
-    image:
-      registry: docker.io
-      repository: chaosnative/workflow-controller
-      tag: v3.3.1
-      digest: ""
-
-  argoWorkflowExecutorImage:
-    image:
-      registry: docker.io
-      repository: chaosnative/argoexec
-      tag: v3.3.1
-      digest: ""
-
-  litmusChaosOperatorImage:
-    image:
-      registry: docker.io
-      repository: chaosnative/chaos-operator
-      tag: 1.15.0
-      digest: ""
-
-  litmusChaosRunnerImage:
-    image:
-      registry: docker.io
-      repository: chaosnative/chaos-runner
-      tag: 1.15.0
-      digest: ""
-
-  litmusChaosExporterImage:
-    image:
-      registry: docker.io
-      repository: chaosnative/chaos-exporter
-      tag: 1.15.0
-      digest: ""
-
   logWatcherImage:
     image:
       registry: docker.io
       repository: chaosnative/harness-chaos-log-watcher
-      tag: 1.15.1
+      tag: 1.19.1
       digest: ""
 
-  enterpriseHubBranchName: 'release/1.15.x'
+  enterpriseHubBranchName: 'release/1.19.x'
 
   chaosExperimentLimit: '2000'
 
@@ -193,8 +151,7 @@ chaos-manager:
     type: ClusterIP
     port: 8080
     targetport: 8080
-    grpcport: 8081
-    targetgrpcport: 8081
+
 
   resources:
     limits:
@@ -254,7 +211,7 @@ chaos-web:
     repository: harness/smp-chaos-web-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.15.7"
+    tag: "1.19.3"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -356,7 +313,7 @@ chaos-linux-ifc:
     repository: harness/smp-chaos-linux-infra-controller-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.15.1"
+    tag: "1.19.0"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -451,7 +408,7 @@ chaos-linux-ifs:
     repository: harness/smp-chaos-linux-infra-server-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.15.1"
+    tag: "1.19.0"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -546,6 +503,8 @@ chaos-linux-ifs:
   #   preStop:
   #     exec:
   #       command:
+  LOG_SERVICE_ENABLED: 'true'
+  LOG_TOKEN_RENEWAL_INTERVAL_IN_HOUR: '1'
 
 chaos-k8s-ifs:
   replicaCount: 2
@@ -568,7 +527,7 @@ chaos-k8s-ifs:
     repository: harness/smp-chaos-k8s-ifs-signed
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.15.2"
+    tag: "1.19.0"
     digest: ""
     #imagePullSecrets: ["chaos-regcred-secret"]
 
@@ -578,42 +537,48 @@ chaos-k8s-ifs:
     image:
       registry: docker.io
       repository: harness/smp-chaos-subscriber-signed
-      tag: 1.15.1
+      tag: 1.19.0
       digest: ""
 
   argoWorkflowControllerImage:
     image:
       registry: docker.io
       repository: chaosnative/workflow-controller
-      tag: v3.3.1
+      tag: v3.4.10
       digest: ""
 
   argoWorkflowExecutorImage:
     image:
       registry: docker.io
       repository: chaosnative/argoexec
-      tag: v3.3.1
+      tag: v3.4.10
       digest: ""
 
   litmusChaosOperatorImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-operator
-      tag: 1.15.0
+      tag: 1.19.0
       digest: ""
 
   litmusChaosRunnerImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-runner
-      tag: 1.15.0
+      tag: 1.19.0
       digest: ""
 
   litmusChaosExporterImage:
     image:
       registry: docker.io
       repository: chaosnative/chaos-exporter
-      tag: 1.15.0
+      tag: 1.19.0
+      digest: ""
+  k8sInfraUpgraderImage:
+    image:
+      registry: docker.io
+      repository: chaosnative/harness-k8s-chaos-infrastructure-upgrader
+      tag: 1.19.0
       digest: ""
 
   chaosExperimentLimit: '2000'

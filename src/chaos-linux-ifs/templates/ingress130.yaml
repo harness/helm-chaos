@@ -12,7 +12,9 @@ metadata:
 spec:
   ingressClassName: {{ .Values.global.ingress.className | quote }}
   rules:
-    - http:
+    {{- range .Values.global.ingress.hosts }}
+    - host: {{ . | quote }}
+      http:
         paths:
           - backend:
               service:
@@ -21,4 +23,13 @@ spec:
                   number: 4000
             path: /chaos/lserver/api(/|$)(.*)
             pathType: Prefix
+    {{- end }}
+  {{- if .Values.global.ingress.tls.enabled }}
+  tls:
+    - hosts:
+        {{- range .Values.global.ingress.hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .Values.global.ingress.tls.secretName }}
+  {{- end }}
 {{- end }}
